@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
+import TextLink from '@/components/laravel/TextLink.vue';
+import { Button } from '@/components/laravel/ui/button';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { logout } from '@/routes';
 import { send } from '@/routes/verification';
