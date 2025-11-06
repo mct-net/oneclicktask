@@ -12,6 +12,9 @@
         "prepare": "husky"
     },
     "lint-staged": {
+        "*.php": [
+            "./vendor/bin/pint"
+        ],
         "*.{js,ts,vue}": [
             "eslint --fix"
         ],
