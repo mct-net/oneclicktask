@@ -6,7 +6,6 @@ use App\Models\Board;
 use App\Models\FileAttachment;
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class FileAttachmentController extends Controller

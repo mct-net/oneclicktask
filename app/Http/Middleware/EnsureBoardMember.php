@@ -21,7 +21,7 @@ class EnsureBoardMember
         $file = $request->route('file');
 
         // Check if user has access to the board
-        if ($board && !$board->hasMember($request->user())) {
+        if ($board && ! $board->hasMember($request->user())) {
             abort(403, 'You do not have access to this board.');
         }
 
