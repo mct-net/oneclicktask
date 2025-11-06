@@ -8,6 +8,7 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
+        "lint:styles": "stylelint \"resources/**/*.{css,scss,sass,vue}\" --fix",
         "prepare": "husky"
     },
     "lint-staged": {
@@ -36,10 +37,12 @@
         "eslint-plugin-vue": "^9.32.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.2.6",
+        "postcss-html": "^1.8.0",
         "prettier": "^3.4.2",
         "prettier-plugin-organize-imports": "^4.1.0",
         "prettier-plugin-tailwindcss": "^0.6.11",
         "stylelint": "^16.25.0",
+        "stylelint-config-recommended-vue": "^1.6.1",
         "stylelint-config-standard": "^39.0.1",
         "typescript": "^5.2.2",
         "typescript-eslint": "^8.23.0",
