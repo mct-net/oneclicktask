@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -48,5 +50,34 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Get the boards owned by the user.
+     */
+    public function ownedBoards(): HasMany
+    {
+        return $this->hasMany(Board::class, 'owner_id');
+    }
+
+    /**
+     * Get the boards the user is a member of.
+     */
+    public function boards(): BelongsToMany
+    {
+        return $this->belongsToMany(Board::class, 'board_user')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get all boards the user has access to (owned + member).
+     */
+    public function allBoards()
+    {
+        return Board::where('owner_id', $this->id)
+            ->orWhereHas('members', function ($query) {
+                $query->where('user_id', $this->id);
+            });
     }
 }

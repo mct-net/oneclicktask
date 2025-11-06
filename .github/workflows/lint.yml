@@ -3,11 +3,11 @@ name: linter
 on:
   push:
     branches:
-      - develop
+      - dev
       - main
   pull_request:
     branches:
-      - develop
+      - dev
       - main
 
 permissions:
@@ -24,22 +24,32 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Install Dependencies
-        run: |
-          composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-          npm install
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
 
-      - name: Run Pint
-        run: vendor/bin/pint
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
 
-      - name: Format Frontend
-        run: npm run format
+      - name: Install PHP Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Lint Frontend
-        run: npm run lint
+      - name: Install Node Dependencies
+        run: pnpm install --frozen-lockfile
 
-      # - name: Commit Changes
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-      #   with:
-      #     commit_message: fix code style
-      #     commit_options: '--no-verify'
+      - name: Run Pint (PHP)
+        run: vendor/bin/pint --test
+
+      - name: Check Frontend Formatting
+        run: pnpm run format:check
+
+      - name: Lint Frontend (ESLint)
+        run: pnpm run lint
+
+      - name: Lint Styles (Stylelint)
+        run: pnpm run lint:styles

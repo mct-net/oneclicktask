@@ -1,2 +1,15 @@
 resources/js/components/ui/*
 resources/views/mail/*
+.idea/
+.nuxt
+.output/
+node_modules
+playwright/results
+playwright/states
+playwright/storage
+playwright/download
+playwright-report
+pnpm-lock.yaml
+vitest-results
+.vscode
+vendor/
