@@ -1,0 +1,34 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable comment-empty-line-before */
+
+@import 'tailwindcss' layer(reference);
+
+/*-------------------------------------
+  Code Theme
+-------------------------------------*/
+@import url('./code-theme.css');
+
+/*-------------------------------------
+  ProseMirror
+-------------------------------------*/
+
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    pointer-events: none;
+    height: 0;
+
+    @apply text-base/60;
+}
+
+.ProseMirror p {
+    line-height: 160%;
+}
+
+.ProseMirror img {
+    width: max-content;
+}
+
+.ProseMirror-selectednode {
+    @apply outline outline-[3px] -outline-offset-[3px] outline-black;
+}

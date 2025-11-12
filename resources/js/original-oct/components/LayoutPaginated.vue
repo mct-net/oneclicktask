@@ -1,0 +1,127 @@
+<script setup lang="ts">
+import { toRefs, watch } from 'vue';
+
+import TaskList from '@/components/common/TaskList.vue';
+import { usePagination } from '@/composables/pagination';
+import type { Task } from '@/lib/types/models';
+import { useTaskStore } from '@/stores/task';
+import { useUIStore } from '@/stores/ui';
+
+/*-------------------------------------
+  State
+-------------------------------------*/
+const props = defineProps<{
+    tasks: Task[];
+}>();
+
+const { tasks } = toRefs(props);
+
+const {
+    currentPage,
+    totalPages,
+    paginatedItems,
+    isLastPage,
+    isFirstPage,
+    goToNextPage,
+    goToPreviousPage,
+    totalCounter,
+} = usePagination({
+    items: tasks,
+    itemsPerPage: 10,
+});
+
+/*-------------------------------------
+  Methods
+-------------------------------------*/
+const { changeLayout } = useUIStore();
+
+const onInputPage = (value: number) => {
+    /*
+    Discard numbers that are not in the range
+    of the total pages.
+  */
+    if (value > totalPages.value) {
+        currentPage.value = totalPages.value;
+    } else if (value < 1) {
+        currentPage.value = 1;
+    } else {
+        currentPage.value = value;
+    }
+};
+
+const onSelectTask = (task: Task) => {
+    useTaskStore().selectedTask = task;
+};
+
+/*-------------------------------------
+  Lifecycle
+-------------------------------------*/
+watch(useTaskStore().filters, () => {
+    currentPage.value = 1;
+});
+</script>
+
+<template>
+    <section class="flex grow flex-col">
+        <TaskList
+            class="mt-3 grow"
+            aria-label="Search results"
+            role="listbox"
+            :tasks="paginatedItems"
+            :stats="[
+                {
+                    name: 'Results',
+                    count: totalCounter,
+                    toggle: () => {},
+                    active: false,
+                },
+            ]"
+            @minimize="changeLayout('resume', 'recent_first')"
+            @select-task="onSelectTask"
+        />
+
+        <!-- Pagination -->
+        <div class="flex justify-center">
+            <div class="flex items-center gap-x-3">
+                <div class="flex items-center gap-x-2">
+                    <input
+                        class="border-subtle h-full w-10 rounded-md border bg-surface px-1 py-2 text-center"
+                        type="number"
+                        :value="currentPage"
+                        @input="
+                            onInputPage(
+                                Number(
+                                    ($event.target as HTMLInputElement).value,
+                                ),
+                            )
+                        "
+                    />
+                    <p>of {{ totalPages }}</p>
+                </div>
+
+                <button
+                    class="text-on-contrast rounded-md bg-interactive-primary px-1.5 py-1"
+                    :class="[
+                        isFirstPage ? 'cursor-not-allowed' : 'cursor-pointer',
+                        'disabled:opacity-50',
+                    ]"
+                    :disabled="isFirstPage"
+                    @click="goToPreviousPage"
+                >
+                    Prev
+                </button>
+                <button
+                    class="text-on-contrast rounded-md bg-interactive-primary px-1.5 py-1"
+                    :class="[
+                        isLastPage ? 'cursor-not-allowed' : 'cursor-pointer',
+                        'disabled:opacity-50',
+                    ]"
+                    :disabled="isLastPage"
+                    @click="goToNextPage"
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    </section>
+</template>

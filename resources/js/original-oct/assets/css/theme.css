@@ -1,0 +1,156 @@
+/*-------------------------------------
+  Fonts
+-------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
+layer(base);
+
+/*-------------------------------------
+  Tailwind
+-------------------------------------*/
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/container-queries';
+
+@theme {
+    --background-color-*: initial;
+    --background-color-canvas: rgb(var(--theme-bg-canvas));
+    --background-color-contrast: rgb(var(--theme-bg-contrast));
+    --background-color-surface: rgb(var(--theme-bg-surface));
+    --background-color-interactive-primary: rgb(
+        var(--theme-bg-interactive-primary)
+    );
+    --background-color-interactive-secondary: rgb(
+        var(--theme-bg-interactive-secondary)
+    );
+    --background-color-error: rgb(var(--theme-bg-error));
+    --background-color-error-accent: rgb(var(--theme-fg-error));
+
+    --background-color-red-500: rgb(var(--red-500));
+
+    --background-color-orange-500: rgb(var(--orange-500));
+
+    --background-color-yellow-500: rgb(var(--yellow-500));
+
+    --background-color-green-500: rgb(var(--green-500));
+
+    --background-color-blue-500: rgb(var(--blue-500));
+
+    --background-color-purple-500: rgb(var(--purple-500));
+
+    --background-color-lilac-500: rgb(var(--lilac-500));
+
+    --background-color-gray-500: rgb(var(--gray-500));
+    --background-color-gray-700: rgb(var(--black));
+
+    --text-color-*: initial;
+    --text-color-base: rgb(var(--theme-fg-base));
+    --text-color-subtle: rgb(var(--theme-fg-subtle));
+    --text-color-link: rgb(var(--theme-fg-link));
+    --text-color-on-contrast: rgb(var(--theme-fg-on-contrast));
+    --text-color-error: rgb(var(--theme-fg-error));
+
+    --border-color-*: initial;
+    --border-color-subtle: rgb(var(--theme-border-subtle));
+    --border-color-error: rgb(var(--theme-border-error));
+    --border-color-canvas: rgb(var(--theme-bg-canvas));
+
+    --shadow-*: initial;
+    --shadow-popover:
+        0 1px 2px rgba(0, 0, 0, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.04);
+
+    --font-*: initial;
+    --font-ubuntu:
+        Ubuntu, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
+}
+
+/*-------------------------------------
+  Theme
+-------------------------------------*/
+@layer base {
+    :host {
+        /* Base colors */
+        --black: 63 72 80;
+        --white: 243 246 249;
+
+        --gray-200: 230 235 239;
+        --gray-300: 214 222 229;
+        --gray-500: 113 120 132;
+
+        --red-200: 245 225 228;
+        --red-500: 246 108 108;
+        --red-700: 147 80 100;
+
+        /* Other colors */
+        --orange-500: 249 149 76;
+        --yellow-500: 239 201 112;
+        --green-500: 164 200 119;
+        --blue-500: 116 185 183;
+        --blue-600: 36 138 195;
+        --purple-500: 127 121 191;
+        --lilac-500: 183 115 152;
+
+        /* Light Theme */
+
+        /* Default page background */
+        --theme-bg-canvas: var(--gray-200);
+
+        /* Inverse background for emphasis */
+        --theme-bg-contrast: var(--black);
+
+        /* Card background */
+        --theme-bg-surface: var(--white);
+
+        /* Primary interactive background i.e. button with default state */
+        --theme-bg-interactive-primary: var(--black);
+
+        /* Secondary interactive background i.e. button with hover state */
+        --theme-bg-interactive-secondary: var(--gray-300);
+
+        /* Error element background */
+        --theme-bg-error: var(--red-200);
+
+        /* Primary text/icon color */
+        --theme-fg-base: var(--black);
+
+        /* Tertiary text/icon color for low emphasis */
+        --theme-fg-subtle: var(--black) / 0.6;
+
+        /* Link text/icon color */
+        --theme-fg-link: var(--blue-600);
+
+        /* Text/icon color on contrast background */
+        --theme-fg-on-contrast: var(--white);
+
+        /* Error text/icon color */
+        --theme-fg-error: var(--red-700);
+
+        /* Primary border color */
+        --theme-border-subtle: var(--black) / 0.2;
+
+        /* Error border color */
+        --theme-border-error: var(--red-700) / 0.23;
+    }
+
+    :host[class='dark'] {
+        /* Dark Theme */
+    }
+}
