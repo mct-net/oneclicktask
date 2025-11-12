@@ -1,3 +1,12 @@
+/*-------------------------------------
+  Fonts
+-------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
+layer(base);
+
+/*-------------------------------------
+  Tailwind
+-------------------------------------*/
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
@@ -9,48 +18,51 @@
 
 @theme inline {
     --font-sans:
-        Instrument Sans, ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+        Ubuntu, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
 
+    /* Base semantic tokens */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
+    /* Card tokens */
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
 
+    /* Popover tokens */
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
 
+    /* Primary action tokens */
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
 
+    /* Secondary action tokens */
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
 
+    /* Muted tokens */
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
 
+    /* Accent tokens */
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
 
+    /* Destructive/Error tokens */
     --color-destructive: var(--destructive);
     --color-destructive-foreground: var(--destructive-foreground);
 
+    /* Border and input tokens */
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
 
-    --color-chart-1: var(--chart-1);
-    --color-chart-2: var(--chart-2);
-    --color-chart-3: var(--chart-3);
-    --color-chart-4: var(--chart-4);
-    --color-chart-5: var(--chart-5);
-
+    /* Sidebar tokens */
     --color-sidebar: var(--sidebar-background);
     --color-sidebar-foreground: var(--sidebar-foreground);
     --color-sidebar-primary: var(--sidebar-primary);
@@ -59,6 +71,27 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* Custom color palette for direct usage */
+    --color-canvas: var(--theme-bg-canvas);
+    --color-contrast: var(--theme-bg-contrast);
+    --color-surface: var(--theme-bg-surface);
+    --color-interactive-primary: var(--theme-bg-interactive-primary);
+    --color-interactive-secondary: var(--theme-bg-interactive-secondary);
+    --color-error: var(--theme-bg-error);
+    --color-error-accent: var(--theme-fg-error);
+
+    --color-red-500: var(--red-500);
+    --color-orange-500: var(--orange-500);
+    --color-yellow-500: var(--yellow-500);
+    --color-green-500: var(--green-500);
+    --color-blue-500: var(--blue-500);
+    --color-purple-500: var(--purple-500);
+    --color-lilac-500: var(--lilac-500);
+    --color-gray-200: var(--gray-200);
+    --color-gray-300: var(--gray-300);
+    --color-gray-500: var(--gray-500);
+    --color-gray-700: var(--black);
 }
 
 /*
@@ -83,83 +116,176 @@
     body,
     html {
         --font-sans:
-            'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-            'Noto Color Emoji';
+            Ubuntu, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+            'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     }
 }
 
-:root {
-    --background: hsl(0 0% 100%);
-    --foreground: hsl(0 0% 3.9%);
-    --card: hsl(0 0% 100%);
-    --card-foreground: hsl(0 0% 3.9%);
-    --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(0 0% 3.9%);
-    --primary: hsl(0 0% 9%);
-    --primary-foreground: hsl(0 0% 98%);
-    --secondary: hsl(0 0% 92.1%);
-    --secondary-foreground: hsl(0 0% 9%);
-    --muted: hsl(0 0% 96.1%);
-    --muted-foreground: hsl(0 0% 45.1%);
-    --accent: hsl(0 0% 96.1%);
-    --accent-foreground: hsl(0 0% 9%);
-    --destructive: hsl(0 84.2% 60.2%);
-    --destructive-foreground: hsl(0 0% 98%);
-    --border: hsl(0 0% 92.8%);
-    --input: hsl(0 0% 89.8%);
-    --ring: hsl(0 0% 3.9%);
-    --chart-1: hsl(12 76% 61%);
-    --chart-2: hsl(173 58% 39%);
-    --chart-3: hsl(197 37% 24%);
-    --chart-4: hsl(43 74% 66%);
-    --chart-5: hsl(27 87% 67%);
-    --radius: 0.5rem;
-    --sidebar-background: hsl(0 0% 98%);
-    --sidebar-foreground: hsl(240 5.3% 26.1%);
-    --sidebar-primary: hsl(0 0% 10%);
-    --sidebar-primary-foreground: hsl(0 0% 98%);
-    --sidebar-accent: hsl(0 0% 94%);
-    --sidebar-accent-foreground: hsl(0 0% 30%);
-    --sidebar-border: hsl(0 0% 91%);
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
-    --sidebar: hsl(0 0% 98%);
-}
+/*-------------------------------------
+  Theme Base Colors
+-------------------------------------*/
+@layer base {
+    :root {
+        /* Base palette colors */
+        --black: 63 72 80;
+        --white: 243 246 249;
 
-.dark {
-    --background: hsl(0 0% 3.9%);
-    --foreground: hsl(0 0% 98%);
-    --card: hsl(0 0% 3.9%);
-    --card-foreground: hsl(0 0% 98%);
-    --popover: hsl(0 0% 3.9%);
-    --popover-foreground: hsl(0 0% 98%);
-    --primary: hsl(0 0% 98%);
-    --primary-foreground: hsl(0 0% 9%);
-    --secondary: hsl(0 0% 14.9%);
-    --secondary-foreground: hsl(0 0% 98%);
-    --muted: hsl(0 0% 16.08%);
-    --muted-foreground: hsl(0 0% 63.9%);
-    --accent: hsl(0 0% 14.9%);
-    --accent-foreground: hsl(0 0% 98%);
-    --destructive: hsl(0 84% 60%);
-    --destructive-foreground: hsl(0 0% 98%);
-    --border: hsl(0 0% 14.9%);
-    --input: hsl(0 0% 14.9%);
-    --ring: hsl(0 0% 83.1%);
-    --chart-1: hsl(220 70% 50%);
-    --chart-2: hsl(160 60% 45%);
-    --chart-3: hsl(30 80% 55%);
-    --chart-4: hsl(280 65% 60%);
-    --chart-5: hsl(340 75% 55%);
-    --sidebar-background: hsl(0 0% 7%);
-    --sidebar-foreground: hsl(0 0% 95.9%);
-    --sidebar-primary: hsl(360, 100%, 100%);
-    --sidebar-primary-foreground: hsl(0 0% 100%);
-    --sidebar-accent: hsl(0 0% 15.9%);
-    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-    --sidebar-border: hsl(0 0% 15.9%);
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
-    --sidebar: hsl(240 5.9% 10%);
+        --gray-200: 230 235 239;
+        --gray-300: 214 222 229;
+        --gray-500: 113 120 132;
+
+        --red-200: 245 225 228;
+        --red-500: 246 108 108;
+        --red-700: 147 80 100;
+
+        /* Extended palette colors */
+        --orange-500: 249 149 76;
+        --yellow-500: 239 201 112;
+        --green-500: 164 200 119;
+        --blue-500: 116 185 183;
+        --blue-600: 36 138 195;
+        --purple-500: 127 121 191;
+        --lilac-500: 183 115 152;
+
+        /* Semantic theme tokens (Light Theme) */
+        --theme-bg-canvas: var(--gray-200);
+        --theme-bg-contrast: var(--black);
+        --theme-bg-surface: var(--white);
+        --theme-bg-interactive-primary: var(--black);
+        --theme-bg-interactive-secondary: var(--gray-300);
+        --theme-bg-error: var(--red-200);
+
+        --theme-fg-base: var(--black);
+        --theme-fg-subtle: var(--black) / 0.6;
+        --theme-fg-link: var(--blue-600);
+        --theme-fg-on-contrast: var(--white);
+        --theme-fg-error: var(--red-700);
+
+        --theme-border-subtle: var(--black) / 0.2;
+        --theme-border-error: var(--red-700) / 0.23;
+
+        /* Map to shadcn-vue semantic tokens */
+        /* Page background */
+        --background: rgb(var(--theme-bg-canvas));
+        --foreground: rgb(var(--theme-fg-base));
+
+        /* Card backgrounds */
+        --card: rgb(var(--theme-bg-surface));
+        --card-foreground: rgb(var(--theme-fg-base));
+
+        /* Popover backgrounds */
+        --popover: rgb(var(--theme-bg-surface));
+        --popover-foreground: rgb(var(--theme-fg-base));
+
+        /* Primary actions (buttons, links) */
+        --primary: rgb(var(--theme-bg-interactive-primary));
+        --primary-foreground: rgb(var(--theme-fg-on-contrast));
+
+        /* Secondary actions */
+        --secondary: rgb(var(--theme-bg-interactive-secondary));
+        --secondary-foreground: rgb(var(--theme-fg-base));
+
+        /* Muted backgrounds and text */
+        --muted: rgb(var(--theme-bg-interactive-secondary));
+        --muted-foreground: rgb(var(--theme-fg-subtle));
+
+        /* Accent highlights */
+        --accent: rgb(var(--theme-bg-interactive-secondary));
+        --accent-foreground: rgb(var(--theme-fg-base));
+
+        /* Destructive/Error states */
+        --destructive: rgb(var(--theme-bg-error));
+        --destructive-foreground: rgb(var(--theme-fg-error));
+
+        /* Borders and inputs */
+        --border: rgb(var(--theme-border-subtle));
+        --input: rgb(var(--theme-bg-interactive-secondary));
+        --ring: rgb(var(--theme-fg-base));
+
+        /* Border radius */
+        --radius: 0.5rem;
+
+        /* Sidebar colors (using surface as base) */
+        --sidebar-background: rgb(var(--theme-bg-surface));
+        --sidebar-foreground: rgb(var(--theme-fg-base));
+        --sidebar-primary: rgb(var(--theme-bg-interactive-primary));
+        --sidebar-primary-foreground: rgb(var(--theme-fg-on-contrast));
+        --sidebar-accent: rgb(var(--theme-bg-interactive-secondary));
+        --sidebar-accent-foreground: rgb(var(--theme-fg-base));
+        --sidebar-border: rgb(var(--theme-border-subtle));
+        --sidebar-ring: rgb(var(--blue-600));
+        --sidebar: rgb(var(--theme-bg-surface));
+
+        /* Shadow */
+        --shadow-popover:
+            0 1px 2px rgba(0, 0, 0, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .dark {
+        /* Dark theme base colors */
+        --black-dark: 20 23 26;
+        --white-dark: 243 246 249;
+        --gray-200-dark: 40 45 50;
+        --gray-300-dark: 55 62 69;
+        --gray-500-dark: 150 155 165;
+
+        /* Semantic theme tokens (Dark Theme) */
+        --theme-bg-canvas: var(--black-dark);
+        --theme-bg-contrast: var(--white-dark);
+        --theme-bg-surface: var(--gray-200-dark);
+        --theme-bg-interactive-primary: var(--white-dark);
+        --theme-bg-interactive-secondary: var(--gray-300-dark);
+        --theme-bg-error: var(--red-700);
+
+        --theme-fg-base: var(--white-dark);
+        --theme-fg-subtle: var(--gray-500-dark);
+        --theme-fg-link: var(--blue-500);
+        --theme-fg-on-contrast: var(--black-dark);
+        --theme-fg-error: var(--red-500);
+
+        --theme-border-subtle: var(--white-dark) / 0.15;
+        --theme-border-error: var(--red-500) / 0.4;
+
+        /* Map to shadcn-vue semantic tokens */
+        --background: rgb(var(--theme-bg-canvas));
+        --foreground: rgb(var(--theme-fg-base));
+
+        --card: rgb(var(--theme-bg-surface));
+        --card-foreground: rgb(var(--theme-fg-base));
+
+        --popover: rgb(var(--theme-bg-surface));
+        --popover-foreground: rgb(var(--theme-fg-base));
+
+        --primary: rgb(var(--theme-bg-interactive-primary));
+        --primary-foreground: rgb(var(--theme-fg-on-contrast));
+
+        --secondary: rgb(var(--theme-bg-interactive-secondary));
+        --secondary-foreground: rgb(var(--theme-fg-base));
+
+        --muted: rgb(var(--theme-bg-interactive-secondary));
+        --muted-foreground: rgb(var(--theme-fg-subtle));
+
+        --accent: rgb(var(--theme-bg-interactive-secondary));
+        --accent-foreground: rgb(var(--theme-fg-base));
+
+        --destructive: rgb(var(--theme-bg-error));
+        --destructive-foreground: rgb(var(--theme-fg-error));
+
+        --border: rgb(var(--theme-border-subtle));
+        --input: rgb(var(--theme-bg-interactive-secondary));
+        --ring: rgb(var(--theme-fg-base));
+
+        /* Sidebar colors for dark mode */
+        --sidebar-background: rgb(var(--gray-200-dark));
+        --sidebar-foreground: rgb(var(--theme-fg-base));
+        --sidebar-primary: rgb(var(--theme-bg-interactive-primary));
+        --sidebar-primary-foreground: rgb(var(--theme-fg-on-contrast));
+        --sidebar-accent: rgb(var(--gray-300-dark));
+        --sidebar-accent-foreground: rgb(var(--theme-fg-base));
+        --sidebar-border: rgb(var(--theme-border-subtle));
+        --sidebar-ring: rgb(var(--blue-500));
+        --sidebar: rgb(var(--gray-200-dark));
+    }
 }
 
 @layer base {
