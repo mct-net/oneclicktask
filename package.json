@@ -22,7 +22,7 @@
             "stylelint --fix"
         ],
         "*.**": [
-            "prettier --check --ignore-unknown"
+            "prettier --ignore-unknown"
         ]
     },
     "devDependencies": {
