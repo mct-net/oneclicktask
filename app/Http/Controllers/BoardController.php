@@ -42,7 +42,7 @@ class BoardController extends Controller
     {
         $board->load(['owner', 'members', 'tasks.author', 'tasks.assignee', 'tasks.tags']);
 
-        return inertia('Boards/Show', [
+        return inertia('Board', [
             'board' => $board,
         ]);
     }
