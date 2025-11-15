@@ -1,7 +1,0 @@
-/*-------------------------------------
-  Overrides for Backpack
--------------------------------------*/
-.app-header {
-    /* Solves conflict with OCT modals */
-    z-index: auto !important;
-}

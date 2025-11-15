@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('file_attachments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('url');
+            $table->string('path'); // Storage path (e.g., 'task-attachments/xyz.jpg')
+            $table->string('url'); // Public URL (generated from path)
             $table->string('type')->nullable();
             $table->foreignId('task_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
