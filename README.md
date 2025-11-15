@@ -4,15 +4,15 @@ A modern, board-based task management application built with Laravel 12, Vue 3, 
 
 ## 📙 Table of Contents
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Development](#development)
-- [Testing](#testing)
-- [Code Quality](#code-quality)
-- [Building for Production](#building-for-production)
-- [Contributing](#contributing)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Development](#-development)
+- [Testing](#-testing)
+- [Code Quality](#-code-quality)
+- [Building for Production](#-building-for-production)
+- [Contributing](#-contributing)
 
 ## 📙 Features
 
