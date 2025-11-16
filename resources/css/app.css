@@ -157,7 +157,7 @@ layer(base);
         --theme-bg-error: var(--red-700);
 
         --theme-fg-base: var(--black);
-        --theme-fg-subtle: var(--black) / 0.6;
+        --theme-fg-subtle: --alpha(var(--black) / 0.6);
         --theme-fg-link: var(--blue-600);
         --theme-fg-on-contrast: var(--white);
         --theme-fg-error: var(--red-700);
@@ -244,8 +244,8 @@ layer(base);
         --theme-fg-on-contrast: var(--black-dark);
         --theme-fg-error: var(--red-500);
 
-        --theme-border-subtle: var(--white-dark) / 0.15;
-        --theme-border-error: var(--red-500) / 0.4;
+        --theme-border-subtle: --alpha(var(--white-dark) / 0.15);
+        --theme-border-error: --alpha(var(--red-500) / 0.4);
 
         /* Map to shadcn-vue semantic tokens */
         --background: var(--theme-bg-canvas);
