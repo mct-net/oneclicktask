@@ -43,7 +43,7 @@ const palette = [
                     />
 
                     <button
-                        class="text-subtle rounded-full"
+                        class="rounded-full text-muted-foreground"
                         @click="$emit('pick', EMPTY_TASK_COLOR)"
                         title="No color"
                     >

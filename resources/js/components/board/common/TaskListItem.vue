@@ -43,11 +43,14 @@ const onAddTime = (minutes: number) => {
         :aria-label="task.name"
     >
         <div class="flex items-center gap-x-2">
-            <IconStarSolid v-if="task.is_starred" class="text-subtle" />
-            <IconStarOutline v-else class="text-subtle" />
+            <IconStarSolid v-if="task.is_starred" class="text-border" />
+            <IconStarOutline v-else class="text-muted-foreground" />
 
-            <IconWarningSolid v-if="task.is_important" class="text-subtle" />
-            <IconWarningOutline v-else class="text-subtle" />
+            <IconWarningSolid
+                v-if="task.is_important"
+                class="text-muted-foreground"
+            />
+            <IconWarningOutline v-else class="text-muted-foreground" />
 
             <span
                 v-if="task.color !== EMPTY_TASK_COLOR"
@@ -55,7 +58,7 @@ const onAddTime = (minutes: number) => {
                 :style="{ backgroundColor: task.color }"
             />
 
-            <IconCircle v-else class="text-subtle" />
+            <IconCircle v-else class="text-muted-foreground" />
         </div>
 
         <span :class="{ 'font-bold': isActive }">

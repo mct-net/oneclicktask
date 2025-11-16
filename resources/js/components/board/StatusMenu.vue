@@ -86,7 +86,7 @@ const setStatus = (status: Task['status']) => {
             <div
                 class="bg-linear-to-r from-transparent to-[rgb(var(--theme-bg-surface))] to-10% py-2 pr-2 pl-10"
             >
-                <div class="text-subtle flex gap-x-2 text-xs">
+                <div class="flex gap-x-2 text-xs text-muted-foreground">
                     <button
                         role="menuitem"
                         :title="getStatusLabel('trashed')"

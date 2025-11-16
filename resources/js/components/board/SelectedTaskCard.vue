@@ -129,15 +129,15 @@ watch(
                     :style="{ backgroundColor: selectedTask.color }"
                 />
 
-                <IconCircle v-else class="text-subtle" />
+                <IconCircle v-else class="text-muted-foreground" />
             </ColorPickerPopover>
 
             <button @click="selectedTask.is_starred = !selectedTask.is_starred">
                 <IconStarSolid
                     v-if="selectedTask.is_starred"
-                    class="text-subtle"
+                    class="text-muted-foreground"
                 />
-                <IconStarOutline v-else class="text-subtle" />
+                <IconStarOutline v-else class="text-muted-foreground" />
             </button>
 
             <button
@@ -145,9 +145,9 @@ watch(
             >
                 <IconWarningSolid
                     v-if="selectedTask.is_important"
-                    class="text-subtle"
+                    class="text-muted-foreground"
                 />
-                <IconWarningOutline v-else class="text-subtle" />
+                <IconWarningOutline v-else class="text-muted-foreground" />
             </button>
         </div>
 
@@ -206,7 +206,7 @@ watch(
             >
                 <div class="relative flex items-center">
                     <button label="Postpone task">
-                        <IconAddTime class="text-subtle w-5.5" />
+                        <IconAddTime class="w-5.5 text-muted-foreground" />
                     </button>
                     <div
                         role="menu"
@@ -234,7 +234,7 @@ watch(
                     @remove="onRemoveAssignee"
                 >
                     <span
-                        class="text-subtle"
+                        class="text-muted-foreground"
                         :aria-label="
                             assignee
                                 ? `Change assignee: ${assignee.firstName} ${assignee.lastName || ''}`

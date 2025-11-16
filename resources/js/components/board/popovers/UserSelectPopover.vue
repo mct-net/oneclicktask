@@ -92,7 +92,10 @@ watch(
         <PopoverButton class="outline-hidden">
             <slot>
                 <div class="rounded-full">
-                    <IconAddUser class="text-subtle" title=" Select user" />
+                    <IconAddUser
+                        class="text-muted-foreground"
+                        title=" Select user"
+                    />
                 </div>
             </slot>
         </PopoverButton>
@@ -147,7 +150,7 @@ watch(
                             >
                                 <IconEmptyCircle
                                     v-if="isUnassignedUser(user)"
-                                    class="text-subtle h-full w-full opacity-50"
+                                    class="h-full w-full text-muted-foreground opacity-50"
                                     :stroke-width="0.6"
                                 />
 
@@ -165,10 +168,10 @@ watch(
 
                         <!-- Action -->
                         <IconCircleMinus
-                            class="text-subtle"
+                            class="text-muted-foreground"
                             v-if="isSelectedUser(user)"
                         />
-                        <IconCirclePlus class="text-subtle" v-else />
+                        <IconCirclePlus class="text-muted-foreground" v-else />
                     </li>
                 </ul>
             </div>

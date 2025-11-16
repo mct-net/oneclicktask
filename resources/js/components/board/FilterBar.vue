@@ -89,15 +89,18 @@ const onRemoveCollaborator = (user: User) => {
                     class="h-4 w-4 rounded-full"
                     :style="{ backgroundColor: filters.color }"
                 />
-                <IconEmptyCircle v-else class="text-subtle" />
+                <IconEmptyCircle v-else class="text-muted-foreground" />
             </ColorPickerPopover>
 
             <button
                 title="Starred"
                 @click="filters.isStarred = !filters.isStarred"
             >
-                <IconStarSolid v-if="filters.isStarred" class="text-subtle" />
-                <IconStarOutline v-else class="text-subtle" />
+                <IconStarSolid
+                    v-if="filters.isStarred"
+                    class="text-muted-foreground"
+                />
+                <IconStarOutline v-else class="text-muted-foreground" />
             </button>
 
             <button
@@ -106,9 +109,9 @@ const onRemoveCollaborator = (user: User) => {
             >
                 <IconWarningSolid
                     v-if="filters.isImportant"
-                    class="text-subtle"
+                    class="text-muted-foreground"
                 />
-                <IconWarningOutline v-else class="text-subtle" />
+                <IconWarningOutline v-else class="text-muted-foreground" />
             </button>
 
             <div class="h-5 border-l" />
@@ -116,7 +119,7 @@ const onRemoveCollaborator = (user: User) => {
             <button
                 :title="getStatusLabel('in_progress')"
                 @click="filters.inProgress = !filters.inProgress"
-                class="text-subtle"
+                class="text-muted-foreground"
             >
                 <IconCirclePlaySolid v-if="filters.inProgress" />
                 <IconCirclePlayOutline v-else />
@@ -127,7 +130,7 @@ const onRemoveCollaborator = (user: User) => {
                 @click="
                     filters.failedOrDuplicated = !filters.failedOrDuplicated
                 "
-                class="text-subtle"
+                class="text-muted-foreground"
             >
                 <IconCircleCloseSolid v-if="filters.failedOrDuplicated" />
                 <IconCircleCloseOutline v-else />
@@ -136,7 +139,7 @@ const onRemoveCollaborator = (user: User) => {
             <button
                 :title="getStatusLabel('done')"
                 @click="filters.done = !filters.done"
-                class="text-subtle"
+                class="text-muted-foreground"
             >
                 <IconCircleCheckSolid v-if="filters.done" />
                 <IconCircleCheckOutline v-else />
@@ -147,7 +150,7 @@ const onRemoveCollaborator = (user: User) => {
             <button
                 :title="getStatusLabel('backlog')"
                 @click="filters.backlog = !filters.backlog"
-                class="text-subtle"
+                class="text-muted-foreground"
             >
                 <IconTelescopeSolid v-if="filters.backlog" />
                 <IconTelescopeOutline v-else />
@@ -156,7 +159,7 @@ const onRemoveCollaborator = (user: User) => {
             <button
                 :title="getStatusLabel('trashed')"
                 @click="filters.trashed = !filters.trashed"
-                class="text-subtle"
+                class="text-muted-foreground"
             >
                 <IconTrashSolid v-if="filters.trashed" />
                 <IconTrashOutline v-else />
@@ -170,7 +173,7 @@ const onRemoveCollaborator = (user: User) => {
                 @add="onAddCollaborator"
                 @remove="onRemoveCollaborator"
             >
-                <span class="text-subtle" title=" Assignees">
+                <span class="text-muted-foreground" title=" Assignees">
                     <IconUserSolid v-if="filters.assignees.length" />
                     <IconUserOutline v-else />
                 </span>

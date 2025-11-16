@@ -43,7 +43,7 @@ onKeyStroke('Escape', close);
         >
             <!-- Overlay -->
             <div
-                class="fixed top-0 left-0 h-full w-full bg-black/50"
+                class="bg-/50 fixed top-0 left-0 h-full w-full"
                 @click.self="close"
             />
 

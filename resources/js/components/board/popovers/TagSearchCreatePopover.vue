@@ -156,10 +156,13 @@ const onEnter = async (close: () => void) => {
                         <!-- Action -->
                         <div class="shrink-0">
                             <IconCircleMinus
-                                class="text-subtle"
+                                class="text-muted-foreground"
                                 v-if="isTagAdded(tag)"
                             />
-                            <IconCirclePlus class="text-subtle" v-else />
+                            <IconCirclePlus
+                                class="text-muted-foreground"
+                                v-else
+                            />
                         </div>
                     </li>
                 </ul>
