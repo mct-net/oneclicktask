@@ -17,6 +17,7 @@ layer(base);
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+    --color-*: initial;
     --font-sans:
         Ubuntu, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
         'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -127,25 +128,25 @@ layer(base);
 @layer base {
     :root {
         /* Base palette colors */
-        --black: 63 72 80;
-        --white: 243 246 249;
+        --black: oklch(0.3966 0.0179 245.09);
+        --white: oklch(0.9717 0.0051 247.88);
 
-        --gray-200: 230 235 239;
-        --gray-300: 214 222 229;
-        --gray-500: 113 120 132;
+        --gray-200: oklch(0.9374 0.0076 241.67);
+        --gray-300: oklch(0.8965 0.0129 244.27);
+        --gray-500: oklch(0.5709 0.0203 261.31);
 
-        --red-200: 245 225 228;
-        --red-500: 246 108 108;
-        --red-700: 147 80 100;
+        --red-200: oklch(0.9267 0.0223 7.2);
+        --red-500: oklch(0.7001 0.1702 22.49);
+        --red-700: rgb(147, 80, 100);
 
         /* Extended palette colors */
-        --orange-500: 249 149 76;
-        --yellow-500: 239 201 112;
-        --green-500: 164 200 119;
-        --blue-500: 116 185 183;
-        --blue-600: 36 138 195;
-        --purple-500: 127 121 191;
-        --lilac-500: 183 115 152;
+        --orange-500: oklch(0.7616 0.1486 54.31);
+        --yellow-500: oklch(0.8506 0.1164 86.75);
+        --green-500: oklch(0.7875 0.1143 128.32);
+        --blue-500: oklch(0.7395 0.0699 193.39);
+        --blue-600: oklch(0.6039 0.124 239.18);
+        --purple-500: oklch(0.6104 0.1048 286.78);
+        --lilac-500: oklch(0.6392 0.0978 346.42);
 
         /* Semantic theme tokens (Light Theme) */
         --theme-bg-canvas: var(--gray-200);
@@ -153,7 +154,7 @@ layer(base);
         --theme-bg-surface: var(--white);
         --theme-bg-interactive-primary: var(--black);
         --theme-bg-interactive-secondary: var(--gray-300);
-        --theme-bg-error: var(--red-200);
+        --theme-bg-error: var(--red-700);
 
         --theme-fg-base: var(--black);
         --theme-fg-subtle: var(--black) / 0.6;
@@ -161,60 +162,60 @@ layer(base);
         --theme-fg-on-contrast: var(--white);
         --theme-fg-error: var(--red-700);
 
-        --theme-border-subtle: var(--black) / 0.2;
-        --theme-border-error: var(--red-700) / 0.23;
+        --theme-border-subtle: oklch(0.3966 0.0179 245.09 / 20%);
+        --theme-border-error: oklch(0.5166 0.0923 1.72 / 23%);
 
         /* Map to shadcn-vue semantic tokens */
         /* Page background */
-        --background: rgb(var(--theme-bg-canvas));
-        --foreground: rgb(var(--theme-fg-base));
+        --background: var(--theme-bg-canvas);
+        --foreground: var(--theme-fg-base);
 
         /* Card backgrounds */
-        --card: rgb(var(--theme-bg-surface));
-        --card-foreground: rgb(var(--theme-fg-base));
+        --card: var(--theme-bg-surface);
+        --card-foreground: var(--theme-fg-base);
 
         /* Popover backgrounds */
-        --popover: rgb(var(--theme-bg-surface));
-        --popover-foreground: rgb(var(--theme-fg-base));
+        --popover: var(--theme-bg-surface);
+        --popover-foreground: var(--theme-fg-base);
 
         /* Primary actions (buttons, links) */
-        --primary: rgb(var(--theme-bg-interactive-primary));
-        --primary-foreground: rgb(var(--theme-fg-on-contrast));
+        --primary: var(--theme-bg-interactive-primary);
+        --primary-foreground: var(--theme-fg-on-contrast);
 
         /* Secondary actions */
-        --secondary: rgb(var(--theme-bg-interactive-secondary));
-        --secondary-foreground: rgb(var(--theme-fg-base));
+        --secondary: var(--theme-bg-interactive-secondary);
+        --secondary-foreground: var(--theme-fg-base);
 
         /* Muted backgrounds and text */
-        --muted: rgb(var(--theme-bg-interactive-secondary));
-        --muted-foreground: rgb(var(--theme-fg-subtle));
+        --muted: var(--theme-bg-interactive-secondary);
+        --muted-foreground: var(--theme-fg-subtle);
 
         /* Accent highlights */
-        --accent: rgb(var(--theme-bg-interactive-secondary));
-        --accent-foreground: rgb(var(--theme-fg-base));
+        --accent: var(--theme-bg-interactive-secondary);
+        --accent-foreground: var(--theme-fg-base);
 
         /* Destructive/Error states */
-        --destructive: rgb(var(--theme-bg-error));
-        --destructive-foreground: rgb(var(--theme-fg-error));
+        --destructive: var(--theme-bg-error);
+        --destructive-foreground: var(--theme-fg-error);
 
         /* Borders and inputs */
-        --border: rgb(var(--theme-border-subtle));
-        --input: rgb(var(--theme-bg-interactive-secondary));
-        --ring: rgb(var(--theme-fg-base));
+        --border: var(--theme-border-subtle);
+        --input: var(--theme-bg-interactive-secondary);
+        --ring: var(--theme-fg-base);
 
         /* Border radius */
         --radius: 0.5rem;
 
         /* Sidebar colors (using surface as base) */
-        --sidebar-background: rgb(var(--theme-bg-surface));
-        --sidebar-foreground: rgb(var(--theme-fg-base));
-        --sidebar-primary: rgb(var(--theme-bg-interactive-primary));
-        --sidebar-primary-foreground: rgb(var(--theme-fg-on-contrast));
-        --sidebar-accent: rgb(var(--theme-bg-interactive-secondary));
-        --sidebar-accent-foreground: rgb(var(--theme-fg-base));
-        --sidebar-border: rgb(var(--theme-border-subtle));
-        --sidebar-ring: rgb(var(--blue-600));
-        --sidebar: rgb(var(--theme-bg-surface));
+        --sidebar-background: var(--theme-bg-surface);
+        --sidebar-foreground: var(--theme-fg-base);
+        --sidebar-primary: var(--theme-bg-interactive-primary);
+        --sidebar-primary-foreground: var(--theme-fg-on-contrast);
+        --sidebar-accent: var(--theme-bg-interactive-secondary);
+        --sidebar-accent-foreground: var(--theme-fg-base);
+        --sidebar-border: var(--theme-border-subtle);
+        --sidebar-ring: var(--blue-600);
+        --sidebar: var(--theme-bg-surface);
 
         /* Shadow */
         --shadow-popover:
@@ -223,11 +224,11 @@ layer(base);
 
     .dark {
         /* Dark theme base colors */
-        --black-dark: 20 23 26;
-        --white-dark: 243 246 249;
-        --gray-200-dark: 40 45 50;
-        --gray-300-dark: 55 62 69;
-        --gray-500-dark: 150 155 165;
+        --black-dark: oklch(0.1294 0.0054 248.42);
+        --white-dark: oklch(0.9635 0.0062 247.13);
+        --gray-200-dark: oklch(0.2118 0.0049 249.78);
+        --gray-300-dark: oklch(0.2906 0.0059 244.38);
+        --gray-500-dark: oklch(0.651 0.0159 247.28);
 
         /* Semantic theme tokens (Dark Theme) */
         --theme-bg-canvas: var(--black-dark);
@@ -247,44 +248,44 @@ layer(base);
         --theme-border-error: var(--red-500) / 0.4;
 
         /* Map to shadcn-vue semantic tokens */
-        --background: rgb(var(--theme-bg-canvas));
-        --foreground: rgb(var(--theme-fg-base));
+        --background: var(--theme-bg-canvas);
+        --foreground: var(--theme-fg-base);
 
-        --card: rgb(var(--theme-bg-surface));
-        --card-foreground: rgb(var(--theme-fg-base));
+        --card: var(--theme-bg-surface);
+        --card-foreground: var(--theme-fg-base);
 
-        --popover: rgb(var(--theme-bg-surface));
-        --popover-foreground: rgb(var(--theme-fg-base));
+        --popover: var(--theme-bg-surface);
+        --popover-foreground: var(--theme-fg-base);
 
-        --primary: rgb(var(--theme-bg-interactive-primary));
-        --primary-foreground: rgb(var(--theme-fg-on-contrast));
+        --primary: var(--theme-bg-interactive-primary);
+        --primary-foreground: var(--theme-fg-on-contrast);
 
-        --secondary: rgb(var(--theme-bg-interactive-secondary));
-        --secondary-foreground: rgb(var(--theme-fg-base));
+        --secondary: var(--theme-bg-interactive-secondary);
+        --secondary-foreground: var(--theme-fg-base);
 
-        --muted: rgb(var(--theme-bg-interactive-secondary));
-        --muted-foreground: rgb(var(--theme-fg-subtle));
+        --muted: var(--theme-bg-interactive-secondary);
+        --muted-foreground: var(--theme-fg-subtle);
 
-        --accent: rgb(var(--theme-bg-interactive-secondary));
-        --accent-foreground: rgb(var(--theme-fg-base));
+        --accent: var(--theme-bg-interactive-secondary);
+        --accent-foreground: var(--theme-fg-base);
 
-        --destructive: rgb(var(--theme-bg-error));
-        --destructive-foreground: rgb(var(--theme-fg-error));
+        --destructive: var(--theme-bg-error);
+        --destructive-foreground: var(--theme-fg-error);
 
-        --border: rgb(var(--theme-border-subtle));
-        --input: rgb(var(--theme-bg-interactive-secondary));
-        --ring: rgb(var(--theme-fg-base));
+        --border: var(--theme-border-subtle);
+        --input: var(--theme-bg-interactive-secondary);
+        --ring: var(--theme-fg-base);
 
         /* Sidebar colors for dark mode */
-        --sidebar-background: rgb(var(--gray-200-dark));
-        --sidebar-foreground: rgb(var(--theme-fg-base));
-        --sidebar-primary: rgb(var(--theme-bg-interactive-primary));
-        --sidebar-primary-foreground: rgb(var(--theme-fg-on-contrast));
-        --sidebar-accent: rgb(var(--gray-300-dark));
-        --sidebar-accent-foreground: rgb(var(--theme-fg-base));
-        --sidebar-border: rgb(var(--theme-border-subtle));
-        --sidebar-ring: rgb(var(--blue-500));
-        --sidebar: rgb(var(--gray-200-dark));
+        --sidebar-background: var(--gray-200-dark);
+        --sidebar-foreground: var(--theme-fg-base);
+        --sidebar-primary: var(--theme-bg-interactive-primary);
+        --sidebar-primary-foreground: var(--theme-fg-on-contrast);
+        --sidebar-accent: var(--gray-300-dark);
+        --sidebar-accent-foreground: var(--theme-fg-base);
+        --sidebar-border: var(--theme-border-subtle);
+        --sidebar-ring: var(--blue-500);
+        --sidebar: var(--gray-200-dark);
     }
 }
 

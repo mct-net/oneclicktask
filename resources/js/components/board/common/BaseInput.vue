@@ -19,7 +19,7 @@ defineEmits(['update:model-value', 'enter']);
 </script>
 
 <template>
-    <div class="border-subtle relative flex h-fit w-full rounded-md border">
+    <div class="relative flex h-fit w-full rounded-md border border-border">
         <input
             ref="inputRef"
             class="h-full w-full grow rounded-md bg-surface px-4 py-3"

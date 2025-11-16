@@ -1,7 +1,4 @@
-/* stylelint-disable selector-class-pattern */
-/* stylelint-disable comment-empty-line-before */
-
-@import 'tailwindcss' layer(reference);
+@reference "../app.css";
 
 /*-------------------------------------
   Code Theme
@@ -18,7 +15,7 @@
     pointer-events: none;
     height: 0;
 
-    @apply text-base/60;
+    @apply text-foreground opacity-60;
 }
 
 .ProseMirror p {
@@ -30,5 +27,5 @@
 }
 
 .ProseMirror-selectednode {
-    @apply outline outline-[3px] -outline-offset-[3px] outline-black;
+    @apply outline-[3px] -outline-offset-[3px] outline-foreground;
 }
