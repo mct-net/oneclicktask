@@ -14,7 +14,7 @@ defineEmits(['update:model-value']);
 </script>
 
 <template>
-    <div class="border-subtle relative flex h-fit w-full rounded-md border">
+    <div class="relative flex h-fit w-full rounded-md border">
         <textarea
             class="h-full w-full grow rounded-md bg-surface px-4 py-3"
             type="text"

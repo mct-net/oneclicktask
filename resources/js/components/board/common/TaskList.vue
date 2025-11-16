@@ -59,7 +59,7 @@ const onToggleLayout = () => {
     <section role="listbox" class="relative" @click.self="clearSelectedTask">
         <div class="relative h-37 pb-2">
             <div
-                class="border-subtle absolute inset-0 box-border size-full rounded-md border-2 border-dashed"
+                class="absolute inset-0 box-border size-full rounded-md border-2 border-dashed"
             />
 
             <div class="relative">

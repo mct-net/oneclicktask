@@ -85,7 +85,7 @@ watch(useTaskStore().filters, () => {
             <div class="flex items-center gap-x-3">
                 <div class="flex items-center gap-x-2">
                     <input
-                        class="border-subtle h-full w-10 rounded-md border bg-surface px-1 py-2 text-center"
+                        class="h-full w-10 rounded-md border bg-surface px-1 py-2 text-center"
                         type="number"
                         :value="currentPage"
                         @input="

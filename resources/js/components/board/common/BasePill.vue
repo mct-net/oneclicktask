@@ -13,7 +13,7 @@ defineProps({
     <li
         class="rounded-md px-1.5 py-1 leading-none"
         :class="{
-            'border-subtle border bg-surface': variant === 'default',
+            'border bg-surface': variant === 'default',
             'text-on-contrast border border-transparent bg-contrast':
                 variant === 'contrast',
             'border border-error bg-error text-error': variant === 'error',

@@ -10,7 +10,7 @@ const { openFileDialog } = useFileDialog({ addNewTask: true });
     <div
         ref="dropZoneRef"
         class="flex h-14 w-fit shrink-0 cursor-pointer items-center gap-x-3 rounded-md border-2 border-dashed bg-interactive-secondary px-5 py-3 text-xs"
-        :class="isOverDropZone ? 'border-primary' : 'border-subtle'"
+        :class="isOverDropZone ? 'border-primary' : ''"
         @click="openFileDialog()"
     >
         <IconImage class="shrink-0" />

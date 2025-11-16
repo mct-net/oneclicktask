@@ -35,7 +35,7 @@ defineProps({
                     {{ confirmationButtonLabel }}
                 </button>
                 <button
-                    class="border-subtle rounded-md border px-3 py-2 leading-none"
+                    class="rounded-md border px-3 py-2 leading-none"
                     @click="close"
                 >
                     Cancel

@@ -196,7 +196,7 @@ onMounted(async () => {
                 <section
                     class="hidden h-full w-76 shrink-0 flex-col rounded-md @3xl/main:flex @4xl/main:w-5/12"
                     :class="{
-                        'border-subtle border-2 border-dashed': !selectedTask,
+                        'border-2 border-dashed': !selectedTask,
                         'bg-surface': selectedTask,
                     }"
                 >

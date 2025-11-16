@@ -111,7 +111,7 @@ const onRemoveCollaborator = (user: User) => {
                 <IconWarningOutline v-else class="text-subtle" />
             </button>
 
-            <div class="border-subtle h-5 border-l" />
+            <div class="h-5 border-l" />
 
             <button
                 :title="getStatusLabel('in_progress')"
@@ -142,7 +142,7 @@ const onRemoveCollaborator = (user: User) => {
                 <IconCircleCheckOutline v-else />
             </button>
 
-            <div class="border-subtle h-5 border-l" />
+            <div class="h-5 border-l" />
 
             <button
                 :title="getStatusLabel('backlog')"
@@ -162,7 +162,7 @@ const onRemoveCollaborator = (user: User) => {
                 <IconTrashOutline v-else />
             </button>
 
-            <div class="border-subtle h-5 border-l" />
+            <div class="h-5 border-l" />
 
             <UserSelectPopover
                 :selected-users="filters.assignees || []"

@@ -15,7 +15,7 @@ const message = messages[Math.floor(Math.random() * messages.length)];
 <template>
     <section class="flex grow items-center justify-center">
         <div
-            class="border-subtle mt-10 mb-40 flex w-fit flex-col items-center gap-x-3 rounded-md border-2 border-dashed p-5 pb-7"
+            class="mt-10 mb-40 flex w-fit flex-col items-center gap-x-3 rounded-md border-2 border-dashed p-5 pb-7"
         >
             <IconUnplug />
             <p class="mt-2 w-44 text-center">{{ message }}</p>

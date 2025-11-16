@@ -16,7 +16,7 @@ defineProps({
                 'flex h-8 w-8 items-center justify-center rounded-md',
                 ($attrs.class as string) || '',
             ),
-            isActive ? 'text-on-contrast bg-contrast' : 'border-subtle border',
+            isActive ? 'text-on-contrast bg-contrast' : 'border',
         ]"
     >
         <slot />

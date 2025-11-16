@@ -87,7 +87,7 @@ onKeyStroke('Escape', disableEditMode);
                         Cancel
                     </button>
                     <button
-                        class="border-subtle text-on-contrast rounded-md border bg-interactive-primary px-3 py-1.5 text-sm leading-none"
+                        class="text-on-contrast rounded-md border bg-interactive-primary px-3 py-1.5 text-sm leading-none"
                         @click="onSave"
                     >
                         Save
