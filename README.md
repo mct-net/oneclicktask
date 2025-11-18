@@ -1,18 +1,23 @@
-# OCT - One Click Task
+# One Click Task - OCT
 
-A modern, board-based task management application built with Laravel 12, Vue 3, and Inertia.js. OCT provides an intuitive interface for teams to collaborate on tasks with support for comments, tags, file attachments, and more.
+**OneClickTask** is a new type of to-do list application designed for efficiency and ease of use.
+Upon login or page visit, the input field is immediately focused, allowing users to quickly enter new tasks.
+
+The list of current tasks can be filtered by hashtags with just a click, making organization straightforward. Additionally, tasks that cannot be immediately attended to can be paused or postponed with a single click.
+
+Built with Laravel 12, Vue 3, and Inertia.js.
 
 ## 📙 Table of Contents
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Development](#development)
-- [Testing](#testing)
-- [Code Quality](#code-quality)
-- [Building for Production](#building-for-production)
-- [Contributing](#contributing)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Development](#-development)
+- [Testing](#-testing)
+- [Code Quality](#-code-quality)
+- [Building for Production](#-building-for-production)
+- [Contributing](#-contributing)
 
 ## 📙 Features
 

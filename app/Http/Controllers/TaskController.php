@@ -15,14 +15,11 @@ class TaskController extends Controller
     public function index(Board $board)
     {
         $tasks = $board->tasks()
-            ->with(['author', 'assignee', 'tags'])
+            ->with(['author', 'assignee', 'tags', 'files', 'comments.user'])
             ->latest()
             ->get();
 
-        return inertia('Tasks', [
-            'board' => $board,
-            'tasks' => $tasks,
-        ]);
+        return response()->json($tasks);
     }
 
     /**
@@ -47,7 +44,7 @@ class TaskController extends Controller
         if (isset($validated['assignee_id'])) {
             $assignee = \App\Models\User::find($validated['assignee_id']);
             if (! $board->hasMember($assignee)) {
-                return back()->withErrors(['assignee_id' => 'Assignee must be a member of this board.']);
+                return response()->json(['message' => 'Assignee must be a member of this board.'], 422);
             }
         }
 
@@ -60,8 +57,9 @@ class TaskController extends Controller
             $task->tags()->sync($validated['tags']);
         }
 
-        return redirect()->route('boards.tasks.show', [$board, $task])
-            ->with('success', 'Task created successfully.');
+        $task->load(['author', 'assignee', 'tags']);
+
+        return response()->json($task, 201);
     }
 
     /**
@@ -71,10 +69,7 @@ class TaskController extends Controller
     {
         $task->load(['board', 'author', 'assignee', 'tags', 'comments.user', 'files']);
 
-        return inertia('Tasks', [
-            'board' => $board,
-            'task' => $task,
-        ]);
+        return response()->json($task);
     }
 
     /**
@@ -99,7 +94,7 @@ class TaskController extends Controller
         if (isset($validated['assignee_id'])) {
             $assignee = \App\Models\User::find($validated['assignee_id']);
             if (! $board->hasMember($assignee)) {
-                return back()->withErrors(['assignee_id' => 'Assignee must be a member of this board.']);
+                return response()->json(['message' => 'Assignee must be a member of this board.'], 422);
             }
         }
 
@@ -109,8 +104,9 @@ class TaskController extends Controller
             $task->tags()->sync($validated['tags']);
         }
 
-        return redirect()->route('boards.tasks.show', [$board, $task])
-            ->with('success', 'Task updated successfully.');
+        $task->load(['author', 'assignee', 'tags']);
+
+        return response()->json($task);
     }
 
     /**
@@ -120,7 +116,6 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return redirect()->route('boards.tasks.index', $board)
-            ->with('success', 'Task deleted successfully.');
+        return response()->json(null, 204);
     }
 }

@@ -60,7 +60,7 @@ const isCurrentRoute = computed(
 const activeItemStyles = computed(
     () => (url: NonNullable<InertiaLinkProps['href']>) =>
         isCurrentRoute.value(toUrl(url))
-            ? 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
+            ? 'text-foreground dark:bg-gray-300 dark:text-foreground'
             : '',
 );
 
@@ -108,7 +108,7 @@ const rightNavItems: NavItem[] = [
                             >
                             <SheetHeader class="flex justify-start text-left">
                                 <AppLogoIcon
-                                    class="size-6 fill-current text-black dark:text-white"
+                                    class="text-black size-6 fill-current dark:text-primary-foreground"
                                 />
                             </SheetHeader>
                             <div
@@ -184,7 +184,7 @@ const rightNavItems: NavItem[] = [
                                 </Link>
                                 <div
                                     v-if="isCurrentRoute(item.href)"
-                                    class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
+                                    class="bg-black dark:bg-white absolute bottom-0 left-0 h-0.5 w-full translate-y-px"
                                 ></div>
                             </NavigationMenuItem>
                         </NavigationMenuList>
@@ -257,7 +257,7 @@ const rightNavItems: NavItem[] = [
                                         :alt="auth.user.name"
                                     />
                                     <AvatarFallback
-                                        class="rounded-lg bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white"
+                                        class="rounded-lg bg-gray-200 font-semibold text-foreground dark:bg-gray-300 dark:text-foreground"
                                     >
                                         {{ getInitials(auth.user?.name) }}
                                     </AvatarFallback>
@@ -277,7 +277,7 @@ const rightNavItems: NavItem[] = [
             class="flex w-full border-b border-sidebar-border/70"
         >
             <div
-                class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl"
+                class="mx-auto flex h-12 w-full items-center justify-start px-4 text-muted-foreground md:max-w-7xl"
             >
                 <Breadcrumbs :breadcrumbs="breadcrumbs" />
             </div>

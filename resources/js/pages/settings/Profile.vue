@@ -83,7 +83,7 @@ const user = page.props.auth.user;
                             <Link
                                 :href="send()"
                                 as="button"
-                                class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+                                class="text-foreground underline decoration-gray-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-gray-500"
                             >
                                 Click here to resend the verification email.
                             </Link>
@@ -91,7 +91,7 @@ const user = page.props.auth.user;
 
                         <div
                             v-if="status === 'verification-link-sent'"
-                            class="mt-2 text-sm font-medium text-green-600"
+                            class="text-green-600 mt-2 text-sm font-medium"
                         >
                             A new verification link has been sent to your email
                             address.
@@ -113,7 +113,7 @@ const user = page.props.auth.user;
                         >
                             <p
                                 v-show="recentlySuccessful"
-                                class="text-sm text-neutral-600"
+                                class="text-sm text-muted-foreground"
                             >
                                 Saved.
                             </p>

@@ -17,6 +17,7 @@ class FileAttachment extends Model
      */
     protected $fillable = [
         'name',
+        'path',
         'url',
         'type',
         'task_id',

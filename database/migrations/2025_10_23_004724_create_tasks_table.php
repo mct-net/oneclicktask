@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->foreignId('author_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('assignee_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('color')->nullable();
+            $table->string('color');
             $table->timestamp('due_date')->nullable();
             $table->timestamp('last_postponed_at')->nullable();
             $table->boolean('is_starred')->default(false);

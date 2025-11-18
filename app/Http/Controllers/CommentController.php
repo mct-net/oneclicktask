@@ -36,7 +36,7 @@ class CommentController extends Controller
 
         $comment->load('user');
 
-        return back()->with('success', 'Comment added successfully.');
+        return response()->json($comment, 201);
     }
 
     /**
@@ -55,7 +55,7 @@ class CommentController extends Controller
 
         $comment->update($validated);
 
-        return back()->with('success', 'Comment updated successfully.');
+        return response()->json($comment, 200);
     }
 
     /**
@@ -70,6 +70,6 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return back()->with('success', 'Comment deleted successfully.');
+        return response()->json(null, 204);
     }
 }
