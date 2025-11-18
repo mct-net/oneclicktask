@@ -108,7 +108,7 @@ const rightNavItems: NavItem[] = [
                             >
                             <SheetHeader class="flex justify-start text-left">
                                 <AppLogoIcon
-                                    class="size-6 fill-current text-black dark:text-white"
+                                    class="text-black size-6 fill-current dark:text-primary-foreground"
                                 />
                             </SheetHeader>
                             <div
@@ -184,7 +184,7 @@ const rightNavItems: NavItem[] = [
                                 </Link>
                                 <div
                                     v-if="isCurrentRoute(item.href)"
-                                    class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
+                                    class="bg-black dark:bg-white absolute bottom-0 left-0 h-0.5 w-full translate-y-px"
                                 ></div>
                             </NavigationMenuItem>
                         </NavigationMenuList>
