@@ -57,7 +57,7 @@ const onToggleLayout = () => {
 
 <template>
     <section role="listbox" class="relative" @click.self="clearSelectedTask">
-        <div class="relative h-37 pb-2">
+        <div class="relative h-44 pb-2">
             <div
                 class="absolute inset-0 box-border size-full rounded-md border-2 border-dashed"
             />
@@ -79,7 +79,7 @@ const onToggleLayout = () => {
                 <EmptyState
                     v-if="!tasks.length"
                     :messages="emptyStateMessages"
-                    class="my-0 h-36 w-full border-none"
+                    class="my-0 h-44 w-full border-none"
                 />
             </div>
         </div>

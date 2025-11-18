@@ -60,7 +60,7 @@ onBeforeMount(() => {
 
         <TaskList
             aria-label="Five most recent tasks"
-            class="mt-3"
+            class="mt-8"
             :tasks="recentTasks.top5"
             :stats="recentTasks.stats"
             disable-time-menu
