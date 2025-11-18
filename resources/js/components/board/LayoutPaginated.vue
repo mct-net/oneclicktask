@@ -100,7 +100,7 @@ watch(useTaskStore().filters, () => {
                 </div>
 
                 <button
-                    class="text-on-contrast rounded-md bg-interactive-primary px-1.5 py-1"
+                    class="rounded-md bg-interactive-primary px-1.5 py-1 text-primary-foreground"
                     :class="[
                         isFirstPage ? 'cursor-not-allowed' : 'cursor-pointer',
                         'disabled:opacity-50',
@@ -111,7 +111,7 @@ watch(useTaskStore().filters, () => {
                     Prev
                 </button>
                 <button
-                    class="text-on-contrast rounded-md bg-interactive-primary px-1.5 py-1"
+                    class="rounded-md bg-interactive-primary px-1.5 py-1 text-primary-foreground"
                     :class="[
                         isLastPage ? 'cursor-not-allowed' : 'cursor-pointer',
                         'disabled:opacity-50',

@@ -93,7 +93,9 @@ const onToggleLayout = () => {
             <li v-for="entry in stats" :key="entry.name">
                 <button
                     class="rounded-md px-2 py-1 transition-opacity hover:opacity-70"
-                    :class="{ 'text-on-contrast bg-contrast': entry.active }"
+                    :class="{
+                        'bg-contrast text-primary-foreground': entry.active,
+                    }"
                     @click="entry.toggle"
                 >
                     <span class="font-bold">{{ entry.name }}</span

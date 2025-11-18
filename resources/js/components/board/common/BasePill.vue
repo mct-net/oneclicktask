@@ -14,7 +14,7 @@ defineProps({
         class="rounded-md px-1.5 py-1 leading-none"
         :class="{
             'border bg-surface': variant === 'default',
-            'text-on-contrast border border-transparent bg-contrast':
+            'border border-transparent bg-contrast text-primary-foreground':
                 variant === 'contrast',
             'border border-error bg-error text-error': variant === 'error',
         }"
