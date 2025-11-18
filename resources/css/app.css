@@ -134,6 +134,7 @@ layer(base);
         --gray-200: oklch(0.9374 0.0076 241.67);
         --gray-300: oklch(0.8965 0.0129 244.27);
         --gray-500: oklch(0.5709 0.0203 261.31);
+        --gray-700: oklch(0.2934 0.0124 243.27);
 
         --red-200: oklch(0.9267 0.0223 7.2);
         --red-500: oklch(0.7001 0.1702 22.49);
@@ -151,6 +152,7 @@ layer(base);
         /* Semantic theme tokens (Light Theme) */
         --theme-bg-canvas: var(--gray-200);
         --theme-bg-contrast: var(--black);
+        --theme-bg-higher-contrast: var(--gray-700);
         --theme-bg-surface: var(--white);
         --theme-bg-interactive-primary: var(--black);
         --theme-bg-interactive-secondary: var(--gray-300);
@@ -207,8 +209,8 @@ layer(base);
         --radius: 0.5rem;
 
         /* Sidebar colors (using surface as base) */
-        --sidebar-background: var(--theme-bg-surface);
-        --sidebar-foreground: var(--theme-fg-base);
+        --sidebar-background: var(--theme-bg-higher-contrast);
+        --sidebar-foreground: var(--theme-fg-on-contrast);
         --sidebar-primary: var(--theme-bg-interactive-primary);
         --sidebar-primary-foreground: var(--theme-fg-on-contrast);
         --sidebar-accent: var(--theme-bg-interactive-secondary);
@@ -229,10 +231,12 @@ layer(base);
         --gray-200-dark: oklch(0.2118 0.0049 249.78);
         --gray-300-dark: oklch(0.2906 0.0059 244.38);
         --gray-500-dark: oklch(0.651 0.0159 247.28);
+        --gray-700-dark: oklch(0.2934 0.0124 243.27);
 
         /* Semantic theme tokens (Dark Theme) */
         --theme-bg-canvas: var(--black-dark);
         --theme-bg-contrast: var(--white-dark);
+        --theme-bg-higher-contrast: var(--gray-700-dark);
         --theme-bg-surface: var(--gray-200-dark);
         --theme-bg-interactive-primary: var(--white-dark);
         --theme-bg-interactive-secondary: var(--gray-300-dark);
