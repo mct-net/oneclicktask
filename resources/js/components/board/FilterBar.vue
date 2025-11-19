@@ -85,7 +85,7 @@ const onRemoveCollaborator = (user: User) => {
                 @pick="(color) => (filters.color = color)"
             >
                 <div
-                    v-if="filters.color !== EMPTY_TASK_COLOR"
+                    v-if="filters.color && filters.color !== EMPTY_TASK_COLOR"
                     class="h-4 w-4 rounded-full"
                     :style="{ backgroundColor: filters.color }"
                 />
