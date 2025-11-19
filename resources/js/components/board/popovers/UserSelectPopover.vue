@@ -10,10 +10,11 @@ import IconCirclePlus from '@/components/board/icons/IconCirclePlus.vue';
 import IconClose from '@/components/board/icons/IconClose.vue';
 import IconEmptyCircle from '@/components/board/icons/IconEmptyCircle.vue';
 import IconSearch from '@/components/board/icons/IconSearch.vue';
+import UserInfo from '@/components/laravel/UserInfo.vue';
 
 import { useUserStore } from '@/composables/board/stores/useUserStore';
 import { UNASSIGNED_USER } from '@/lib/board/constants';
-import type { User } from '@/lib/board/types/models';
+import type { User } from '@/types';
 
 /*-------------------------------------
   State
@@ -44,9 +45,7 @@ const sortedUsers = computed(() => {
 const filteredUsers = computed(() => {
     return query.value
         ? sortedUsers.value.filter((user) =>
-              `${user.firstName.toLowerCase() || ''} ${user.lastName?.toLowerCase() || ''}`.includes(
-                  query.value.toLowerCase(),
-              ),
+              user.name.toLowerCase().includes(query.value.toLowerCase()),
           )
         : sortedUsers.value;
 });
@@ -143,26 +142,23 @@ watch(
                         <!-- Info -->
                         <div class="flex items-center gap-3">
                             <div
+                                v-if="isUnassignedUser(user)"
                                 class="h-8 w-8 shrink-0 overflow-hidden rounded-full"
-                                :class="{
-                                    'bg-canvas': !isUnassignedUser(user),
-                                }"
                             >
                                 <IconEmptyCircle
-                                    v-if="isUnassignedUser(user)"
                                     class="h-full w-full text-muted-foreground opacity-50"
                                     :stroke-width="0.6"
                                 />
-
-                                <img
-                                    v-else
-                                    class="h-full w-full object-cover"
-                                    :src="user.avatarUrl"
-                                    loading="lazy"
-                                />
                             </div>
-                            <p class="font-bold">
-                                {{ user.firstName }} {{ user.lastName }}
+
+                            <UserInfo
+                                v-else
+                                :user="user"
+                                class="h-8 w-8 shrink-0 rounded-full"
+                            />
+
+                            <p class="text-sm font-bold">
+                                {{ user.name }}
                             </p>
                         </div>
 

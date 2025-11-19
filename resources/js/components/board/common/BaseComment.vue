@@ -1,35 +1,21 @@
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core';
-import type { PropType } from 'vue';
 import { ref } from 'vue';
 
 import BaseTextarea from '@/components/board/common/BaseTextarea.vue';
 import CommentOptionsPopover from '@/components/board/popovers/CommentOptionsPopover.vue';
-import type { Comment } from '@/lib/board/types/models';
-import { formatRelativeTime } from '@/lib/board/utils/date';
+import UserInfo from '@/components/laravel/UserInfo.vue';
 
-const props = defineProps({
-    id: {
-        type: Number,
-        required: true,
-    },
-    content: {
-        type: String,
-        required: true,
-    },
-    createdAt: {
-        type: String,
-        required: true,
-    },
-    user: {
-        type: Object as PropType<Comment['user']>,
-        required: true,
-    },
-    isEditable: {
-        type: Boolean,
-        required: true,
-    },
-});
+import { formatRelativeTime } from '@/lib/board/utils/date';
+import type { User } from '@/types';
+
+const props = defineProps<{
+    id: number;
+    content: string;
+    createdAt: string;
+    user: User;
+    isEditable: boolean;
+}>();
 
 const emit = defineEmits(['delete', 'update']);
 
@@ -55,16 +41,14 @@ onKeyStroke('Escape', disableEditMode);
 
 <template>
     <article class="flex gap-x-3">
-        <!-- Avatar -->
-        <div class="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-canvas">
-            <img class="h-full w-full object-cover" :src="user.avatarUrl" />
-        </div>
+        <!-- User Info -->
+        <UserInfo :user="user" class="rounded-full" />
 
         <!-- Info -->
         <div class="grow">
-            <div class="mb-1 flex items-center gap-3 leading-none">
+            <div class="mb-1 flex items-center gap-3 text-sm leading-none">
                 <p class="font-bold">
-                    {{ user.firstName }} {{ user.lastName }}
+                    {{ user.name }}
                 </p>
                 <p class="text-xs opacity-80">
                     {{ formatRelativeTime(createdAt) }}

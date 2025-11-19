@@ -14,11 +14,12 @@ import IconWarningSolid from '@/components/board/icons/IconWarningSolid.vue';
 import ColorPickerPopover from '@/components/board/popovers/ColorPickerPopover.vue';
 import UserSelectPopover from '@/components/board/popovers/UserSelectPopover.vue';
 import StatusMenu from '@/components/board/StatusMenu.vue';
+import UserInfo from '@/components/laravel/UserInfo.vue';
 import { useDialogStore } from '@/composables/board/stores/useDialogStore';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
 import { EMPTY_TASK_COLOR } from '@/lib/board/constants';
-import type { User } from '@/lib/board/types/models';
 import { formatDueDate } from '@/lib/board/utils/date';
+import type { User } from '@/types';
 import { computed, watch } from 'vue';
 
 const {
@@ -237,21 +238,15 @@ watch(
                         class="text-muted-foreground"
                         :aria-label="
                             assignee
-                                ? `Change assignee: ${assignee.firstName} ${assignee.lastName || ''}`
+                                ? `Change assignee: ${assignee.name}`
                                 : 'Set assignee'
                         "
                     >
-                        <div
+                        <UserInfo
                             v-if="assignee"
-                            class="h-5.5 w-5.5 shrink-0 overflow-hidden rounded-full bg-canvas"
-                        >
-                            <img
-                                class="block h-full w-full object-cover"
-                                :src="assignee.avatarUrl"
-                                :alt="` Profile picture of ${assignee.firstName} ${assignee.lastName || ''}`"
-                                :title="` Assignee: ${assignee.firstName} ${assignee.lastName || ''}`"
-                            />
-                        </div>
+                            :user="assignee"
+                            class="h-5.5 w-5.5 shrink-0 rounded-full text-xs"
+                        />
                         <span
                             v-else
                             title=" Set assignee"

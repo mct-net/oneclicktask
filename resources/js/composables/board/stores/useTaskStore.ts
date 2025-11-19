@@ -8,6 +8,7 @@ import {
     DATETIME_FORMAT,
     DEFAULT_TASK_COLOR,
     DEFAULT_TASK_STATUS,
+    EMPTY_TASK_COLOR,
     UNASSIGNED_USER,
 } from '@/lib/board/constants';
 import type { Tag, Task, User } from '@/lib/board/types/models';
@@ -91,7 +92,7 @@ export function useTaskStore() {
                 tags: taskTags,
             } = task;
 
-            if (color && color !== task.color) {
+            if (color && color !== EMPTY_TASK_COLOR && color !== task.color) {
                 return false;
             }
 
