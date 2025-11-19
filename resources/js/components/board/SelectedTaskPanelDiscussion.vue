@@ -72,7 +72,7 @@ const onInsertComment = async () => {
             :class="[{ 'max-h-64': !isExpanded }, isExpanded ? 'mr-3' : 'mr-5']"
         >
             <!-- Creation Date and Author -->
-            <p class="pt-5">
+            <p class="pt-5 text-sm">
                 <span class="font-bold">
                     {{ formatAuthorFullName(selectedTask.author) }}
                 </span>
