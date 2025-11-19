@@ -2,15 +2,15 @@
 
 Thank you for your interest in contributing to OCT! This document provides guidelines and instructions for contributing to the project.
 
-## 📙 Table of Contents
+## Table of Contents
 
-- [Code of Conduct](#-code-of-conduct)
-- [Getting Started](#-getting-started)
-- [Development Workflow](#-development-workflow)
-- [Coding Standards](#-coding-standards)
-- [Pull Request Process](#-pull-request-process)
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [Development Workflow](#development-workflow)
+- [Coding Standards](#coding-standards)
+- [Pull Request Process](#pull-request-process)
 
-## 📙 Code of Conduct
+## Code of Conduct
 
 ### Our Pledge
 
@@ -24,7 +24,7 @@ We are committed to providing a welcoming and inspiring community for all. Pleas
 - Focus on what is best for the community
 - Show empathy towards other community members
 
-## 📙 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -67,7 +67,7 @@ Before contributing, ensure you have the required software installed:
 
 6. **Verify installation** by visiting http://localhost:8000
 
-## 📙 Development Workflow
+## Development Workflow
 
 ### Branch Naming Convention
 
@@ -122,7 +122,7 @@ git merge upstream/dev
 git push origin dev
 ```
 
-## 📙 Coding Standards
+## Coding Standards
 
 ### PHP (Backend)
 
@@ -235,7 +235,7 @@ git push origin dev
     router.visit(`/tasks/${task.id}`);
     ```
 
-## 📙 Testing Requirements
+## Testing Requirements
 
 ### Writing Tests
 
@@ -249,7 +249,7 @@ All new features and bug fixes must include tests.
 - **Database**: Use factories instead of manual creation
 - **Clean Up**: Tests automatically refresh database
 
-## 📙 Pull Request Process
+## Pull Request Process
 
 ### Creating a Pull Request
 
@@ -287,7 +287,7 @@ TEST: Add tests for comment functionality
 - Once approved, a maintainer will merge your PR
 - Your branch will be deleted after merge
 
-## 📙 Commit Message Guidelines
+## Commit Message Guidelines
 
 We follow [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
@@ -308,7 +308,7 @@ Commits are automatically validated using [commitlint](https://commitlint.js.org
 - `Tag` - Task categorization
 - `FileAttachment` - File uploads
 
-## 📙 Questions?
+## Questions?
 
 If you have questions not covered here:
 

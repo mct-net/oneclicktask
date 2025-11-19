@@ -14,10 +14,11 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    // User routes
-    Route::get('users/current', [App\Http\Controllers\UserController::class, 'current'])->name('users.current');
+Route::get('tasks', function () {
+    return Inertia::render('Tasks');
+})->middleware(['auth', 'verified'])->name('tasks');
 
+Route::middleware(['auth', 'verified'])->group(function () {
     // Board routes without member check
     Route::get('boards', [App\Http\Controllers\BoardController::class, 'index'])->name('boards.index');
     Route::get('boards/create', [App\Http\Controllers\BoardController::class, 'create'])->name('boards.create');
@@ -25,9 +26,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Board-scoped routes (with middleware)
     Route::middleware('board.member')->group(function () {
-        // Board user routes
-        Route::get('boards/{board}/users', [App\Http\Controllers\UserController::class, 'index'])->name('boards.users.index');
-
         // Board routes that require membership
         Route::get('boards/{board}', [App\Http\Controllers\BoardController::class, 'show'])->name('boards.show');
         Route::get('boards/{board}/edit', [App\Http\Controllers\BoardController::class, 'edit'])->name('boards.edit');
@@ -43,15 +41,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('boards.tasks', App\Http\Controllers\TaskController::class);
         Route::resource('boards.tasks.comments', App\Http\Controllers\CommentController::class)->except(['create', 'edit']);
         Route::resource('boards.tasks.files', App\Http\Controllers\FileAttachmentController::class)->except(['create', 'edit']);
-
-        // Board-level tags (for listing all tags in a board)
-        Route::get('boards/{board}/tags', [App\Http\Controllers\TagController::class, 'index'])->name('boards.tags.index');
-        Route::post('boards/{board}/tags', [App\Http\Controllers\TagController::class, 'store'])->name('boards.tags.store');
-
-        // Task-level tags (for attaching/detaching tags to/from tasks)
-        Route::post('boards/{board}/tasks/{task}/tags', [App\Http\Controllers\TaskTagController::class, 'attach'])->name('boards.tasks.tags.attach');
-        Route::put('boards/{board}/tasks/{task}/tags/{tag}', [App\Http\Controllers\TaskTagController::class, 'update'])->name('boards.tasks.tags.update');
-        Route::delete('boards/{board}/tasks/{task}/tags/{tag}', [App\Http\Controllers\TaskTagController::class, 'detach'])->name('boards.tasks.tags.detach');
     });
 });
 

@@ -2,38 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Board;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
     /**
-     * Display a listing of tags used in the board.
+     * Display a listing of the resource.
      */
-    public function index(Board $board)
+    public function index()
     {
-        // Get all tags used in tasks belonging to this board
-        $tags = Tag::whereHas('tasks', function ($query) use ($board) {
-            $query->where('board_id', $board->id);
-        })->withCount(['tasks' => function ($query) use ($board) {
-            $query->where('board_id', $board->id);
-        }])->get();
+        $tags = Tag::withCount('tasks')->get();
 
         return response()->json($tags);
     }
 
     /**
-     * Store a new tag (or return existing if it already exists).
+     * Store a newly created resource in storage.
      */
-    public function store(Request $request, Board $board)
+    public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:tags,name',
         ]);
 
-        $tag = Tag::firstOrCreate(['name' => $validated['name']]);
+        $tag = Tag::create($validated);
 
-        return response()->json($tag, 201);
+        return back()->with('success', 'Tag created successfully.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Tag $tag)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:tags,name,'.$tag->id,
+        ]);
+
+        $tag->update($validated);
+
+        return back()->with('success', 'Tag updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+
+        return back()->with('success', 'Tag deleted successfully.');
     }
 }

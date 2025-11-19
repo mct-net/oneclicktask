@@ -24,7 +24,7 @@ defineProps<{
 
         <div
             v-if="status"
-            class="text-green-600 mb-4 text-center text-sm font-medium"
+            class="mb-4 text-center text-sm font-medium text-green-600"
         >
             {{ status }}
         </div>

@@ -35,12 +35,11 @@ class FileAttachmentController extends Controller
 
         $fileAttachment = $task->files()->create([
             'name' => $validated['name'] ?? $file->getClientOriginalName(),
-            'path' => $path,
             'url' => Storage::url($path),
             'type' => $file->getMimeType(),
         ]);
 
-        return response()->json($fileAttachment, 201);
+        return back()->with('success', 'File uploaded successfully.');
     }
 
     /**
@@ -48,7 +47,7 @@ class FileAttachmentController extends Controller
      */
     public function show(Board $board, Task $task, FileAttachment $file)
     {
-        return Storage::disk('public')->download($file->path, $file->name);
+        return Storage::download($file->url);
     }
 
     /**
@@ -56,10 +55,12 @@ class FileAttachmentController extends Controller
      */
     public function destroy(Board $board, Task $task, FileAttachment $file)
     {
-        Storage::disk('public')->delete($file->path);
+        // Extract the path from the URL
+        $path = str_replace('/storage/', '', $file->url);
+        Storage::disk('public')->delete($path);
 
         $file->delete();
 
-        return response()->json(null, 204);
+        return back()->with('success', 'File deleted successfully.');
     }
 }
