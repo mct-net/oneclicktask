@@ -65,7 +65,7 @@ const setStatus = (status: Task['status']) => {
 
             <ul
                 v-else-if="selectedTask.status === 'trashed'"
-                class="flex h-5.5 gap-x-2"
+                class="flex h-5.5 gap-x-2 text-sm"
             >
                 <BasePill variant="default" @click="setStatus('backlog')">
                     Restore
