@@ -1,8 +1,8 @@
 import { computed, ref, watch } from 'vue';
 
-import { useNoty } from '@/composables/board/noty';
 import { useUIStore } from '@/composables/board/stores/useUIStore';
 import { useUserStore } from '@/composables/board/stores/useUserStore';
+import { useToast } from '@/composables/useToast';
 import { restClient } from '@/lib/board/api';
 import {
     DATETIME_FORMAT,
@@ -356,10 +356,11 @@ export function useTaskStore() {
             // set selected task to the last one
             selectedTask.value = filteredTasks.value[0] || null;
 
-            useNoty({
+            const { toast } = useToast();
+            toast({
                 message: 'Task has been deleted.',
                 type: 'success',
-            }).setNoty();
+            });
         } catch (error) {
             handleError(error);
         }
@@ -387,10 +388,11 @@ export function useTaskStore() {
             return newTag;
         } catch (error: any) {
             if (error.response.status === 409) {
-                useNoty({
+                const { toast } = useToast();
+                toast({
                     message: `This task already contains a tag with the "${tag}" name.`,
                     type: 'error',
-                }).setNoty();
+                });
             } else {
                 handleError(error);
             }
@@ -414,10 +416,11 @@ export function useTaskStore() {
             }
         } catch (error: any) {
             if (error.response.status === 409) {
-                useNoty({
+                const { toast } = useToast();
+                toast({
                     message: `This task already contains a tag with the "${newName}" name.`,
                     type: 'error',
-                }).setNoty();
+                });
             } else {
                 handleError(error);
             }
@@ -511,10 +514,12 @@ export function useTaskStore() {
             }
         } catch (error) {
             handleError(error);
-            useNoty({
+            const { toast } = useToast();
+            toast({
                 message: 'Network error. Unable to upload file. Retry later.',
                 type: 'error',
-            }).setNoty();
+                duration: 5,
+            });
         }
     }
 

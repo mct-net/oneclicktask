@@ -24,10 +24,10 @@ import ConfirmDialog from '@/components/board/dialogs/ConfirmDialog.vue';
 import ExpandedEditorDialog from '@/components/board/dialogs/ExpandedEditorDialog.vue';
 
 // Composables
-import { useNoty } from '@/composables/board/noty';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
 import { useUIStore } from '@/composables/board/stores/useUIStore';
 import { useUserStore } from '@/composables/board/stores/useUserStore';
+import { useToast } from '@/composables/useToast';
 import { setCurrentBoardId } from '@/lib/board/api';
 import { addTagIfNotExists } from '@/lib/board/utils/tasks';
 
@@ -66,6 +66,8 @@ const { clearSelectedTask, loading, layout } = uiStore;
 
 const error = ref(false);
 
+const { toast } = useToast();
+
 // Select task from URL query parameter
 const selectTaskFromRoute = () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -77,10 +79,10 @@ const selectTaskFromRoute = () => {
             taskStore.selectedTask.value = task;
             return true;
         } else {
-            useNoty({
+            toast({
                 message: `Task with ID ${taskId} not found`,
                 type: 'error',
-            }).setNoty();
+            });
             router.visit(window.location.pathname, {
                 preserveState: true,
                 preserveScroll: true,

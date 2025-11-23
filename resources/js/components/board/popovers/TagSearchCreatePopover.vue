@@ -9,8 +9,8 @@ import IconCirclePlus from '@/components/board/icons/IconCirclePlus.vue';
 import IconClose from '@/components/board/icons/IconClose.vue';
 import IconOptions from '@/components/board/icons/IconOptions.vue';
 import IconSearch from '@/components/board/icons/IconSearch.vue';
-import { useNoty } from '@/composables/board/noty';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
+import { useToast } from '@/composables/useToast';
 import { restClient } from '@/lib/board/api';
 import type { Tag } from '@/lib/board/types/models';
 import { safely } from '@/lib/board/utils/error';
@@ -31,8 +31,8 @@ const query = ref('');
 const isCreating = ref(false);
 
 const showError = (message: string) => {
-    const { setNoty } = useNoty({ message, type: 'error' });
-    setNoty();
+    const { toast } = useToast();
+    toast({ message, type: 'error' });
 };
 
 const filteredTags = computed(() => {
