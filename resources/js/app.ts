@@ -1,7 +1,6 @@
 import '../css/app.css';
 import '../css/board/code-theme.css';
 import '../css/board/glightbox.css';
-import '../css/board/noty.scss';
 import '../css/board/prose-mirror.css';
 
 import { createInertiaApp } from '@inertiajs/vue3';

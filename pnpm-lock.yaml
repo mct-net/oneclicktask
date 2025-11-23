@@ -107,9 +107,6 @@ importers:
       lucide-vue-next:
         specifier: ^0.468.0
         version: 0.468.0(vue@3.5.22(typescript@5.9.3))
-      noty:
-        specifier: 3.2.0-beta-deprecated
-        version: 3.2.0-beta-deprecated
       reka-ui:
         specifier: ^2.4.1
         version: 2.6.0(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
@@ -2216,10 +2213,6 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
-
-  noty@3.2.0-beta-deprecated:
-    resolution: {integrity: sha512-ntRbHuQ9SnnnVFZm/oq5L1DBCaHQUvsU24AwZH3PGjAWx2YqR/IhOadMk11vmJovYiQo00oqTj6Hp+D6PGtmLA==}
-    deprecated: no longer supported
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
@@ -4933,8 +4926,6 @@ snapshots:
     optional: true
 
   normalize-path@3.0.0: {}
-
-  noty@3.2.0-beta-deprecated: {}
 
   nth-check@2.1.1:
     dependencies:

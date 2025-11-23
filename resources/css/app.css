@@ -76,6 +76,7 @@ layer(base);
     /* Custom color palette for direct usage */
     --color-canvas: var(--theme-bg-canvas);
     --color-contrast: var(--theme-bg-contrast);
+    --color-higher-contrast: var(--theme-bg-higher-contrast);
     --color-surface: var(--theme-bg-surface);
     --color-interactive-primary: var(--theme-bg-interactive-primary);
     --color-interactive-secondary: var(--theme-bg-interactive-secondary);

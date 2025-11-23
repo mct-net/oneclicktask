@@ -1,4 +1,4 @@
-import { useNoty } from '@/composables/board/noty';
+import { useToast } from '@/composables/useToast';
 
 export function handleError(error: any) {
     let message = 'An unexpected error occurred. Please try again later.';
@@ -8,12 +8,12 @@ export function handleError(error: any) {
             'Session expired. Your changes could not be saved. Please log in again.';
     }
 
-    const { setNoty } = useNoty({
+    const { toast } = useToast();
+    toast({
         message,
         type: 'error',
         duration: 5,
     });
-    setNoty();
 
     console.error(error);
 }
