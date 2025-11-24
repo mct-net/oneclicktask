@@ -82,6 +82,7 @@ layer(base);
     --color-interactive-secondary: var(--theme-bg-interactive-secondary);
     --color-error: var(--theme-bg-error);
     --color-error-accent: var(--theme-fg-error);
+    --color-error-border: var(--theme-border-error);
 
     --color-red-500: var(--red-500);
     --color-orange-500: var(--orange-500);
@@ -161,7 +162,7 @@ layer(base);
         --theme-bg-surface: var(--white);
         --theme-bg-interactive-primary: var(--black);
         --theme-bg-interactive-secondary: var(--gray-300);
-        --theme-bg-error: var(--red-700);
+        --theme-bg-error: var(--red-200);
 
         --theme-fg-base: var(--black);
         --theme-fg-subtle: --alpha(var(--black) / 0.6);
@@ -241,7 +242,7 @@ layer(base);
         --theme-bg-surface: var(--gray-200-dark);
         --theme-bg-interactive-primary: var(--white-dark);
         --theme-bg-interactive-secondary: var(--gray-300-dark);
-        --theme-bg-error: var(--red-700);
+        --theme-bg-error: var(--red-200);
 
         --theme-fg-base: var(--white-dark);
         --theme-fg-subtle: var(--gray-500-dark);
