@@ -16,7 +16,8 @@ defineProps({
             'border bg-surface': variant === 'default',
             'border border-transparent bg-contrast text-primary-foreground':
                 variant === 'contrast',
-            'border border-error bg-error text-error': variant === 'error',
+            'border border-error-border bg-error text-error-accent':
+                variant === 'error',
         }"
     >
         <slot />
