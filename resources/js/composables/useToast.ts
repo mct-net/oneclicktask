@@ -27,7 +27,7 @@ export function useToast() {
             id,
             message,
             type,
-            duration: duration * 10000000,
+            duration: duration * 1000,
         };
 
         toasts.value = [newToast, ...toasts.value].slice(0, TOAST_LIMIT);
