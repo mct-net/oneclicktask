@@ -23,6 +23,7 @@ const message =
 <template>
     <section class="flex grow items-center justify-center">
         <div
+            data-testid="empty-state"
             :class="
                 twMerge(
                     'mt-10 mb-40 flex w-fit flex-col items-center justify-center gap-x-3 rounded-md border-2 border-dashed p-5 pb-7',
