@@ -306,7 +306,7 @@ export function useTaskStore() {
             uiStore.updateRoute();
         } else {
             selectedTask.value = null;
-            uiStore.updateRoute();
+            uiStore.clearSelectedTask();
         }
     }
 
@@ -581,7 +581,7 @@ export function useTaskStore() {
             return;
         }
 
-        const firstTask = filteredTasks.value.sort(sortByUrgency)[0];
+        const firstTask = mostUrgentTasks.value[0];
 
         if (firstTask && selectedTask.value?.id !== firstTask.id) {
             selectedTask.value = firstTask;

@@ -151,12 +151,12 @@ class BoardPage
 
     /**
      * Get all urgent task names
+     *
+     * @return array<int, string>
      */
     public function getUrgentTaskList(): array
     {
-        $content = $this->page->text($this->urgentList);
-
-        return array_filter(array_map('trim', explode("\n", $content)));
+        return locator($this->page, "{$this->urgentList} [aria-label=\"Task name\"]");
     }
 
     /**
@@ -260,11 +260,11 @@ class BoardPage
     /**
      * Postpone the selected task
      */
-    public function postponeSelectedTask(): self
+    public function postponeSelectedTask(string $option): self
     {
         $this->page->hover($this->postponeArea);
         $this->page->click($this->postponeButton);
-        $this->page->press('Enter');
+        $this->page->click("{$this->postponeArea} button:has-text('{$option}')");
 
         return $this;
     }
@@ -309,7 +309,7 @@ class BoardPage
             manually combine the HTML of the detail area and the
             text of the description region.
         */
-        return $this->page->content($this->taskDetailArea);
+        return $this->page->text("{$this->taskDetailArea}");
     }
 
     /**

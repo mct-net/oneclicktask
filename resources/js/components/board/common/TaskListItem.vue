@@ -61,7 +61,7 @@ const onAddTime = (minutes: number) => {
             <IconCircle v-else class="text-muted-foreground" />
         </div>
 
-        <span :class="{ 'font-bold': isActive }">
+        <span :class="{ 'font-bold': isActive }" aria-label="Task name">
             {{ task.name }}
         </span>
 

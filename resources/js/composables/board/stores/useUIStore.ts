@@ -1,4 +1,3 @@
-import { router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 import type { SortByCriteria } from '@/composables/board/stores/useTaskStore';
@@ -16,22 +15,19 @@ export function useUIStore() {
     const updateRoute = () => {
         const taskStore = useTaskStore();
 
+        // Use browser history API to avoid triggering full route updates
+        const url = new URL(window.location.href);
+
         if (taskStore.selectedTask.value) {
-            // Use query param approach for Inertia
-            router.visit(window.location.pathname, {
-                data: { task: taskStore.selectedTask.value.id },
-                preserveState: true,
-                preserveScroll: true,
-                only: [],
-            });
+            url.searchParams.set(
+                'task',
+                String(taskStore.selectedTask.value.id),
+            );
         } else {
-            router.visit(window.location.pathname, {
-                data: {},
-                preserveState: true,
-                preserveScroll: true,
-                only: [],
-            });
+            url.searchParams.delete('task');
         }
+
+        window.history.replaceState({}, '', url);
     };
 
     const changeLayout = (layout_: Layout, sortBy: SortByCriteria) => {

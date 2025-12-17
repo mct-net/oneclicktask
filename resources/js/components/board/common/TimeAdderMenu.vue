@@ -8,7 +8,6 @@ defineEmits(['add']);
             <button
                 class="rounded-md bg-interactive-secondary px-2 py-1 leading-none"
                 role="menuitem"
-                label="+5m"
                 @click="$emit('add', 5)"
             >
                 <span class="opacity-35">+</span>5m
@@ -17,7 +16,6 @@ defineEmits(['add']);
             <button
                 class="rounded-md bg-interactive-secondary px-2 py-1 leading-none"
                 role="menuitem"
-                label="+1h"
                 @click="$emit('add', 60)"
             >
                 <span class="opacity-35">+</span>1h
@@ -26,7 +24,6 @@ defineEmits(['add']);
             <button
                 class="rounded-md bg-interactive-secondary px-2 py-1 leading-none"
                 role="menuitem"
-                label="+1d"
                 @click="$emit('add', 60 * 24)"
             >
                 <span class="opacity-35">+</span>1d
@@ -35,7 +32,6 @@ defineEmits(['add']);
             <button
                 class="rounded-md bg-interactive-secondary px-2 py-1 leading-none"
                 role="menuitem"
-                label="+1w"
                 @click="$emit('add', 60 * 24 * 7)"
             >
                 <span class="opacity-35">+</span>1w
@@ -44,7 +40,6 @@ defineEmits(['add']);
             <button
                 class="rounded-md bg-interactive-secondary px-2 py-1 leading-none"
                 role="menuitem"
-                label="+1mo"
                 @click="$emit('add', 60 * 24 * 30)"
             >
                 <span class="opacity-35">+</span>1mo
@@ -53,7 +48,6 @@ defineEmits(['add']);
             <button
                 class="rounded-md bg-interactive-secondary px-2 py-1 leading-none"
                 role="menuitem"
-                label="+90d"
                 @click="$emit('add', 60 * 24 * 90)"
             >
                 <span class="opacity-35">+</span>90d
