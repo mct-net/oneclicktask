@@ -90,7 +90,7 @@ class BoardPage
         $this->page
             ->fill($this->searchInput, $taskName)
             ->keys($this->searchInput, 'Enter');
-        $this->page->waitForText($taskName, 5);
+        $this->page->assertSee($taskName, 5);
 
         if ($status) {
             $this->changeTaskStatus($status);
@@ -306,20 +306,15 @@ class BoardPage
         /*
             Note: We would ideally use Playwrights aria snapshot,
             but Pest Browser doesn't support it yet. That's why we
-            manually combine the HTML of the detail area and the
-            text of the description region.
+            manually combine the aria labels and the visible text
+            of the detail area.
         */
-        return $this->page->text("{$this->taskDetailArea}");
-    }
 
-    /**
-     * Wait for specific text to appear
-     */
-    public function waitForText(string $text, int $timeout = 5): self
-    {
-        $this->page->waitForText($text, $timeout);
+        $visibleText = $this->page->text($this->taskDetailArea);
+        $ariaLabels = getAriaLabels($this->page, "{$this->taskDetailArea}");
+        $searchableContent = $visibleText.' '.implode(' ', $ariaLabels);
 
-        return $this;
+        return $searchableContent;
     }
 
     /**
