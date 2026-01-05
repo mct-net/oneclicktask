@@ -50,7 +50,8 @@ const onInputPage = (value: number) => {
 };
 
 const onSelectTask = (task: Task) => {
-    useTaskStore().selectedTask = task;
+    useTaskStore().selectedTask.value = task;
+    useUIStore().updateRoute();
 };
 
 /*-------------------------------------
