@@ -275,6 +275,7 @@ class BoardPage
     public function clickOutsideTask(): self
     {
         $this->page->click($this->deselectionArea);
+        $this->page->assertSeeIn($this->taskDetailArea, 'No task selected.');
 
         return $this;
     }
@@ -284,7 +285,9 @@ class BoardPage
      */
     public function isTaskDetailsAreaVisible(): bool
     {
-        return $this->page->isVisible($this->taskDetailArea);
+        $results = locator($this->page, $this->taskDetailArea);
+
+        return count($results);
     }
 
     /**
@@ -333,6 +336,11 @@ class BoardPage
         $foundContent = $visibleText.' '.implode(' ', $ariaLabels);
 
         return $foundContent;
+    }
+
+    public function assertInDetailCard(string $string)
+    {
+        $this->page->assertSeeIn($this->taskDetailArea, $string);
     }
 
     /**
