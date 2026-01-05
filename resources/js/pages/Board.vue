@@ -130,7 +130,10 @@ onMounted(async () => {
     <Head :title="board.name" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="@container/main flex h-full flex-1">
+        <div
+            class="@container/main flex h-full flex-1"
+            @click.self="clearSelectedTask"
+        >
             <!-- Error State -->
             <ErrorState
                 v-if="error"
@@ -141,7 +144,6 @@ onMounted(async () => {
             <main
                 v-else
                 class="mx-auto flex h-full w-full max-w-325 gap-x-6 p-5 @4xl/main:px-10"
-                data-testid="deselection-area"
                 @click.self="clearSelectedTask"
             >
                 <!-- Main Content Area -->
@@ -161,10 +163,17 @@ onMounted(async () => {
                     <!-- Filters Bar -->
                     <FilterBar class="mt-5" @click.self="clearSelectedTask" />
 
+                    <!-- E2E Deselection Area -->
+                    <div
+                        class="h-8"
+                        data-testid="deselection-area"
+                        @click.self="clearSelectedTask"
+                    />
+
                     <!-- Selected Task's Area -->
                     <article
                         v-if="!filters.search"
-                        class="mt-8 min-h-33"
+                        class="min-h-33"
                         aria-label="Selected task area"
                     >
                         <SelectedTaskCard

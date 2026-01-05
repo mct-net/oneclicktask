@@ -1,4 +1,4 @@
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 
 import { useUIStore } from '@/composables/board/stores/useUIStore';
 import { useUserStore } from '@/composables/board/stores/useUserStore';
@@ -306,7 +306,7 @@ export function useTaskStore() {
             uiStore.updateRoute();
         } else {
             selectedTask.value = null;
-            uiStore.updateRoute();
+            uiStore.clearSelectedTask();
         }
     }
 
@@ -335,6 +335,7 @@ export function useTaskStore() {
             tasks.value.push(newTask);
 
             selectedTask.value = newTask;
+            useUIStore().updateRoute();
         } catch (error) {
             handleError(error);
         }
@@ -355,6 +356,7 @@ export function useTaskStore() {
 
             // set selected task to the last one
             selectedTask.value = filteredTasks.value[0] || null;
+            useUIStore().updateRoute();
 
             const { toast } = useToast();
             toast({
@@ -575,30 +577,6 @@ export function useTaskStore() {
 
         return currentUser;
     }
-
-    function selectMostUrgentTask() {
-        if (!filteredTasks.value.length) {
-            return;
-        }
-
-        const firstTask = filteredTasks.value.sort(sortByUrgency)[0];
-
-        if (firstTask && selectedTask.value?.id !== firstTask.id) {
-            selectedTask.value = firstTask;
-        }
-    }
-
-    watch(
-        filters,
-        () => {
-            if (filteredTasks.value.length) {
-                selectMostUrgentTask();
-            } else {
-                selectedTask.value = null;
-            }
-        },
-        { immediate: true, deep: true },
-    );
 
     return {
         tasks,

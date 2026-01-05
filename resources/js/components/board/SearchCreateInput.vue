@@ -75,7 +75,7 @@ watch(
         <BaseInput
             v-model="search"
             placeholder="Find or create..."
-            @keypress.enter="onEnter"
+            @enter="onEnter"
             v-slot="{ inputRef }"
         >
             <button

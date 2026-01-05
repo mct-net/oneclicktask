@@ -64,9 +64,9 @@ const onInsertTag = async (tag: string) => {
     }
 };
 
-const onAddTime = (minutes: number) => {
+const onAddTime = async (minutes: number) => {
     if (selectedTask.value) {
-        addTime(selectedTask.value, minutes);
+        await addTime(selectedTask.value, minutes);
         selectNextUrgentTask({
             currentTask: selectedTask.value,
         });

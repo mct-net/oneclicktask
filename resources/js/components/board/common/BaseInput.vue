@@ -26,6 +26,7 @@ defineEmits(['update:model-value', 'enter']);
             :class="{ 'pr-12': slots.default }"
             type="text"
             :placeholder="placeholder"
+            :aria-label="placeholder"
             :value="modelValue"
             @input="
                 $emit(

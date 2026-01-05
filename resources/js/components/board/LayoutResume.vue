@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { router } from '@inertiajs/vue3';
 import { onBeforeMount, toRef } from 'vue';
 
 import { useRecentTasks, useUrgentTasks } from '@/composables/board/filter';
@@ -23,17 +22,12 @@ const recentTasks = useRecentTasks(tasks);
 /*-------------------------------------
   Methods
 -------------------------------------*/
-const { clearSelectedTask, changeLayout } = useUIStore();
+const { clearSelectedTask, changeLayout, updateRoute } = useUIStore();
+const taskStore = useTaskStore();
 
 const onSelectTask = (task: Task) => {
-    useTaskStore().selectedTask.value = task;
-    // Update URL with task query param
-    router.visit(window.location.pathname, {
-        data: { task: task.id },
-        preserveState: true,
-        preserveScroll: true,
-        only: [],
-    });
+    taskStore.selectedTask.value = task;
+    updateRoute();
 };
 
 /*-------------------------------------
