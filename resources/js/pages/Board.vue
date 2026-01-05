@@ -130,7 +130,10 @@ onMounted(async () => {
     <Head :title="board.name" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="@container/main flex h-full flex-1">
+        <div
+            class="@container/main flex h-full flex-1"
+            @click.self="clearSelectedTask"
+        >
             <!-- Error State -->
             <ErrorState
                 v-if="error"
