@@ -92,7 +92,7 @@ class BoardPage
             ->keys($this->searchInput, 'Enter');
         $this->page->assertSee($taskName, 5);
 
-        if ($status) {
+        if ($status && $status != 'Backlog') {
             $this->changeTaskStatus($status);
         }
 
