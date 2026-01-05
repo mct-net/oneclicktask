@@ -10,7 +10,7 @@ describe('Feature: Task Auto-Save', function () {
         $this->board->members()->attach($this->user->id, ['role' => 'admin']);
     });
 
-    test('user can safely refresh without losing task changes', function () {
+    test('User can safely refresh without losing task changes', function () {
         $this->actingAs($this->user);
         $this->page = visit("/boards/{$this->board->id}");
 
