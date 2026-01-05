@@ -318,6 +318,24 @@ class BoardPage
     }
 
     /**
+     * Get content from the results list
+     */
+    public function getSearchResultsContent(): string
+    {
+        /*
+            Note: We would ideally use Playwrights aria snapshot,
+            but Pest Browser doesn't support it yet. That's why we
+            manually combine the aria labels and the visible text.
+        */
+
+        $visibleText = $this->page->text($this->resultsList);
+        $ariaLabels = getAriaLabels($this->page, "{$this->resultsList}");
+        $foundContent = $visibleText.' '.implode(' ', $ariaLabels);
+
+        return $foundContent;
+    }
+
+    /**
      * Assert that text is visible
      */
     public function assertSee(string $text): self
