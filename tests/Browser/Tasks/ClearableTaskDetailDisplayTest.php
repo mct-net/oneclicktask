@@ -37,10 +37,8 @@ describe('Feature: Clearable Task Detail Display', function () {
 
         boardPage()->clickOutsideTask();
 
-        $content = boardPage()->getSelectedTaskCardContent();
-        expect($content)
-            ->not->toContain('Read a book')
-            ->toContain('No task selected');
+        boardPage()->assertInDetailCard('No task selected');
+        boardPage()->assertNotInDetailCard('Read a book');
 
         $url = page()->url();
         expect($url)->toEndWith('/boards/1');

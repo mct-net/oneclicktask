@@ -46,14 +46,12 @@ describe('Feature: Postpone and Advance Task Flow', function () {
         ($this->setupBoardPage)();
 
         boardPage()->selectUrgentTask('Read a book');
-        $content = boardPage()->getSelectedTaskContent();
-        expect($content)->toContain('Read a book');
+        boardPage()->assertInDetailCard('Read a book');
 
         boardPage()->postponeSelectedTask('+5m');
 
-        $content = boardPage()->getSelectedTaskContent();
-        expect($content)->toContain('Write a report')
-            ->and($content)->not->toContain('Read a book');
+        boardPage()->assertInDetailCard('Write a report');
+        boardPage()->assertNotInDetailCard('Read a book');
     });
 
     test('Postponing the last urgent task clears the task detail area', function () {

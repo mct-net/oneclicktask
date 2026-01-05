@@ -343,6 +343,11 @@ class BoardPage
         $this->page->assertSeeIn($this->taskDetailArea, $string);
     }
 
+    public function assertNotInDetailCard(string $string)
+    {
+        $this->page->assertDontSeeIn($this->taskDetailArea, $string);
+    }
+
     /**
      * Assert that text is visible
      */
