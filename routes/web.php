@@ -10,10 +10,6 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
     // User routes
     Route::get('users/current', [App\Http\Controllers\UserController::class, 'current'])->name('users.current');

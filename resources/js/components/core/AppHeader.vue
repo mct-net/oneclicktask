@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { index as boardsIndex } from '@/actions/App/Http/Controllers/BoardController';
 import AppLogo from '@/components/core/AppLogo.vue';
 import AppLogoIcon from '@/components/core/AppLogoIcon.vue';
 import Breadcrumbs from '@/components/core/Breadcrumbs.vue';
@@ -35,10 +36,9 @@ import {
 import UserMenuContent from '@/components/core/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
-import { dashboard } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { BookOpen, Folder, Menu, Search } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 interface Props {
@@ -64,13 +64,7 @@ const activeItemStyles = computed(
             : '',
 );
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
+const mainNavItems: NavItem[] = [];
 
 const rightNavItems: NavItem[] = [
     {
@@ -152,7 +146,7 @@ const rightNavItems: NavItem[] = [
                     </Sheet>
                 </div>
 
-                <Link :href="dashboard()" class="flex items-center gap-x-2">
+                <Link :href="boardsIndex()" class="flex items-center gap-x-2">
                     <AppLogo />
                 </Link>
 
