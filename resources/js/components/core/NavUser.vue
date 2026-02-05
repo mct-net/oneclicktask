@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import UserInfo from '@/components/laravel/UserInfo.vue';
+import UserInfo from '@/components/core/UserInfo.vue';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuTrigger,
-} from '@/components/laravel/ui/dropdown-menu';
+} from '@/components/core/ui/dropdown-menu';
 import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
     useSidebar,
-} from '@/components/laravel/ui/sidebar';
+} from '@/components/core/ui/sidebar';
 import { usePage } from '@inertiajs/vue3';
 import { ChevronsUpDown } from 'lucide-vue-next';
 import UserMenuContent from './UserMenuContent.vue';

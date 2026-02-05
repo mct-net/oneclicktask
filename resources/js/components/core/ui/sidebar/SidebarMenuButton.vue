@@ -3,7 +3,7 @@ import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
-} from '@/components/laravel/ui/tooltip';
+} from '@/components/core/ui/tooltip';
 import { type Component, computed } from 'vue';
 import SidebarMenuButtonChild, {
     type SidebarMenuButtonProps,

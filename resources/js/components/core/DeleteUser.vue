@@ -4,9 +4,9 @@ import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 // Components
-import HeadingSmall from '@/components/laravel/HeadingSmall.vue';
-import InputError from '@/components/laravel/InputError.vue';
-import { Button } from '@/components/laravel/ui/button';
+import HeadingSmall from '@/components/core/HeadingSmall.vue';
+import InputError from '@/components/core/InputError.vue';
+import { Button } from '@/components/core/ui/button';
 import {
     Dialog,
     DialogClose,
@@ -16,9 +16,9 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from '@/components/laravel/ui/dialog';
-import { Input } from '@/components/laravel/ui/input';
-import { Label } from '@/components/laravel/ui/label';
+} from '@/components/core/ui/dialog';
+import { Input } from '@/components/core/ui/input';
+import { Label } from '@/components/core/ui/label';
 
 const passwordInput = ref<InstanceType<typeof Input> | null>(null);
 </script>

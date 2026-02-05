@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import InputError from '@/components/laravel/InputError.vue';
-import { Button } from '@/components/laravel/ui/button';
-import { Input } from '@/components/laravel/ui/input';
-import { Label } from '@/components/laravel/ui/label';
+import InputError from '@/components/core/InputError.vue';
+import { Button } from '@/components/core/ui/button';
+import { Input } from '@/components/core/ui/input';
+import { Label } from '@/components/core/ui/label';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { update } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';

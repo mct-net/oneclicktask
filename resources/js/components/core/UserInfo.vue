@@ -3,7 +3,7 @@ import {
     Avatar,
     AvatarFallback,
     AvatarImage,
-} from '@/components/laravel/ui/avatar';
+} from '@/components/core/ui/avatar';
 import { useInitials } from '@/composables/useInitials';
 import { cn } from '@/lib/utils';
 import type { User } from '@/types';

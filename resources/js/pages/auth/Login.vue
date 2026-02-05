@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import InputError from '@/components/laravel/InputError.vue';
-import TextLink from '@/components/laravel/TextLink.vue';
-import { Button } from '@/components/laravel/ui/button';
-import { Checkbox } from '@/components/laravel/ui/checkbox';
-import { Input } from '@/components/laravel/ui/input';
-import { Label } from '@/components/laravel/ui/label';
+import InputError from '@/components/core/InputError.vue';
+import TextLink from '@/components/core/TextLink.vue';
+import { Button } from '@/components/core/ui/button';
+import { Checkbox } from '@/components/core/ui/checkbox';
+import { Input } from '@/components/core/ui/input';
+import { Label } from '@/components/core/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { register } from '@/routes';
 import { store } from '@/routes/login';

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Heading from '@/components/laravel/Heading.vue';
-import { Button } from '@/components/laravel/ui/button';
-import { Separator } from '@/components/laravel/ui/separator';
+import Heading from '@/components/core/Heading.vue';
+import { Button } from '@/components/core/ui/button';
+import { Separator } from '@/components/core/ui/separator';
 import { toUrl, urlIsActive } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';

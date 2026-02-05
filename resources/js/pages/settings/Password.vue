@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
-import InputError from '@/components/laravel/InputError.vue';
+import InputError from '@/components/core/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { edit } from '@/routes/user-password';
 import { Form, Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-import HeadingSmall from '@/components/laravel/HeadingSmall.vue';
-import { Button } from '@/components/laravel/ui/button';
-import { Input } from '@/components/laravel/ui/input';
-import { Label } from '@/components/laravel/ui/label';
+import HeadingSmall from '@/components/core/HeadingSmall.vue';
+import { Button } from '@/components/core/ui/button';
+import { Input } from '@/components/core/ui/input';
+import { Label } from '@/components/core/ui/label';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbItems: BreadcrumbItem[] = [

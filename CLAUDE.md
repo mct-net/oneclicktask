@@ -112,8 +112,8 @@ php artisan pail                # Tail logs in real-time
 
 **Component Organization:**
 
-- `resources/js/components/laravel/ui/` - 20+ shadcn-vue style UI primitives (reka-ui based)
-- `resources/js/components/laravel/` - App-specific components
+- `resources/js/components/core/ui/` - 20+ shadcn-vue style UI primitives (reka-ui based)
+- `resources/js/components/core/` - App-specific components
 - `resources/js/layouts/` - Layout components (App, Auth, Settings) with variants
 - `resources/js/pages/` - Inertia page components
 - `resources/js/routes/` - Additional organization mirroring backend routes

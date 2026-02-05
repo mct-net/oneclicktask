@@ -1,4 +1,4 @@
-import type { ToastProps } from '@/components/laravel/ui/toast';
+import type { ToastProps } from '@/components/core/ui/toast';
 import { ref } from 'vue';
 
 const TOAST_LIMIT = 5;

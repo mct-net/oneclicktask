@@ -10,7 +10,7 @@ import IconCirclePlus from '@/components/board/icons/IconCirclePlus.vue';
 import IconClose from '@/components/board/icons/IconClose.vue';
 import IconEmptyCircle from '@/components/board/icons/IconEmptyCircle.vue';
 import IconSearch from '@/components/board/icons/IconSearch.vue';
-import UserInfo from '@/components/laravel/UserInfo.vue';
+import UserInfo from '@/components/core/UserInfo.vue';
 
 import { useUserStore } from '@/composables/board/stores/useUserStore';
 import { UNASSIGNED_USER } from '@/lib/board/constants';

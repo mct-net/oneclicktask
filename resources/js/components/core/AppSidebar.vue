@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import NavBoards from '@/components/laravel/NavBoards.vue';
-import NavMain from '@/components/laravel/NavMain.vue';
-import NavUser from '@/components/laravel/NavUser.vue';
+import NavBoards from '@/components/core/NavBoards.vue';
+import NavMain from '@/components/core/NavMain.vue';
+import NavUser from '@/components/core/NavUser.vue';
 import {
     Sidebar,
     SidebarContent,
@@ -10,7 +10,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/components/laravel/ui/sidebar';
+} from '@/components/core/ui/sidebar';
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';

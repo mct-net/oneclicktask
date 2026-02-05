@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import InputError from '@/components/laravel/InputError.vue';
-import { Button } from '@/components/laravel/ui/button';
-import { Input } from '@/components/laravel/ui/input';
+import InputError from '@/components/core/InputError.vue';
+import { Button } from '@/components/core/ui/button';
+import { Input } from '@/components/core/ui/input';
 import {
     PinInput,
     PinInputGroup,
     PinInputSlot,
-} from '@/components/laravel/ui/pin-input';
+} from '@/components/core/ui/pin-input';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { store } from '@/routes/two-factor/login';
 import { Form, Head } from '@inertiajs/vue3';

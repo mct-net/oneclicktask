@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import AlertError from '@/components/laravel/AlertError.vue';
-import { Button } from '@/components/laravel/ui/button';
+import AlertError from '@/components/core/AlertError.vue';
+import { Button } from '@/components/core/ui/button';
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from '@/components/laravel/ui/card';
+} from '@/components/core/ui/card';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { regenerateRecoveryCodes } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';

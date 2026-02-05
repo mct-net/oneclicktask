@@ -3,7 +3,7 @@ import {
     Alert,
     AlertDescription,
     AlertTitle,
-} from '@/components/laravel/ui/alert';
+} from '@/components/core/ui/alert';
 import { AlertCircle } from 'lucide-vue-next';
 import { computed } from 'vue';
 

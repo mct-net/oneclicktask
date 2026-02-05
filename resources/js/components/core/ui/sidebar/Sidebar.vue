@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Sheet, SheetContent } from '@/components/laravel/ui/sheet';
-import SheetDescription from '@/components/laravel/ui/sheet/SheetDescription.vue';
-import SheetHeader from '@/components/laravel/ui/sheet/SheetHeader.vue';
-import SheetTitle from '@/components/laravel/ui/sheet/SheetTitle.vue';
+import { Sheet, SheetContent } from '@/components/core/ui/sheet';
+import SheetDescription from '@/components/core/ui/sheet/SheetDescription.vue';
+import SheetHeader from '@/components/core/ui/sheet/SheetHeader.vue';
+import SheetTitle from '@/components/core/ui/sheet/SheetTitle.vue';
 import { cn } from '@/lib/utils';
 import type { SidebarProps } from '.';
 import { SIDEBAR_WIDTH_MOBILE, useSidebar } from './utils';
