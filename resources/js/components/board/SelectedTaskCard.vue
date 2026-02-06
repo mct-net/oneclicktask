@@ -14,7 +14,7 @@ import IconWarningSolid from '@/components/board/icons/IconWarningSolid.vue';
 import ColorPickerPopover from '@/components/board/popovers/ColorPickerPopover.vue';
 import UserSelectPopover from '@/components/board/popovers/UserSelectPopover.vue';
 import StatusMenu from '@/components/board/StatusMenu.vue';
-import UserInfo from '@/components/laravel/UserInfo.vue';
+import UserInfo from '@/components/core/UserInfo.vue';
 import { useDialogStore } from '@/composables/board/stores/useDialogStore';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
 import { EMPTY_TASK_COLOR } from '@/lib/board/constants';

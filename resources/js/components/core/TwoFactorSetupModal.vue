@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import AlertError from '@/components/laravel/AlertError.vue';
-import InputError from '@/components/laravel/InputError.vue';
-import { Button } from '@/components/laravel/ui/button';
+import AlertError from '@/components/core/AlertError.vue';
+import InputError from '@/components/core/InputError.vue';
+import { Button } from '@/components/core/ui/button';
 import {
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
-} from '@/components/laravel/ui/dialog';
+} from '@/components/core/ui/dialog';
 import {
     PinInput,
     PinInputGroup,
     PinInputSlot,
-} from '@/components/laravel/ui/pin-input';
+} from '@/components/core/ui/pin-input';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { confirm } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';

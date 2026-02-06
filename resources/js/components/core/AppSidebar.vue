@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import NavBoards from '@/components/laravel/NavBoards.vue';
-import NavMain from '@/components/laravel/NavMain.vue';
-import NavUser from '@/components/laravel/NavUser.vue';
+import { index as boardsIndex } from '@/actions/App/Http/Controllers/BoardController';
+import NavBoards from '@/components/core/NavBoards.vue';
+import NavUser from '@/components/core/NavUser.vue';
 import {
     Sidebar,
     SidebarContent,
@@ -10,20 +10,9 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/components/laravel/ui/sidebar';
-import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
+} from '@/components/core/ui/sidebar';
 import { Link } from '@inertiajs/vue3';
-import { LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
-
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
 </script>
 
 <template>
@@ -32,7 +21,7 @@ const mainNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="dashboard()">
+                        <Link :href="boardsIndex()">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
@@ -41,7 +30,6 @@ const mainNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
             <NavBoards />
         </SidebarContent>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SidebarInset } from '@/components/laravel/ui/sidebar';
+import { SidebarInset } from '@/components/core/ui/sidebar';
 import { computed } from 'vue';
 
 interface Props {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import InputError from '@/components/laravel/InputError.vue';
-import TextLink from '@/components/laravel/TextLink.vue';
-import { Button } from '@/components/laravel/ui/button';
-import { Input } from '@/components/laravel/ui/input';
-import { Label } from '@/components/laravel/ui/label';
+import InputError from '@/components/core/InputError.vue';
+import TextLink from '@/components/core/TextLink.vue';
+import { Button } from '@/components/core/ui/button';
+import { Input } from '@/components/core/ui/input';
+import { Label } from '@/components/core/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { login } from '@/routes';
 import { store } from '@/routes/register';

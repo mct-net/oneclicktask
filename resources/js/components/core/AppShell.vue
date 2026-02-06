@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SidebarProvider } from '@/components/laravel/ui/sidebar';
+import { SidebarProvider } from '@/components/core/ui/sidebar';
 import { usePage } from '@inertiajs/vue3';
 
 interface Props {

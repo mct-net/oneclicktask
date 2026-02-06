@@ -4,7 +4,7 @@ import { ref } from 'vue';
 
 import BaseTextarea from '@/components/board/common/BaseTextarea.vue';
 import CommentOptionsPopover from '@/components/board/popovers/CommentOptionsPopover.vue';
-import UserInfo from '@/components/laravel/UserInfo.vue';
+import UserInfo from '@/components/core/UserInfo.vue';
 
 import { formatRelativeTime } from '@/lib/board/utils/date';
 import type { User } from '@/types';

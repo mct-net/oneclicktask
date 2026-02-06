@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Input } from '@/components/laravel/ui/input';
+import { Input } from '@/components/core/ui/input';
 import { cn } from '@/lib/utils';
 import type { HTMLAttributes } from 'vue';
 

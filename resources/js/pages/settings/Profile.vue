@@ -4,12 +4,12 @@ import { edit } from '@/routes/profile';
 import { send } from '@/routes/verification';
 import { Form, Head, Link, usePage } from '@inertiajs/vue3';
 
-import DeleteUser from '@/components/laravel/DeleteUser.vue';
-import HeadingSmall from '@/components/laravel/HeadingSmall.vue';
-import InputError from '@/components/laravel/InputError.vue';
-import { Button } from '@/components/laravel/ui/button';
-import { Input } from '@/components/laravel/ui/input';
-import { Label } from '@/components/laravel/ui/label';
+import DeleteUser from '@/components/core/DeleteUser.vue';
+import HeadingSmall from '@/components/core/HeadingSmall.vue';
+import InputError from '@/components/core/InputError.vue';
+import { Button } from '@/components/core/ui/button';
+import { Input } from '@/components/core/ui/input';
+import { Label } from '@/components/core/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';

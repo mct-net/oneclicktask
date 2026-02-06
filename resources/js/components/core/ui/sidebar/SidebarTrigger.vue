@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@/components/laravel/ui/button';
+import { Button } from '@/components/core/ui/button';
 import { cn } from '@/lib/utils';
 import { PanelLeft } from 'lucide-vue-next';
 import type { HTMLAttributes } from 'vue';

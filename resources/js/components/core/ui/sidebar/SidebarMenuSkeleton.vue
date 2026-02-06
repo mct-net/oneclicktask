@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Skeleton } from '@/components/laravel/ui/skeleton';
+import { Skeleton } from '@/components/core/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { computed, type HTMLAttributes } from 'vue';
 

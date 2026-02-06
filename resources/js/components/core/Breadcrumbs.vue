@@ -6,7 +6,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-} from '@/components/laravel/ui/breadcrumb';
+} from '@/components/core/ui/breadcrumb';
 import { Link } from '@inertiajs/vue3';
 
 interface BreadcrumbItemType {

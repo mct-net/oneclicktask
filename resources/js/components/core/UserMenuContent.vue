@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import UserInfo from '@/components/laravel/UserInfo.vue';
+import UserInfo from '@/components/core/UserInfo.vue';
 import {
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-} from '@/components/laravel/ui/dropdown-menu';
+} from '@/components/core/ui/dropdown-menu';
 import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
 import type { User } from '@/types';

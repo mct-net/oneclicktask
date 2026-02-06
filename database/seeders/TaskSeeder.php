@@ -24,7 +24,7 @@ class TaskSeeder extends Seeder
 
         // Create a board for these quirky tasks
         $board = Board::firstOrCreate(
-            ['name' => 'Personal Projects'],
+            ['name' => 'My Tasks'],
             [
                 'description' => 'Late night thoughts and side projects from the graveyard shift',
                 'owner_id' => $user->id,

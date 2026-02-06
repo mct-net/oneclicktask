@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import AppContent from '@/components/laravel/AppContent.vue';
-import AppShell from '@/components/laravel/AppShell.vue';
-import AppSidebar from '@/components/laravel/AppSidebar.vue';
-import AppSidebarHeader from '@/components/laravel/AppSidebarHeader.vue';
+import AppContent from '@/components/core/AppContent.vue';
+import AppShell from '@/components/core/AppShell.vue';
+import AppSidebar from '@/components/core/AppSidebar.vue';
+import AppSidebarHeader from '@/components/core/AppSidebarHeader.vue';
 import {
     Toast,
     ToastClose,
@@ -10,7 +10,7 @@ import {
     ToastProvider,
     ToastTitle,
     ToastViewport,
-} from '@/components/laravel/ui/toast';
+} from '@/components/core/ui/toast';
 import { useToast } from '@/composables/useToast';
 import type { BreadcrumbItemType } from '@/types';
 

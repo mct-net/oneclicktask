@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Breadcrumbs from '@/components/laravel/Breadcrumbs.vue';
-import { SidebarTrigger } from '@/components/laravel/ui/sidebar';
+import Breadcrumbs from '@/components/core/Breadcrumbs.vue';
+import { SidebarTrigger } from '@/components/core/ui/sidebar';
 import type { BreadcrumbItemType } from '@/types';
 
 withDefaults(
