@@ -435,12 +435,6 @@ export function useTaskStore() {
             await restClient.tags.delete(task.id, tagId);
 
             task.tags = task.tags?.filter((tag) => tag.id !== tagId);
-            tags.value = tags.value.filter((tag) => tag.id !== tagId);
-
-            uiStore.quickTagFilters.value =
-                uiStore.quickTagFilters.value.filter(
-                    (tag: Tag) => tag.id !== tagId,
-                );
         } catch (error) {
             handleError(error);
         }
