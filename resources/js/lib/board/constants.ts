@@ -1,4 +1,4 @@
-import type { User } from '@/lib/board/types/models';
+import type { User } from '@/types';
 
 export const EMPTY_TASK_COLOR = 'transparent' as const;
 export const DEFAULT_TASK_COLOR = EMPTY_TASK_COLOR;
@@ -33,9 +33,10 @@ export const IMAGE_EXTENSIONS = [
 ];
 
 export const UNASSIGNED_USER: User = {
-    id: 12345678901234567890,
-    username: 'unassigned',
-    firstName: 'Unassigned',
-    lastName: '',
-    avatarUrl: '',
+    id: 0,
+    name: 'Unassigned',
+    email: '',
+    email_verified_at: null,
+    created_at: '',
+    updated_at: '',
 };

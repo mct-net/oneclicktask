@@ -1,8 +1,8 @@
 import { ref } from 'vue';
 
 import { restClient } from '@/lib/board/api';
-import type { User } from '@/lib/board/types/models';
 import { handleError } from '@/lib/board/utils/error';
+import type { User } from '@/types';
 
 // Module-level reactive state (singleton pattern)
 const users = ref<User[]>([]);

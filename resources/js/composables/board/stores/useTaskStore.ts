@@ -11,13 +11,14 @@ import {
     EMPTY_TASK_COLOR,
     UNASSIGNED_USER,
 } from '@/lib/board/constants';
-import type { Tag, Task, User } from '@/lib/board/types/models';
+import type { Tag, Task } from '@/lib/board/types/models';
 import { utcDate } from '@/lib/board/utils/date';
 import { handleError } from '@/lib/board/utils/error';
 import {
     filterOverdueOrDueToday,
     sortByUrgency,
 } from '@/lib/board/utils/tasks';
+import type { User } from '@/types';
 
 export type SortByCriteria = 'recent_first' | 'most_urgent_first' | null;
 
