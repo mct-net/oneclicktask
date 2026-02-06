@@ -25,10 +25,13 @@ import {
     getStatusLabel,
     useTaskStore,
 } from '@/composables/board/stores/useTaskStore';
+
 import { useUIStore } from '@/composables/board/stores/useUIStore';
 import { EMPTY_TASK_COLOR } from '@/lib/board/constants';
-import type { Tag, User } from '@/lib/board/types/models';
 import { addTagIfNotExists, removeTagIfExists } from '@/lib/board/utils/tasks';
+
+import type { Tag } from '@/lib/board/types/models';
+import type { User } from '@/types';
 
 /*-------------------------------------
   State

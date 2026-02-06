@@ -1,10 +1,4 @@
-export type User = {
-    id: number;
-    username: string;
-    avatarUrl: string;
-    firstName: string;
-    lastName?: string;
-};
+import type { User } from '@/types';
 
 export type Comment = {
     id: number;
