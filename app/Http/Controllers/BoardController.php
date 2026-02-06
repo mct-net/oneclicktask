@@ -16,6 +16,10 @@ class BoardController extends Controller
             ->latest()
             ->get();
 
+        if ($boards->count() === 1) {
+            return redirect()->route('boards.show', $boards->first());
+        }
+
         return inertia('Boards/Index', [
             'boards' => $boards,
         ]);
