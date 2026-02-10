@@ -154,7 +154,7 @@ watch(
                 @remove="onRemoveTag"
             >
                 <template #trigger>
-                    <button>
+                    <button aria-label="Manage tags">
                         <IconTagOutline class="text-muted-foreground" />
                     </button>
                 </template>

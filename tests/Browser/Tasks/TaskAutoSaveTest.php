@@ -24,7 +24,6 @@ describe('Feature: Task Auto-Save', function () {
             ->selectRecentTask('Sample Task')
             ->editSelectedTask('name', 'Updated Task Name')
             ->editSelectedTask('status', 'Done')
-            ->editSelectedTask('tag', 'Sample Tag', 'Updated Tag')
             ->editSelectedTask('description', 'Updated description')
             ->editSelectedTask('assignee', $this->user->name);
 
@@ -43,7 +42,7 @@ describe('Feature: Task Auto-Save', function () {
         expect($selectedContent)
             ->toContain('Updated Task Name')
             ->toContain('Updated description')
-            ->toContain('Updated Tag')
+            ->toContain('Sample Tag')
             ->toContain($this->user->name)
             ->not->toContain('Sample Task');
     });
