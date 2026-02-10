@@ -8,16 +8,19 @@ import IconCircle from '@/components/board/icons/IconCircle.vue';
 import IconMaximize from '@/components/board/icons/IconMaximize.vue';
 import IconStarOutline from '@/components/board/icons/IconStarOutline.vue';
 import IconStarSolid from '@/components/board/icons/IconStarSolid.vue';
+import IconTagOutline from '@/components/board/icons/IconTagOutline.vue';
 import IconUserOutline from '@/components/board/icons/IconUserOutline.vue';
 import IconWarningOutline from '@/components/board/icons/IconWarningOutline.vue';
 import IconWarningSolid from '@/components/board/icons/IconWarningSolid.vue';
 import ColorPickerPopover from '@/components/board/popovers/ColorPickerPopover.vue';
+import TagSearchCreatePopover from '@/components/board/popovers/TagSearchCreatePopover.vue';
 import UserSelectPopover from '@/components/board/popovers/UserSelectPopover.vue';
 import StatusMenu from '@/components/board/StatusMenu.vue';
 import UserInfo from '@/components/core/UserInfo.vue';
 import { useDialogStore } from '@/composables/board/stores/useDialogStore';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
 import { EMPTY_TASK_COLOR } from '@/lib/board/constants';
+import type { Tag } from '@/lib/board/types/models';
 import { formatDueDate } from '@/lib/board/utils/date';
 import type { User } from '@/types';
 import { computed, watch } from 'vue';
@@ -27,7 +30,6 @@ const {
     updateTask,
     destroyTask,
     addTag,
-    updateTag,
     removeTag,
     addTime,
     selectNextUrgentTask,
@@ -46,21 +48,15 @@ const onRemoveAssignee = () => {
     }
 };
 
-const onDeleteTag = (id: number) => {
+const onAddTag = async (tag: Tag) => {
     if (selectedTask.value) {
-        removeTag(selectedTask.value, id);
+        await addTag(selectedTask.value, tag.name);
     }
 };
 
-const onUpdateTag = (newName: string, id: number) => {
+const onRemoveTag = (tag: Tag) => {
     if (selectedTask.value) {
-        updateTag(selectedTask.value, newName, id);
-    }
-};
-
-const onInsertTag = async (tag: string) => {
-    if (selectedTask.value) {
-        await addTag(selectedTask.value, tag);
+        removeTag(selectedTask.value, tag.id);
     }
 };
 
@@ -150,6 +146,19 @@ watch(
                 />
                 <IconWarningOutline v-else class="text-muted-foreground" />
             </button>
+
+            <TagSearchCreatePopover
+                placement="left"
+                :added-tags="selectedTask.tags"
+                @add="onAddTag"
+                @remove="onRemoveTag"
+            >
+                <template #trigger>
+                    <button aria-label="Manage tags">
+                        <IconTagOutline class="text-muted-foreground" />
+                    </button>
+                </template>
+            </TagSearchCreatePopover>
         </div>
 
         <!-- Featured Info -->
@@ -172,12 +181,7 @@ watch(
                 :aria-label="`Task name: ${selectedTask.name}`"
             />
 
-            <EditableTagList
-                :tags="selectedTask.tags"
-                @delete-tag="onDeleteTag"
-                @update-tag="onUpdateTag"
-                @insert-tag="onInsertTag"
-            />
+            <EditableTagList :tags="selectedTask.tags" />
         </div>
 
         <!-- Meta -->

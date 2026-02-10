@@ -38,7 +38,7 @@ class BoardPage
     // Tags
     protected string $tagsRegion = '[role="region"][aria-label="Tags"]';
 
-    protected string $addTagButton = 'button[aria-label="Add tag"]';
+    protected string $addTagButton = 'button[aria-label="Manage tags"]';
 
     // Assignee
     protected string $assigneeButton = '[aria-label="Set assignee"]';
@@ -188,10 +188,6 @@ class BoardPage
                 ->fill("{$this->taskDescriptionRegion} p:visible", $value);
         }
 
-        if ($field === 'tag') {
-            $this->editTaskTag($value, $newValue);
-        }
-
         if ($field === 'assignee') {
             $this->changeSelectedTaskAssignee($value);
         }
@@ -200,26 +196,13 @@ class BoardPage
     }
 
     /**
-     * Edit a specific tag on the task
+     * Add a new tag to the selected task via the tag popover
      */
-    public function editTaskTag(string $tag, string $newValue): self
-    {
-        $this->page->click("{$this->tagsRegion} p:has-text('{$tag}')")
-            ->fill("{$this->tagsRegion} p:has-text('{$tag}')", $newValue);
-
-        return $this;
-    }
-
-    /**
-     * Add a new tag to the selected task
-     */
-    public function addTagToSelectedTask(?string $tag = null): self
+    public function addTagToSelectedTask(string $tag): self
     {
         $this->page->click($this->addTagButton);
-
-        if ($tag) {
-            $this->page->fill("{$this->tagsRegion} p:has-text('New Tag')", $tag);
-        }
+        $this->page->fill('input[placeholder="Search tag..."]', $tag);
+        $this->page->keys('input[placeholder="Search tag..."]', 'Enter');
 
         return $this;
     }
