@@ -20,6 +20,10 @@ const props = defineProps({
         type: Array as PropType<Tag[]>,
         required: true,
     },
+    placement: {
+        type: String as PropType<'left' | 'right'>,
+        default: 'right',
+    },
 });
 
 const emit = defineEmits(['add', 'remove']);
@@ -110,13 +114,20 @@ const onEnter = async (close: () => void) => {
 
 <template>
     <Popover class="relative flex items-center" v-slot="{ close }">
-        <PopoverButton class="outline-hidden" title="Add tag">
-            <span class="block px-2 py-1">
-                <IconOptions />
-            </span>
+        <PopoverButton class="outline-hidden" title="Add tag" as="template">
+            <slot name="trigger">
+                <button class="outline-hidden" title="Add tag">
+                    <span class="block px-2 py-1">
+                        <IconOptions />
+                    </span>
+                </button>
+            </slot>
         </PopoverButton>
 
-        <PopoverPanel class="absolute top-[calc(100%+0.4rem)] -right-2 z-10">
+        <PopoverPanel
+            class="absolute top-[calc(100%+0.4rem)] z-10"
+            :class="placement === 'left' ? '-left-2' : '-right-2'"
+        >
             <div class="w-56 rounded-md bg-surface shadow-popover">
                 <div class="p-3">
                     <BaseInput
