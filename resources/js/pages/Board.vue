@@ -173,7 +173,7 @@ onMounted(async () => {
                     <!-- Selected Task's Area -->
                     <article
                         v-if="!filters.search"
-                        class="min-h-33"
+                        class="min-h-34"
                         aria-label="Selected task area"
                     >
                         <SelectedTaskCard
