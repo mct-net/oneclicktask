@@ -47,5 +47,12 @@ export function useAnalytics() {
         posthog.capture(event, properties);
     }
 
-    return { identify, reset, capture };
+    function capturePageview() {
+        if (!initialized) return;
+        posthog.capture('$pageview', {
+            $current_url: window.location.href,
+        });
+    }
+
+    return { identify, reset, capture, capturePageview };
 }
