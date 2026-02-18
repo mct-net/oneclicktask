@@ -2,6 +2,7 @@ import { computed, ref } from 'vue';
 
 import { useUIStore } from '@/composables/board/stores/useUIStore';
 import { useUserStore } from '@/composables/board/stores/useUserStore';
+import { useAnalytics } from '@/composables/useAnalytics';
 import { useToast } from '@/composables/useToast';
 import { restClient } from '@/lib/board/api';
 import {
@@ -558,6 +559,12 @@ export function useTaskStore() {
             task.last_postponed_at = utcDate().format(DATETIME_FORMAT);
 
             await restClient.tasks.update(task);
+
+            const { capture } = useAnalytics();
+            capture('task_postponed', {
+                task_id: task.id,
+                minutes_added: minutes,
+            });
         } catch (error) {
             handleError(error);
         }

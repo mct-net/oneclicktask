@@ -11,8 +11,11 @@ import {
     ToastTitle,
     ToastViewport,
 } from '@/components/core/ui/toast';
+import { useAnalytics } from '@/composables/useAnalytics';
 import { useToast } from '@/composables/useToast';
-import type { BreadcrumbItemType } from '@/types';
+import type { AppPageProps, BreadcrumbItemType } from '@/types';
+import { usePage } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
 
 interface Props {
     breadcrumbs?: BreadcrumbItemType[];
@@ -23,6 +26,15 @@ withDefaults(defineProps<Props>(), {
 });
 
 const { toasts, onOpenChange } = useToast();
+const { identify, capture } = useAnalytics();
+const page = usePage<AppPageProps>();
+
+onMounted(() => {
+    if (page.props.auth?.user) {
+        identify(page.props.auth.user);
+        capture('session_started');
+    }
+});
 </script>
 
 <template>

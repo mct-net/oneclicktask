@@ -2,6 +2,7 @@ import { ref } from 'vue';
 
 import type { SortByCriteria } from '@/composables/board/stores/useTaskStore';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
+import { useAnalytics } from '@/composables/useAnalytics';
 import type { Tag } from '@/lib/board/types/models';
 
 type Layout = 'resume' | 'paginated';
@@ -33,6 +34,9 @@ export function useUIStore() {
     const changeLayout = (layout_: Layout, sortBy: SortByCriteria) => {
         layout.value = layout_;
         useTaskStore().filters.value.sortBy = sortBy;
+
+        const { capture } = useAnalytics();
+        capture('layout_changed', { layout: layout_, sort_by: sortBy });
     };
 
     const clearSelectedTask = () => {
