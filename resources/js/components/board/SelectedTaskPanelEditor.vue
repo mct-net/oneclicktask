@@ -153,7 +153,7 @@ watch(
         const isSame = editor.value.getHTML() === value;
 
         if (isSame) return;
-        editor.value.commands.setContent(value || '', false);
+        editor.value.commands.setContent(value || '', { emitUpdate: false });
     },
 );
 
