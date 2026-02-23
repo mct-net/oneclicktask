@@ -13,7 +13,8 @@ export function initializeAnalytics() {
     posthog.init(apiKey, {
         api_host: host || 'https://us.i.posthog.com',
         autocapture: false,
-        capture_pageview: false,
+        capture_pageview: true,
+
         capture_pageleave: true,
         disable_session_recording: true,
         persistence: 'localStorage+cookie',
@@ -51,12 +52,5 @@ export function useAnalytics() {
         posthog.capture(event, properties);
     }
 
-    function capturePageview() {
-        if (!initialized) return;
-        posthog.capture('$pageview', {
-            $current_url: window.location.href,
-        });
-    }
-
-    return { identify, reset, capture, capturePageview };
+    return { identify, reset, capture };
 }
