@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Log;
 use PostHog\PostHog;
 
 class PostHogService
@@ -24,6 +25,10 @@ class PostHogService
     {
         if (! $this->enabled) {
             return;
+        }
+
+        if (app()->environment('local')) {
+            Log::debug("[PostHog] Capturing event: {$event}", ['userId' => $userId, 'properties' => $properties]);
         }
 
         PostHog::capture([
