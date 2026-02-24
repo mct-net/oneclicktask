@@ -97,6 +97,7 @@ class TaskController extends Controller
             'assignee_id' => 'nullable|exists:users,id',
             'color' => 'nullable|string|max:50',
             'due_date' => 'nullable|date',
+            'last_postponed_at' => 'nullable|date',
             'is_starred' => 'boolean',
             'is_important' => 'boolean',
             'status' => 'nullable|string|max:50',
@@ -112,8 +113,18 @@ class TaskController extends Controller
             }
         }
 
-        $oldStatus = $task->status;
-        $oldAssigneeId = $task->assignee_id;
+        $snapshot = [
+            'name' => $task->name,
+            'content' => $task->content,
+            'assignee_id' => $task->assignee_id,
+            'color' => $task->color,
+            'due_date' => $task->due_date?->toISOString(),
+            'last_postponed_at' => $task->last_postponed_at?->toISOString(),
+            'is_starred' => $task->is_starred,
+            'is_important' => $task->is_important,
+            'status' => $task->status,
+            'tags' => $task->tags()->orderBy('tags.id')->pluck('tags.id')->toArray(),
+        ];
 
         $task->update($validated);
 
@@ -123,29 +134,48 @@ class TaskController extends Controller
 
         $task->load(['author', 'assignee', 'tags']);
 
+        $this->trackUpdate($posthog, $board, $task, $validated, $snapshot);
+
+        return response()->json($task);
+    }
+
+    private function trackUpdate(PostHogService $posthog, Board $board, Task $task, array $validated, array $snapshot): void
+    {
+        $trackableFields = ['name', 'content', 'assignee_id', 'color', 'due_date', 'is_starred', 'is_important', 'status'];
+
+        $changedFields = array_keys(array_filter(
+            array_intersect_key($validated, array_flip($trackableFields)),
+            fn ($value, $key) => $snapshot[$key] != $value,
+            ARRAY_FILTER_USE_BOTH,
+        ));
+
+        $newTags = $task->tags()->orderBy('tags.id')->pluck('tags.id')->toArray();
+        if ($snapshot['tags'] !== $newTags) {
+            $changedFields[] = 'tags';
+        }
+
         $posthog->capture(Auth::id(), 'task_edited', [
             'board_id' => $board->id,
             'task_id' => $task->id,
+            'changed_fields' => $changedFields,
         ]);
 
-        if (isset($validated['status']) && $oldStatus !== $validated['status']) {
+        if (isset($validated['status']) && $snapshot['status'] !== $validated['status']) {
             $posthog->capture(Auth::id(), 'task_status_changed', [
                 'board_id' => $board->id,
                 'task_id' => $task->id,
-                'old_status' => $oldStatus,
+                'old_status' => $snapshot['status'],
                 'new_status' => $validated['status'],
             ]);
         }
 
-        if (array_key_exists('assignee_id', $validated) && $oldAssigneeId != $validated['assignee_id']) {
+        if (array_key_exists('assignee_id', $validated) && $snapshot['assignee_id'] != $validated['assignee_id']) {
             $posthog->capture(Auth::id(), 'task_assigned', [
                 'board_id' => $board->id,
                 'task_id' => $task->id,
                 'assignee_id' => $validated['assignee_id'],
             ]);
         }
-
-        return response()->json($task);
     }
 
     /**
