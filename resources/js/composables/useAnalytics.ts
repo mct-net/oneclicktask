@@ -54,5 +54,16 @@ export function useAnalytics() {
         posthog.capture(event, properties);
     }
 
-    return { identify, reset, capture };
+    function trackStatusChange() {
+        const userId = posthog.get_distinct_id();
+        const key = `task_status_changes_count_${userId}`;
+        const count = parseInt(localStorage.getItem(key) ?? '0', 10) + 1;
+        localStorage.setItem(key, String(count));
+
+        if (count === 2) {
+            capture('feedback_requested');
+        }
+    }
+
+    return { identify, reset, capture, trackStatusChange };
 }

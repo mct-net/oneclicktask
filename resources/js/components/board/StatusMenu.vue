@@ -14,16 +14,22 @@ import {
     getStatusLabel,
     useTaskStore,
 } from '@/composables/board/stores/useTaskStore';
+import { useAnalytics } from '@/composables/useAnalytics';
 import type { Task } from '@/lib/board/types/models';
 
 defineEmits(['destroy']);
 
 const taskStore = useTaskStore();
 const { selectedTask } = taskStore;
+const { trackStatusChange } = useAnalytics();
 
 const setStatus = (status: Task['status']) => {
     if (!selectedTask.value) {
         return;
+    }
+
+    if (selectedTask.value.status !== status) {
+        trackStatusChange();
     }
 
     selectedTask.value.status = status;
