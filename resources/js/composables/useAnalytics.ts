@@ -14,7 +14,9 @@ export function initializeAnalytics() {
         api_host: host || 'https://us.i.posthog.com',
         autocapture: false,
         capture_pageview: true,
-
+        error_tracking: {
+            captureExtensionExceptions: false,
+        },
         capture_pageleave: true,
         disable_session_recording: true,
         persistence: 'localStorage+cookie',
