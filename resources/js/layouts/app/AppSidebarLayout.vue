@@ -26,13 +26,18 @@ withDefaults(defineProps<Props>(), {
 });
 
 const { toasts, onOpenChange } = useToast();
-const { identify, capture } = useAnalytics();
+const { identify, capture, optIn, optOut } = useAnalytics();
 const page = usePage<AppPageProps>();
 
 onMounted(() => {
     if (page.props.auth?.user) {
-        identify(page.props.auth.user);
-        capture('session_started');
+        if (page.props.auth.user.analytics_consent) {
+            optIn();
+            identify(page.props.auth.user);
+            capture('session_started');
+        } else {
+            optOut();
+        }
     }
 });
 </script>

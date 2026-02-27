@@ -7,7 +7,6 @@ use App\Models\Task;
 use App\Services\PostHogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -87,10 +86,6 @@ class TaskController extends Controller
      */
     public function update(Request $request, Board $board, Task $task, PostHogService $posthog)
     {
-        if (app()->environment('local')) {
-            Log::debug("[PostHog] Updating task {$task->id} on board {$board->id} with data: ".json_encode($request->all()));
-        }
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'content' => 'nullable|string',

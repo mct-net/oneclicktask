@@ -20,6 +20,7 @@ export function initializeAnalytics() {
         capture_pageleave: true,
         disable_session_recording: true,
         persistence: 'localStorage+cookie',
+        opt_out_capturing_by_default: true,
     });
 
     initialized = true;
@@ -65,5 +66,28 @@ export function useAnalytics() {
         }
     }
 
-    return { identify, reset, capture, trackStatusChange };
+    function optIn() {
+        if (!initialized) return;
+        posthog.opt_in_capturing();
+    }
+
+    function optOut() {
+        if (!initialized) return;
+        posthog.opt_out_capturing();
+    }
+
+    function hasOptedIn(): boolean {
+        if (!initialized) return false;
+        return posthog.has_opted_in_capturing();
+    }
+
+    return {
+        identify,
+        reset,
+        capture,
+        trackStatusChange,
+        optIn,
+        optOut,
+        hasOptedIn,
+    };
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use PostHog\PostHog;
 
@@ -23,7 +24,7 @@ class PostHogService
 
     public function capture(int $userId, string $event, array $properties = []): void
     {
-        if (! $this->enabled) {
+        if (! $this->enabled || ! $this->hasConsent($userId)) {
             return;
         }
 
@@ -40,7 +41,7 @@ class PostHogService
 
     public function identify(int $userId, array $properties = []): void
     {
-        if (! $this->enabled) {
+        if (! $this->enabled || ! $this->hasConsent($userId)) {
             return;
         }
 
@@ -48,5 +49,10 @@ class PostHogService
             'distinctId' => (string) $userId,
             'properties' => $properties,
         ]);
+    }
+
+    private function hasConsent(int $userId): bool
+    {
+        return (bool) User::where('id', $userId)->value('analytics_consent');
     }
 }

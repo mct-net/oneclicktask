@@ -3,6 +3,7 @@ import Heading from '@/components/core/Heading.vue';
 import { Button } from '@/components/core/ui/button';
 import { Separator } from '@/components/core/ui/separator';
 import { toUrl, urlIsActive } from '@/lib/utils';
+import { edit as editAnalytics } from '@/routes/analytics';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';
 import { show } from '@/routes/two-factor';
@@ -26,6 +27,10 @@ const sidebarNavItems: NavItem[] = [
     {
         title: 'Appearance',
         href: editAppearance(),
+    },
+    {
+        title: 'Analytics',
+        href: editAnalytics(),
     },
 ];
 
