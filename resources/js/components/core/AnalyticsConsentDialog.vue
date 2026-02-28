@@ -10,13 +10,15 @@ import {
 } from '@/components/core/ui/dialog';
 import { useAnalytics } from '@/composables/useAnalytics';
 import { update } from '@/routes/analytics';
+import type { AppPageProps } from '@/types';
+import { usePage } from '@inertiajs/vue3';
 import axios from 'axios';
 import { Heart } from 'lucide-vue-next';
 import { ref } from 'vue';
 
-const STORAGE_KEY = 'analytics_consent_dismissed';
+const page = usePage<AppPageProps>();
 
-const open = ref(!localStorage.getItem(STORAGE_KEY));
+const open = ref(page.props.auth?.user?.analytics_consent === null);
 
 const { optIn, optOut } = useAnalytics();
 
@@ -25,7 +27,6 @@ function persist(consent: boolean) {
 }
 
 function dismiss() {
-    localStorage.setItem(STORAGE_KEY, '1');
     open.value = false;
 }
 

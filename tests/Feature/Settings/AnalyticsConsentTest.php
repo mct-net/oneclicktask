@@ -46,8 +46,8 @@ test('analytics consent can be revoked', function () {
     expect($user->fresh()->analytics_consent)->toBeFalse();
 });
 
-test('analytics consent defaults to false for new users', function () {
-    $user = User::factory()->create();
+test('analytics consent defaults to null for new users', function () {
+    $user = User::factory()->create(['analytics_consent' => null]);
 
-    expect($user->fresh()->analytics_consent)->toBeFalse();
+    expect($user->fresh()->analytics_consent)->toBeNull();
 });
