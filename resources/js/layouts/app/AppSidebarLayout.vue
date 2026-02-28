@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AnalyticsConsentDialog from '@/components/core/AnalyticsConsentDialog.vue';
 import AppContent from '@/components/core/AppContent.vue';
 import AppShell from '@/components/core/AppShell.vue';
 import AppSidebar from '@/components/core/AppSidebar.vue';
@@ -72,4 +73,6 @@ onMounted(() => {
         </Toast>
         <ToastViewport />
     </ToastProvider>
+
+    <AnalyticsConsentDialog />
 </template>
