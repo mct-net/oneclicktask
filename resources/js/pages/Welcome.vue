@@ -838,6 +838,15 @@ withDefaults(
                 </div>
             </main>
         </div>
-        <div class="hidden h-14.5 lg:block"></div>
+        <footer
+            class="w-full max-w-[335px] py-4 text-center text-sm text-[#706f6c] lg:max-w-4xl dark:text-[#A1A09A]"
+        >
+            <Link
+                href="/privacy-policy"
+                class="hover:text-[#1b1b18] hover:underline dark:hover:text-[#EDEDEC]"
+            >
+                Privacy Policy
+            </Link>
+        </footer>
     </div>
 </template>

@@ -5,6 +5,13 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
+Route::get('/privacy', function () {
+    return Inertia::render('PrivacyPolicy', [
+        'appName' => config('app.name'),
+        'lastUpdated' => '2026-03-02',
+    ]);
+})->name('privacy-policy');
+
 Route::get('/', function () {
     if (Auth::check()) {
         $boards = Auth::user()->allBoards()->get();

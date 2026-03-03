@@ -10,7 +10,7 @@ import { createApp, h } from 'vue';
 import { initializeAnalytics } from './composables/useAnalytics';
 import { initializeTheme } from './composables/useAppearance';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'One Click Task';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
