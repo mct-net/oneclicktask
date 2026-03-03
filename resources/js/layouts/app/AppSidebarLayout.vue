@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AnalyticsConsentDialog from '@/components/core/AnalyticsConsentDialog.vue';
 import AppContent from '@/components/core/AppContent.vue';
 import AppShell from '@/components/core/AppShell.vue';
 import AppSidebar from '@/components/core/AppSidebar.vue';
@@ -11,8 +12,11 @@ import {
     ToastTitle,
     ToastViewport,
 } from '@/components/core/ui/toast';
+import { useAnalytics } from '@/composables/useAnalytics';
 import { useToast } from '@/composables/useToast';
-import type { BreadcrumbItemType } from '@/types';
+import type { AppPageProps, BreadcrumbItemType } from '@/types';
+import { usePage } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
 
 interface Props {
     breadcrumbs?: BreadcrumbItemType[];
@@ -23,6 +27,20 @@ withDefaults(defineProps<Props>(), {
 });
 
 const { toasts, onOpenChange } = useToast();
+const { identify, capture, optIn, optOut } = useAnalytics();
+const page = usePage<AppPageProps>();
+
+onMounted(() => {
+    if (page.props.auth?.user) {
+        if (page.props.auth.user.analytics_consent) {
+            optIn();
+            identify(page.props.auth.user);
+            capture('session_started');
+        } else {
+            optOut();
+        }
+    }
+});
 </script>
 
 <template>
@@ -55,4 +73,6 @@ const { toasts, onOpenChange } = useToast();
         </Toast>
         <ToastViewport />
     </ToastProvider>
+
+    <AnalyticsConsentDialog />
 </template>

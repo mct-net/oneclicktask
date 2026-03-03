@@ -1,4 +1,5 @@
 import { useToast } from '@/composables/useToast';
+import { posthog } from 'posthog-js';
 
 export function handleError(error: any) {
     let message = 'An unexpected error occurred. Please try again later.';
@@ -16,6 +17,7 @@ export function handleError(error: any) {
     });
 
     console.error(error);
+    posthog.captureException(error, { error });
 }
 
 /**

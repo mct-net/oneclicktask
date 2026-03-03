@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Services\PostHogService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -30,10 +31,22 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => $input['password'],
         ]);
+
+        $posthog = app(PostHogService::class);
+        $posthog->capture($user->id, 'user_signed_up', [
+            'signup_date' => $user->created_at->toISOString(),
+        ]);
+        $posthog->identify($user->id, [
+            'name' => $user->name,
+            'email' => $user->email,
+            'signup_date' => $user->created_at->toISOString(),
+        ]);
+
+        return $user;
     }
 }

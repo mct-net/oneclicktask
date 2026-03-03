@@ -27,11 +27,13 @@ import {
 } from '@/composables/board/stores/useTaskStore';
 
 import { useUIStore } from '@/composables/board/stores/useUIStore';
+import { useAnalytics } from '@/composables/useAnalytics';
 import { EMPTY_TASK_COLOR } from '@/lib/board/constants';
 import { addTagIfNotExists, removeTagIfExists } from '@/lib/board/utils/tasks';
 
 import type { Tag } from '@/lib/board/types/models';
 import type { User } from '@/types';
+import { watch } from 'vue';
 
 /*-------------------------------------
   State
@@ -70,6 +72,40 @@ const onRemoveCollaborator = (user: User) => {
         (u) => u.id !== user.id,
     );
 };
+
+/*-------------------------------------
+  Analytics
+-------------------------------------*/
+const { capture } = useAnalytics();
+let filterDebounce: ReturnType<typeof setTimeout>;
+
+watch(
+    filters,
+    (f) => {
+        clearTimeout(filterDebounce);
+        filterDebounce = setTimeout(() => {
+            const active: string[] = [];
+            if (f.color && f.color !== EMPTY_TASK_COLOR) active.push('color');
+            if (f.isStarred) active.push('starred');
+            if (f.isImportant) active.push('important');
+            if (f.inProgress) active.push('in_progress');
+            if (f.failedOrDuplicated) active.push('failed_or_duplicated');
+            if (f.done) active.push('done');
+            if (f.backlog) active.push('backlog');
+            if (f.trashed) active.push('trashed');
+            if (f.assignees.length) active.push('assignees');
+            if (f.tags.length) active.push('tags');
+
+            if (active.length > 0) {
+                capture('filter_applied', {
+                    filters: active,
+                    filter_count: active.length,
+                });
+            }
+        }, 500);
+    },
+    { deep: true },
+);
 </script>
 
 <template>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Comment;
 use App\Models\Task;
+use App\Services\PostHogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Board $board, Task $task)
+    public function store(Request $request, Board $board, Task $task, PostHogService $posthog)
     {
         $validated = $request->validate([
             'content' => 'required|string',
@@ -35,6 +36,12 @@ class CommentController extends Controller
         ]);
 
         $comment->load('user');
+
+        $posthog->capture(Auth::id(), 'comment_added', [
+            'board_id' => $board->id,
+            'task_id' => $task->id,
+            'comment_id' => $comment->id,
+        ]);
 
         return response()->json($comment, 201);
     }
