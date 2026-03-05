@@ -80,7 +80,7 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 ENV APP_ENV=production \
     APP_DEBUG=false \
-    APP_URL=https://oct.cv2.mct-dev.de
+    APP_URL=https://oct.dev.mctsrv.de
 
 EXPOSE 80
 
