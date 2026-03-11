@@ -28,9 +28,7 @@ class PostHogService
             return;
         }
 
-        if (app()->environment('local')) {
-            Log::debug("[PostHog] Capturing event: {$event}", ['userId' => $userId, 'properties' => $properties]);
-        }
+        Log::debug("[PostHog] Capturing event: {$event}", ['userId' => $userId, 'properties' => $properties]);
 
         PostHog::capture([
             'distinctId' => (string) $userId,
