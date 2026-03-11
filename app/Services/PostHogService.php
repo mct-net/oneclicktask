@@ -15,6 +15,8 @@ class PostHogService
         $apiKey = config('services.posthog.api_key');
         $host = config('services.posthog.host');
 
+        Log::debug('[PostHog] Initializing PostHogService with API key: '.($apiKey ? '****' : 'not set')." and host: {$host}");
+
         $this->enabled = ! empty($apiKey);
 
         if ($this->enabled) {
@@ -25,6 +27,8 @@ class PostHogService
     public function capture(int $userId, string $event, array $properties = []): void
     {
         if (! $this->enabled || ! $this->hasConsent($userId)) {
+            Log::debug("[PostHog] Skipping event capture for user {$userId} due to disabled analytics or lack of consent.");
+
             return;
         }
 
