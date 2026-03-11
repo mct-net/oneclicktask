@@ -10,19 +10,17 @@ class BoardController extends Controller
 {
     public function index()
     {
-        $boards = Auth::user()->allBoards()
-            ->with(['owner', 'members'])
-            ->withCount('tasks')
-            ->latest()
-            ->get();
+        $user = Auth::user();
+        $board = $user->allBoards()->latest()->first();
 
-        if ($boards->count() === 1) {
-            return redirect()->route('boards.show', $boards->first());
+        if (! $board) {
+            $board = Board::create([
+                'name' => 'My Tasks',
+                'owner_id' => $user->id,
+            ]);
         }
 
-        return inertia('Boards/Index', [
-            'boards' => $boards,
-        ]);
+        return redirect()->route('boards.show', $board);
     }
 
     public function store(Request $request)
