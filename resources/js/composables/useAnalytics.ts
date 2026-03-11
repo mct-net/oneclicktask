@@ -25,9 +25,9 @@ export function initializeAnalytics() {
 
     initialized = true;
 
-    if (window.location.hostname.includes('localhost')) {
-        posthog.debug();
-    }
+    // if (window.location.hostname.includes('localhost')) {
+    posthog.debug();
+    // }
 }
 
 export function useAnalytics() {
