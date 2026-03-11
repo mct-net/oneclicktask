@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Board;
 use App\Models\User;
 use App\Services\PostHogService;
 use Illuminate\Support\Facades\Validator;
@@ -35,6 +36,11 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => $input['password'],
+        ]);
+
+        Board::create([
+            'name' => $user->name."'s Board",
+            'owner_id' => $user->id,
         ]);
 
         $posthog = app(PostHogService::class);
