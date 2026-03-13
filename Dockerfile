@@ -29,6 +29,9 @@ RUN set -eux; \
 FROM php:8.3-cli-alpine AS assets
 WORKDIR /app
 
+ARG VITE_POSTHOG_API_KEY
+ARG VITE_POSTHOG_HOST
+
 RUN apk add --no-cache nodejs npm
 
 COPY --from=vendor /app/vendor /opt/vendor
