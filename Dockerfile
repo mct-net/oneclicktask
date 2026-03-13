@@ -42,7 +42,6 @@ RUN set -eux; \
     else echo "package.json not found in build context"; exit 1; fi; \
     cp -a "$APP_DIR"/. /app; \
     cp -a /opt/vendor /app/vendor; \
-    if [ -f /app/.env.example ]; then cp /app/.env.example /app/.env; fi; \
     npm install -g pnpm@10; \
     export CI=true HUSKY=0; \
     pnpm install --frozen-lockfile --ignore-scripts; \
