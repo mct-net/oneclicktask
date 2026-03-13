@@ -3,22 +3,12 @@ import posthog from 'posthog-js';
 let initialized = false;
 
 export function initializeAnalytics() {
-    if (typeof window === 'undefined') {
-        console.error(
-            'PostHog analytics is not initialized because window is undefined.',
-        );
-        return;
-    }
+    if (typeof window === 'undefined') return;
 
     const apiKey = import.meta.env.VITE_POSTHOG_API_KEY;
     const host = import.meta.env.VITE_POSTHOG_HOST;
 
-    if (!apiKey) {
-        console.error(
-            'PostHog analytics is not initialized because VITE_POSTHOG_API_KEY is not set.',
-        );
-        return;
-    }
+    if (!apiKey) return;
 
     posthog.init(apiKey, {
         api_host: host || 'https://us.i.posthog.com',
