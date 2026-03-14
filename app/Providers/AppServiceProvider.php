@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(\App\Services\PostHogService::class);
     }
 
     /**
@@ -20,7 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (filter_var(env('APP_FORCE_HTTPS', false), FILTER_VALIDATE_BOOLEAN)) {
+        if (
+            $this->app->environment('production')
+            || filter_var(env('APP_FORCE_HTTPS', false), FILTER_VALIDATE_BOOLEAN)
+            || filter_var(env('FORCE_HTTPS', false), FILTER_VALIDATE_BOOLEAN)
+        ) {
             URL::forceScheme('https');
         }
     }

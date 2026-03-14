@@ -1,0 +1,31 @@
+@reference "../app.css";
+
+/*-------------------------------------
+  Code Theme
+-------------------------------------*/
+@import url('./code-theme.css');
+
+/*-------------------------------------
+  ProseMirror
+-------------------------------------*/
+
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    pointer-events: none;
+    height: 0;
+
+    @apply text-foreground opacity-60;
+}
+
+.ProseMirror p {
+    line-height: 160%;
+}
+
+.ProseMirror img {
+    width: max-content;
+}
+
+.ProseMirror-selectednode {
+    @apply outline-[3px] -outline-offset-[3px] outline-foreground;
+}

@@ -15,7 +15,7 @@ Laravel 12 mit Inertia, Vue 3, Fortify und Vite. Der aktuelle Stand ist im Wesen
 
 ```bash
 composer install --no-scripts
-npm ci --ignore-scripts
+corepack pnpm install --frozen-lockfile --ignore-scripts
 ```
 
 2. Environment vorbereiten:
@@ -35,37 +35,37 @@ php artisan migrate
 
 ```bash
 php artisan test
-npm run build
+corepack pnpm build
 ```
 
 ## Entwicklung lokal
 
-Für das Frontend reicht `npm run dev`. Für den vollständigen Stack startet `composer run dev` zusätzlich Laravel-Server, Queue-Listener und Log-Stream.
+Für das Frontend reicht `corepack pnpm dev`. Für den vollständigen Stack startet `composer run dev` zusätzlich Laravel-Server, Queue-Listener und Log-Stream.
 
 ## Preview mit Caddy und sichtbarem HMR
 
-Wenn `npm run dev` über `preview.oneclicktask.de` erreichbar sein soll, setze in `.env` mindestens:
+Wenn `corepack pnpm dev` über `preview.oneclicktask.com` erreichbar sein soll, setze in `.env` mindestens:
 
 ```dotenv
-APP_URL=https://preview.oneclicktask.de
+APP_URL=https://preview.oneclicktask.com
 APP_FORCE_HTTPS=true
 SESSION_SECURE_COOKIE=true
 TRUSTED_PROXIES=127.0.0.1
 
 VITE_DEV_SERVER_HOST=127.0.0.1
 VITE_DEV_SERVER_PORT=5173
-VITE_DEV_SERVER_ORIGIN=https://preview.oneclicktask.de
-VITE_HMR_HOST=preview.oneclicktask.de
+VITE_DEV_SERVER_ORIGIN=https://preview.oneclicktask.com
+VITE_HMR_HOST=preview.oneclicktask.com
 VITE_HMR_PROTOCOL=wss
 VITE_HMR_CLIENT_PORT=443
-VITE_ALLOWED_HOSTS=preview.oneclicktask.de
+VITE_ALLOWED_HOSTS=preview.oneclicktask.com
 ```
 
 Danach:
 
 ```bash
 php artisan serve --host=127.0.0.1 --port=8000
-npm run dev
+corepack pnpm dev
 ```
 
 Eine passende Caddy-Konfiguration liegt in [`ops/Caddyfile.preview.example`](./ops/Caddyfile.preview.example). Sie leitet normale Requests an Laravel und Vite-spezifische Requests inklusive Websocket-Upgrades an den Dev-Server weiter.

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
+import AppLogoIcon from '@/components/core/AppLogoIcon.vue';
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from '@/components/ui/card';
+} from '@/components/core/ui/card';
 import { home } from '@/routes';
 import { Link } from '@inertiajs/vue3';
 
@@ -27,7 +27,7 @@ defineProps<{
             >
                 <div class="flex h-9 w-9 items-center justify-center">
                     <AppLogoIcon
-                        class="size-9 fill-current text-black dark:text-white"
+                        class="size-9 fill-current text-foreground dark:text-primary-foreground"
                     />
                 </div>
             </Link>

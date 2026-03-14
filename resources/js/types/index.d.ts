@@ -3,11 +3,16 @@ import type { LucideIcon } from 'lucide-vue-next';
 
 export interface Auth {
     user: User;
+    boards: Array<{
+        id: number;
+        name: string;
+        color: string | null;
+    }>;
 }
 
 export interface BreadcrumbItem {
     title: string;
-    href: string;
+    href?: string;
 }
 
 export interface NavItem {
@@ -32,6 +37,7 @@ export interface User {
     email: string;
     avatar?: string;
     email_verified_at: string | null;
+    analytics_consent: boolean | null;
     created_at: string;
     updated_at: string;
 }

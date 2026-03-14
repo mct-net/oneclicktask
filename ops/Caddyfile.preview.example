@@ -1,4 +1,4 @@
-preview.oneclicktask.de {
+preview.oneclicktask.com {
     encode zstd gzip
 
     @vite_ws {

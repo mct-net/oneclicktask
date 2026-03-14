@@ -36,14 +36,18 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
+        $quote = (string) Inspiring::quotes()->random();
+        $parts = preg_split('/\s+[-�]\s+/', $quote, 2) ?: [];
+        $message = trim($parts[0] ?? $quote);
+        $author = trim($parts[1] ?? 'Unknown');
 
         return [
             ...parent::share($request),
             'name' => config('app.name'),
-            'quote' => ['message' => trim($message), 'author' => trim($author)],
+            'quote' => ['message' => $message, 'author' => $author],
             'auth' => [
                 'user' => $this->resolveAuthenticatedUser($request),
+                'boards' => $request->user()?->allBoards()->get(['id', 'name', 'color']) ?? [],
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
@@ -66,7 +70,11 @@ class HandleInertiaRequests extends Middleware
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
+            'avatar' => $user->avatar,
             'email_verified_at' => $user->email_verified_at,
+            'analytics_consent' => $user->analytics_consent,
+            'created_at' => optional($user->created_at)?->toISOString(),
+            'updated_at' => optional($user->updated_at)?->toISOString(),
         ];
     }
 }

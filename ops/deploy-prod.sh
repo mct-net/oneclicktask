@@ -22,7 +22,8 @@ touch "$PROD_DIR/database/database.sqlite"
 
 cd "$PROD_DIR"
 composer install --no-dev --optimize-autoloader --no-interaction
-PATH="$NODE_BIN:$PATH" "$NODE_BIN/npm" ci --ignore-scripts
-PATH="$NODE_BIN:$PATH" "$NODE_BIN/npm" run build
+PATH="$NODE_BIN:$PATH" "$NODE_BIN/corepack" enable
+PATH="$NODE_BIN:$PATH" "$NODE_BIN/corepack" pnpm install --frozen-lockfile --ignore-scripts
+PATH="$NODE_BIN:$PATH" "$NODE_BIN/corepack" pnpm build
 php artisan migrate --force
 systemctl restart oneclicktask-prod.service
