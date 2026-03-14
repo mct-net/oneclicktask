@@ -1,97 +1,58 @@
 # Funktionsliste
 
-Diese Liste beschreibt die aktuell im Code sichtbaren Funktionen der Software. Sie trennt zwischen bereits real vorhandenen Funktionen und dem, was noch nicht vorhanden ist.
+Diese Liste beschreibt die aktuell sichtbaren Funktionen der Software nach dem Merge des `dev`-Branches.
 
-## Vorhandene Kernfunktionen
+## Fachfunktionen
 
-1. Benutzerregistrierung
-   Benutzer koennen ein neues Konto mit Name, E-Mail und Passwort anlegen.
+1. Benutzerregistrierung, Login, Logout, Passwort-Reset und E-Mail-Verifikation.
+2. Zwei-Faktor-Authentifizierung mit QR-Code, Secret-Key und Recovery-Codes.
+3. Board-basierte Arbeitsbereiche mit Besitzer und Mitgliedern.
+4. Aufgabenverwaltung pro Board mit Name, Beschreibung, Status, Priorisierung, Stern/Important-Flags und Faelligkeit.
+5. Auswahl und Filterung von Tasks nach Status, Suche, Tags, Farben und Zuweisung.
+6. Kommentare auf Tasks.
+7. Dateianhaenge pro Task.
+8. Tags auf Task-Ebene.
+9. Rollen im Board-Kontext in einfacher Form: Owner, Admin, Member.
+10. Analytics-Consent im Benutzerprofil und optionale PostHog-Event-Erfassung.
+11. Preview-Betrieb mit Vite-HMR und getrennte Produktions-Snapshot-Instanz.
 
-2. Login / Logout
-   Benutzer koennen sich anmelden und wieder abmelden.
+## Technische Staerken
 
-3. Passwort-Reset per E-Mail-Flow
-   Die Anwendung unterstuetzt das Anfordern eines Reset-Links und das Setzen eines neuen Passworts per Token.
+1. Der Frontend-Bereich fuer das Board ist schon in Komponenten, Stores, Utils und API-Helfer zerlegt.
+2. Die Mitgliedschaftspruefung ist zentralisiert und verhindert einfache Cross-Board-Zugriffe.
+3. Unit-/Feature-Tests fuer Auth, Settings und Shared Props laufen gruen.
+4. Build, Linting und Preview-Betrieb sind auf dem Host bereits funktionsfaehig.
 
-4. E-Mail-Verifikation
-   Neu angelegte Benutzer muessen ihre E-Mail bestaetigen, bevor sie verifizierte Bereiche voll nutzen.
+## Modularitaetsbewertung
 
-5. Dashboard
-   Es gibt eine einfache geschuetzte Dashboard-Seite als Ziel nach erfolgreichem Login.
+Gesamteindruck: mittel.
 
-6. Profilverwaltung
-   Benutzer koennen ihren Namen und ihre E-Mail-Adresse im Settings-Bereich aendern.
+Positiv:
 
-7. Passwortaenderung im eingeloggten Zustand
-   Benutzer koennen ihr Passwort nach Eingabe des aktuellen Passworts aktualisieren.
+- Das Frontend ist im Board-Modul bereits relativ gut geschnitten.
+- Analytics ist als eigener Service ausgelagert.
+- Middleware, Models und Controller folgen grundsaetzlich klaren Verantwortungsgrenzen.
 
-8. Konto-Loeschung
-   Benutzer koennen ihr Konto nach Passwortbestaetigung selbst loeschen.
+Schwachstellen:
 
-9. Zwei-Faktor-Authentifizierung
-   2FA kann aktiviert, bestaetigt und deaktiviert werden.
+- Die HTTP-Controller enthalten zu viel kombinierte Logik aus Validierung, Berechtigung, Seiteneffekt und Persistenz.
+- Es fehlen Form Requests, Policies und klar getrennte Application-Services fuer zentrale Faelle wie Task-Update, Mitgliedereinladung oder Tag-Management.
+- Das Tag-Modell ist global statt board-scoped. Das erzeugt fachliche Kopplung zwischen Boards.
+- Die Frontend-Stores arbeiten als Singletons auf Modul-Ebene. Das ist fuer die aktuelle SPA praktikabel, macht aber Tests, parallele Board-Kontexte und kuenftige SSR-/Multi-Instance-Sauberkeit schwieriger.
+- Die API arbeitet mit globalem `currentBoardId` im Client statt mit sauber injizierten Board-Kontexten.
 
-10. QR-Code- und Secret-Key-basierte 2FA-Einrichtung
-    Die App liefert sowohl einen QR-Code als auch einen manuellen Secret-Key fuer Authenticator-Apps.
+## Wichtige Review-Funde
 
-11. Recovery-Codes fuer 2FA
-    Recovery-Codes koennen angezeigt und neu generiert werden.
+1. Die toten Resource-Routen wurden entfernt. Der fruehere 500er-Risikopfad aus nicht implementierten Controller-Methoden ist damit beseitigt.
+2. Tags sind jetzt board-scoped. Gleichnamige Tags koennen pro Board getrennt existieren, ohne sich gegenseitig umzubenennen.
+3. Dateianhaenge liegen jetzt auf einem privaten Storage-Disk und werden nur ueber autorisierte Download-Routen ausgeliefert.
+4. Der Setup-Workflow in [`composer.json`](/home/ag/codex/oneclicktask/composer.json) ist fuer Fremdquellen weiterhin aggressiv, weil `composer setup` Migrationen und Frontend-Installationen direkt ausfuehrt.
+5. Die Browser-Tests aus dem `dev`-Branch sind aktuell nicht stabil gruen und bilden damit keine verlaessliche Merge-Sicherung.
+6. Analytics sendet bei aktivierter Konfiguration an PostHog. Die Details dazu sind in [`external-data-flows.md`](/home/ag/codex/oneclicktask/external-data-flows.md) dokumentiert.
 
-12. Passwortbestaetigung vor sensiblen Aktionen
-    Bestimmte Aktionen, insbesondere 2FA-Einstellungen, koennen eine frische Passwortbestaetigung verlangen.
+## Handlungsempfehlungen
 
-13. Login-Rate-Limiting
-    Login-Versuche sind limitiert, um brute-force-artige Zugriffe abzufangen.
-
-14. Two-Factor-Rate-Limiting
-    Auch die 2FA-Challenge ist limitiert.
-
-15. Appearance-Einstellung
-    Es gibt eine einfache Einstellung fuer die Oberflaechendarstellung, die ueber Cookies gespeichert wird.
-
-16. Inertia-/Vue-Frontend
-    Die Benutzeroberflaeche ist als moderne SPA-artige App mit Laravel, Inertia und Vue aufgebaut.
-
-17. Preview-Betrieb mit Hot Reload
-    Die Anwendung ist so vorbereitet, dass die Preview-Instanz ueber Vite mit HMR betrieben werden kann.
-
-18. Produktionsbetrieb mit gebauten Assets
-    Eine separate Produktionsinstanz kann mit vorgebauten Vite-Assets stabil ausgeliefert werden.
-
-## Vorhandene technische Qualitaetsmerkmale
-
-1. Feature-Tests mit Pest
-   Auth, Dashboard und Settings sind per automatisierten Tests abgedeckt.
-
-2. Typpruefung und Linting
-   Frontend-Code kann per `vue-tsc`, ESLint und Prettier geprueft werden.
-
-3. Sicherheitsgrundlage
-   Sichere Cookies, HTTPS-Setup, Proxy-Unterstuetzung und reduzierte Inertia-User-Props sind vorbereitet.
-
-4. Caddy- und systemd-Betrieb
-   Das Projekt ist fuer den Betrieb hinter Caddy mit separaten systemd-Diensten vorbereitet.
-
-## Was aktuell noch nicht vorhanden ist
-
-1. Keine Aufgabenlogik
-   Trotz des Namens `oneclicktask` gibt es noch keine eigentliche Task-, Projekt- oder Ticket-Funktionalitaet.
-
-2. Keine Rollen / Rechte ausser Basis-Auth
-   Es existiert derzeit kein ausgearbeitetes Rollen- oder Berechtigungssystem.
-
-3. Keine Admin-Oberflaeche
-   Es gibt keinen separaten Administrationsbereich.
-
-4. Keine API fuer Fachobjekte
-   Es existiert keine dedizierte JSON-API fuer Anwendungsobjekte wie Tasks, Projekte oder Kommentare.
-
-5. Keine Mandanten- oder Teamstruktur
-   Es gibt keine Organisationen, Teams oder Mehrbenutzer-Fachlogik.
-
-6. Keine Zahlungs-, Reporting- oder Exportfunktionen
-   Weder Billing noch Reporting, Im-/Export oder aehnliche Business-Funktionen sind vorhanden.
-
-## Kurzfazit
-
-Die Software ist aktuell ein solides, sauber abgesichertes Benutzerkonto- und Authentifizierungs-Scaffold. Die eigentliche fachliche Produktlogik fuer ein System namens `oneclicktask` ist noch weitgehend offen.
+1. Fuer `BoardController` und `TaskController` Form Requests und Services einfuehren.
+2. E2E-Tests reparieren oder aus dem Standard-Testlauf trennen, bis sie stabil sind.
+3. Den `composer setup`-Pfad fuer Fremdquellen entschärfen oder intern-only kennzeichnen.
+4. Externe Datenfluesse regelmaessig gegen die Doku in [`external-data-flows.md`](/home/ag/codex/oneclicktask/external-data-flows.md) abgleichen.

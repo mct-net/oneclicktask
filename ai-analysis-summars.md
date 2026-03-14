@@ -1,39 +1,50 @@
 # AI Analysis Summars
 
-## Was die Software aktuell ist
+## Kurzbild der Software
 
-Die Anwendung ist derzeit keine fertige Aufgabenplattform, sondern ein technisch gut vorbereitetes Laravel-12-Grundgeruest mit Inertia- und Vue-Frontend. Der Schwerpunkt liegt momentan auf Benutzerkonten, Sicherheit und Account-Verwaltung.
+`oneclicktask` ist jetzt eine echte kollaborative Task-Anwendung auf Laravel 12, Inertia und Vue 3. Das zentrale Fachmodell besteht aus Boards, Tasks, Kommentaren, Dateianhaengen, Tags und einfachen Board-Rollen.
 
-## Welche Funktionen die Software derzeit bietet
+## Aktuelle Hauptfunktionen
 
-- Registrierung neuer Benutzer
-- Login und Logout
-- Passwort-Reset ueber Token-Flow
-- E-Mail-Verifikation
-- Geschuetztes Dashboard
-- Benutzerprofil bearbeiten
-- Passwort im eingeloggten Zustand aendern
-- Eigenes Konto loeschen
-- Zwei-Faktor-Authentifizierung aktivieren, bestaetigen und deaktivieren
-- QR-Code, Secret-Key und Recovery-Codes fuer 2FA
-- Passwortbestaetigung fuer sensible Aktionen
-- Basis-Layout fuer Settings und Appearance
-- Preview-Betrieb mit Hot Reload
-- Produktionsbetrieb mit gebauten Assets
+- Benutzerkonto mit Registrierung, Login, Passwort-Reset, E-Mail-Verifikation und 2FA
+- Board-basierte Arbeitsbereiche
+- Task-Erfassung und Task-Bearbeitung innerhalb eines Boards
+- Status-, Prioritaets-, Such- und Tag-Filter fuer Tasks
+- Kommentare und Dateianhaenge
+- Mitgliederlisten und einfache Rollenverwaltung pro Board
+- Analytics-Consent und optionale PostHog-Telemetrie
+- Trennung zwischen stabiler Produktionsinstanz und Preview mit HMR
 
-## Welche Art Software daraus werden kann
+## Architektur-Einschaetzung
 
-Die vorhandene Struktur eignet sich gut als Basis fuer:
+Die Anwendung ist funktional schon deutlich weiter als ein Starter-Kit, aber architektonisch noch in einer Zwischenphase:
 
-- Aufgaben- oder Ticketverwaltung
-- internes Tool mit Login und Benutzerprofilen
-- saas-aehnliche Webanwendung mit sicherem Account-System
-- Portal mit spaeteren Fachmodulen
+- Das Frontend ist fuer das Board-Modul bereits relativ modular aufgebaut.
+- Das Backend ist noch stark controller-getrieben.
+- Wichtige Querschnittsthemen wie Autorisierung, Validierung und Geschaeftsregeln sind noch nicht konsequent in Policies, Form Requests und Services ausgelagert.
 
-## Wichtige Einordnung
+## Wichtigste Risiken aus dem Detail-Review
 
-Aktuell fehlen noch die eigentlichen Fachmodule. Es gibt noch keine Datenmodelle oder Oberflaechen fuer Aufgaben, Projekte, Workflows, Kommentare, Prioritaeten, Status, Zuweisungen oder Reports. Der Name `oneclicktask` ist also bisher eher ein Projektname als eine bereits umgesetzte Fachfunktion.
+1. Der Setup-Befehl bleibt fuer unkontrollierte Quellen zu vertrauensvoll.
+2. Die Browser-Test-Suite ist aktuell kein verlaessliches Sicherheitsnetz.
+3. Analytics kann bei gesetzter Konfiguration und Consent an PostHog senden.
+4. Das Backend ist weiter stark controller-getrieben, obwohl die kritischsten offensichtlichen Routen-/Tag-/Upload-Probleme jetzt bereinigt sind.
 
-## Zusammenfassung in einem Satz
+## Modularitaetsurteil
 
-Die Software bietet derzeit vor allem ein sauberes Auth-, Benutzer- und Sicherheitsfundament; die eigentliche Produktfunktion fuer ein Task-System muss noch gebaut werden.
+Die Software ist insgesamt brauchbar modularisiert, aber noch nicht sauber genug fuer schnelles, risikoarmes Wachstum. Der groesste Hebel liegt nicht im Frontend, sondern im Backend-Schnitt:
+
+- Controller entlasten
+- Form Requests einfuehren
+- Policies fuer Board-/Task-/Comment-/File-Zugriffe ausbauen
+- Tags und Dateien fachlich sauber kapseln
+
+## Empfehlung fuer die naechste Ausbauphase
+
+1. Danach `BoardController` und `TaskController` in Requests plus Services zerlegen.
+2. Anschliessend E2E-Tests stabilisieren, damit weitere Features nicht auf weichem Untergrund entstehen.
+3. Die externen Datenfluesse aus [`external-data-flows.md`](/home/ag/codex/oneclicktask/external-data-flows.md) bei jeder neuen Integration mitpflegen.
+
+## Ein-Satz-Zusammenfassung
+
+`oneclicktask` ist heute eine funktionsfaehige Board-/Task-App mit bereits nachgezogenen Haertungen fuer Routen, Tags und Uploads, aber noch mit klaren architektonischen Baustellen vor weiterem Funktionsausbau.
