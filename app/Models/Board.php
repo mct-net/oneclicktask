@@ -64,6 +64,14 @@ class Board extends Model
     }
 
     /**
+     * Get the tags that belong to the board.
+     */
+    public function tags(): HasMany
+    {
+        return $this->hasMany(Tag::class);
+    }
+
+    /**
      * Check if a user is a member of the board.
      */
     public function hasMember(User $user): bool

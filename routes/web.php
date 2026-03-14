@@ -34,7 +34,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Board routes without member check
     Route::get('boards', [App\Http\Controllers\BoardController::class, 'index'])->name('boards.index');
-    Route::get('boards/create', [App\Http\Controllers\BoardController::class, 'create'])->name('boards.create');
     Route::post('boards', [App\Http\Controllers\BoardController::class, 'store'])->name('boards.store');
 
     // Board-scoped routes (with middleware)
@@ -44,7 +43,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Board routes that require membership
         Route::get('boards/{board}', [App\Http\Controllers\BoardController::class, 'show'])->name('boards.show');
-        Route::get('boards/{board}/edit', [App\Http\Controllers\BoardController::class, 'edit'])->name('boards.edit');
         Route::match(['put', 'patch'], 'boards/{board}', [App\Http\Controllers\BoardController::class, 'update'])->name('boards.update');
         Route::delete('boards/{board}', [App\Http\Controllers\BoardController::class, 'destroy'])->name('boards.destroy');
 
@@ -54,9 +52,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('boards/{board}/role', [App\Http\Controllers\BoardController::class, 'updateMemberRole'])->name('boards.role');
 
         // Nested resources
-        Route::resource('boards.tasks', App\Http\Controllers\TaskController::class);
-        Route::resource('boards.tasks.comments', App\Http\Controllers\CommentController::class)->except(['create', 'edit']);
-        Route::resource('boards.tasks.files', App\Http\Controllers\FileAttachmentController::class)->except(['create', 'edit']);
+        Route::resource('boards.tasks', App\Http\Controllers\TaskController::class)->except(['create', 'edit']);
+        Route::resource('boards.tasks.comments', App\Http\Controllers\CommentController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('boards.tasks.files', App\Http\Controllers\FileAttachmentController::class)->only(['index', 'store', 'show', 'destroy']);
 
         // Board-level tags (for listing all tags in a board)
         Route::get('boards/{board}/tags', [App\Http\Controllers\TagController::class, 'index'])->name('boards.tags.index');

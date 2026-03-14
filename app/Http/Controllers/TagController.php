@@ -13,12 +13,10 @@ class TagController extends Controller
      */
     public function index(Board $board)
     {
-        // Get all tags used in tasks belonging to this board
-        $tags = Tag::whereHas('tasks', function ($query) use ($board) {
-            $query->where('board_id', $board->id);
-        })->withCount(['tasks' => function ($query) use ($board) {
-            $query->where('board_id', $board->id);
-        }])->get();
+        $tags = $board->tags()
+            ->withCount('tasks')
+            ->orderBy('name')
+            ->get();
 
         return response()->json($tags);
     }
@@ -32,7 +30,9 @@ class TagController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $tag = Tag::firstOrCreate(['name' => $validated['name']]);
+        $tag = $board->tags()->firstOrCreate([
+            'name' => $validated['name'],
+        ]);
 
         return response()->json($tag, 201);
     }
