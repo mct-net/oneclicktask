@@ -4,9 +4,6 @@ let initialized = false;
 
 export function initializeAnalytics() {
     if (typeof window === 'undefined') {
-        console.error(
-            'PostHog analytics is not initialized because window is undefined.',
-        );
         return;
     }
 
@@ -14,9 +11,6 @@ export function initializeAnalytics() {
     const host = import.meta.env.VITE_POSTHOG_HOST;
 
     if (!apiKey) {
-        console.error(
-            'PostHog analytics is not initialized because VITE_POSTHOG_API_KEY is not set.',
-        );
         return;
     }
 
