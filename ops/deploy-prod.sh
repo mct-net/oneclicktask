@@ -25,5 +25,6 @@ composer install --no-dev --optimize-autoloader --no-interaction
 PATH="$NODE_BIN:$PATH" "$NODE_BIN/corepack" enable
 PATH="$NODE_BIN:$PATH" "$NODE_BIN/corepack" pnpm install --frozen-lockfile --ignore-scripts
 PATH="$NODE_BIN:$PATH" "$NODE_BIN/corepack" pnpm build
+rm -f "$PROD_DIR/public/hot"
 php artisan migrate --force
 systemctl restart oneclicktask-prod.service
