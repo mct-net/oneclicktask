@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TextLink from '@/components/TextLink.vue';
-import { Button } from '@/components/ui/button';
+import TextLink from '@/components/core/TextLink.vue';
+import { Button } from '@/components/core/ui/button';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { logout } from '@/routes';
 import { send } from '@/routes/verification';
@@ -21,7 +21,7 @@ defineProps<{
 
         <div
             v-if="status === 'verification-link-sent'"
-            class="mb-4 text-center text-sm font-medium text-green-600"
+            class="text-green-600 mb-4 text-center text-sm font-medium"
         >
             A new verification link has been sent to the email address you
             provided during registration.

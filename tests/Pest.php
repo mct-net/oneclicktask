@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,9 +14,13 @@
 |
 */
 
+pest()->extend(TestCase::class)
+    ->use(RefreshDatabase::class)
+    ->in('Feature');
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Browser');
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +48,36 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+use Tests\Browser\Pages\BoardPage;
+
+/**
+ * Setup page fixture for browser tests
+ */
+uses()->beforeEach(function () {
+    $this->page = null;
+    $this->boardPage = null;
+})->in('Browser');
+
+/**
+ * Lazily initialize the main page
+ */
+function page()
 {
-    // ..
+    if (! test()->page) {
+        test()->page = visit('/');
+    }
+
+    return test()->page;
+}
+
+/**
+ * Lazily initialize BoardPage
+ */
+function boardPage(): BoardPage
+{
+    if (! test()->boardPage) {
+        test()->boardPage = new BoardPage(page());
+    }
+
+    return test()->boardPage;
 }

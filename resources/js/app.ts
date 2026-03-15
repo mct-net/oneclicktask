@@ -1,12 +1,16 @@
 import '../css/app.css';
+import '../css/board/code-theme.css';
+import '../css/board/glightbox.css';
+import '../css/board/prose-mirror.css';
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
+import { initializeAnalytics } from './composables/useAnalytics';
 import { initializeTheme } from './composables/useAppearance';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'One Click Task';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -27,3 +31,4 @@ createInertiaApp({
 
 // This will set light / dark mode on page load...
 initializeTheme();
+initializeAnalytics();

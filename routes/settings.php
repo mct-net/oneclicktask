@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Settings\AnalyticsController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Settings\TwoFactorAuthenticationController;
@@ -25,4 +26,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('settings/two-factor', [TwoFactorAuthenticationController::class, 'show'])
         ->name('two-factor.show');
+
+    Route::get('settings/analytics', [AnalyticsController::class, 'edit'])->name('analytics.edit');
+    Route::patch('settings/analytics', [AnalyticsController::class, 'update'])->name('analytics.update');
 });
