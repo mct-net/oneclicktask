@@ -72,6 +72,7 @@ Eine passende Caddy-Konfiguration liegt in [`ops/Caddyfile.preview.example`](./o
 
 ## Server-Layout auf diesem Host
 
-- `https://oneclicktask.com` läuft als stabile Snapshot-Instanz aus `/home/ag/codex/oneclicktask-prod` über `oneclicktask-prod.service`.
-- `https://preview.oneclicktask.com` läuft direkt aus diesem Workspace `/home/ag/codex/oneclicktask` über `oneclicktask-preview.service` plus `oneclicktask-preview-vite.service`.
-- Die produktive Snapshot-Instanz kann mit `./ops/deploy-prod.sh` aus dem aktuellen Workspace neu ausgerollt werden, ohne die Preview-Instanz umzubiegen.
+- `https://oneclicktask.com` läuft als stabile Snapshot-Instanz aus `/home/ag/codex/oneclicktask-prod` über `oneclicktask-prod.service` und liefert ausschließlich gebaute Assets aus `public/build`.
+- `https://preview.oneclicktask.com` nutzt denselben Laravel-Backend-Service, aber Caddy leitet nur die Vite-HMR-Pfade an `oneclicktask-preview-vite.service` weiter. So bleibt Datenbank, Session und Backend identisch, während das Frontend live aus `corepack pnpm dev` kommt.
+- Die App schaltet hostbasiert um: `oneclicktask.com` ignoriert `public/hot` bewusst, `preview.oneclicktask.com` verwendet ein separates Preview-Hotfile unter `storage/framework/vite.preview.hot`.
+- Die produktive Snapshot-Instanz kann mit `./ops/deploy-prod.sh` aus dem aktuellen Workspace neu ausgerollt werden, ohne die Preview-HMR-Strecke umzubauen.
