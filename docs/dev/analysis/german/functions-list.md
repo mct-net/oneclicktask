@@ -48,11 +48,11 @@ Schwachstellen:
 3. Dateianhaenge liegen jetzt auf einem privaten Storage-Disk und werden nur ueber autorisierte Download-Routen ausgeliefert.
 4. Der Setup-Workflow in [`composer.json`](/home/ag/codex/oneclicktask/composer.json) ist fuer Fremdquellen weiterhin aggressiv, weil `composer setup` Migrationen und Frontend-Installationen direkt ausfuehrt.
 5. Die Browser-Tests aus dem `dev`-Branch sind aktuell nicht stabil gruen und bilden damit keine verlaessliche Merge-Sicherung.
-6. Analytics sendet bei aktivierter Konfiguration an PostHog. Die Details dazu sind in [`external-data-flows.md`](/home/ag/codex/oneclicktask/external-data-flows.md) dokumentiert.
+6. Analytics sendet bei aktivierter Konfiguration an PostHog. Die Details dazu sind in [`external-data-flows.md`](/home/ag/codex/oneclicktask/docs/dev/analysis/german/external-data-flows.md) dokumentiert.
 
 ## Handlungsempfehlungen
 
 1. Fuer `BoardController` und `TaskController` Form Requests und Services einfuehren.
 2. E2E-Tests reparieren oder aus dem Standard-Testlauf trennen, bis sie stabil sind.
 3. Den `composer setup`-Pfad fuer Fremdquellen entschärfen oder intern-only kennzeichnen.
-4. Externe Datenfluesse regelmaessig gegen die Doku in [`external-data-flows.md`](/home/ag/codex/oneclicktask/external-data-flows.md) abgleichen.
+4. Externe Datenfluesse regelmaessig gegen die Doku in [`external-data-flows.md`](/home/ag/codex/oneclicktask/docs/dev/analysis/german/external-data-flows.md) abgleichen.

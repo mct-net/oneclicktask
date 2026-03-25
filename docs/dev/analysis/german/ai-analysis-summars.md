@@ -43,7 +43,7 @@ Die Software ist insgesamt brauchbar modularisiert, aber noch nicht sauber genug
 
 1. Danach `BoardController` und `TaskController` in Requests plus Services zerlegen.
 2. Anschliessend E2E-Tests stabilisieren, damit weitere Features nicht auf weichem Untergrund entstehen.
-3. Die externen Datenfluesse aus [`external-data-flows.md`](/home/ag/codex/oneclicktask/external-data-flows.md) bei jeder neuen Integration mitpflegen.
+3. Die externen Datenfluesse aus [`external-data-flows.md`](/home/ag/codex/oneclicktask/docs/dev/analysis/german/external-data-flows.md) bei jeder neuen Integration mitpflegen.
 
 ## Ein-Satz-Zusammenfassung
 

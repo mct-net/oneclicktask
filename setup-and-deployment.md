@@ -68,7 +68,7 @@ php artisan serve --host=127.0.0.1 --port=8000
 corepack pnpm dev
 ```
 
-Eine passende Caddy-Konfiguration liegt in [`ops/Caddyfile.preview.example`](./ops/Caddyfile.preview.example). Sie leitet normale Requests an Laravel und Vite-spezifische Requests inklusive Websocket-Upgrades an den Dev-Server weiter.
+Eine passende Caddy-Konfiguration nur fuer die Preview liegt in [`ops/Caddyfile.preview.example`](./ops/Caddyfile.preview.example). Die versionierte Referenz fuer das komplette Setup mit `oneclicktask.com`, `www.oneclicktask.com` und `preview.oneclicktask.com` liegt in [`ops/Caddyfile.oneclicktask.example`](./ops/Caddyfile.oneclicktask.example).
 
 ## Server-Layout auf diesem Host
 
@@ -76,3 +76,4 @@ Eine passende Caddy-Konfiguration liegt in [`ops/Caddyfile.preview.example`](./o
 - `https://preview.oneclicktask.com` nutzt denselben Laravel-Backend-Service, aber Caddy leitet nur die Vite-HMR-Pfade an `oneclicktask-preview-vite.service` weiter. So bleibt Datenbank, Session und Backend identisch, während das Frontend live aus `corepack pnpm dev` kommt.
 - Die App schaltet hostbasiert um: `oneclicktask.com` ignoriert `public/hot` bewusst, `preview.oneclicktask.com` verwendet ein separates Preview-Hotfile unter `storage/framework/vite.preview.hot`.
 - Die produktive Snapshot-Instanz kann mit `./ops/deploy-prod.sh` aus dem aktuellen Workspace neu ausgerollt werden, ohne die Preview-HMR-Strecke umzubauen.
+- Ein kompaktes Betriebs-Runbook fuer dieses Setup liegt in [`docs/dev/analysis/german/production-preview-runbook.md`](./docs/dev/analysis/german/production-preview-runbook.md).
