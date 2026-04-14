@@ -1,0 +1,9 @@
+services:
+  app:
+    image: oneclicktask:latest
+    ports:
+      - "8080:80"
+    env_file:
+      - path: .env
+        required: false
+    restart: unless-stopped

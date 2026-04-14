@@ -77,8 +77,10 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 
 COPY --from=vendor /app /var/www/html
 COPY --from=assets /app/public/build /var/www/html/public/build
+COPY startup.sh /usr/local/bin/startup.sh
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod +x /usr/local/bin/startup.sh
 
 ENV APP_ENV=production \
     APP_DEBUG=false \
@@ -86,4 +88,4 @@ ENV APP_ENV=production \
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+CMD ["sh", "/usr/local/bin/startup.sh"]

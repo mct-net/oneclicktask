@@ -157,7 +157,13 @@ class TaskSeeder extends Seeder
         ];
 
         foreach ($tasks as $task) {
-            Task::create($task);
+            Task::query()->updateOrCreate(
+                [
+                    'board_id' => $task['board_id'],
+                    'name' => $task['name'],
+                ],
+                $task
+            );
         }
     }
 }
