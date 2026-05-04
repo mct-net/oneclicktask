@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { autoUpdate, hide, offset, useFloating } from '@floating-ui/vue';
 import { useElementHover } from '@vueuse/core';
-import GLightbox from 'glightbox';
 import type { PropType } from 'vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import ContextMenu from '@/components/board/common/ContextMenu.vue';
 import IconFileGeneric from '@/components/board/icons/IconFileGeneric.vue';
@@ -103,16 +102,14 @@ const isImage = computed(
 );
 
 /*-------------------------------------
-  Lightbox
+  Overlay
 -------------------------------------*/
-onMounted(() => {
-    GLightbox({ selector: '.glightbox' });
-});
+const isOverlayOpen = ref(false);
 </script>
 
 <template>
     <article
-        class="@container w-fit rounded-md bg-interactive-secondary"
+        class="@container w-fit min-w-[18rem] rounded-md bg-interactive-secondary"
         :title="name"
     >
         <!-- Header -->
@@ -137,6 +134,7 @@ onMounted(() => {
             v-show="isImage"
             ref="thumbnailRef"
             class="relative hidden h-32 cursor-pointer p-0.5 pt-0 @[18rem]:block"
+            @click="isOverlayOpen = true"
         >
             <img
                 v-if="isImage"
@@ -159,28 +157,38 @@ onMounted(() => {
                     "
                     :class="{ hidden: !areThumbnailsHovered }"
                     class="cursor-pointer"
+                    @click="isOverlayOpen = true"
                 >
-                    <a
-                        :href="url"
-                        class="glightbox"
-                        data-glightbox="type: image"
-                        data-gallery="attachments-gallery"
-                    >
-                        <img
-                            v-if="isImage"
-                            :src="url"
-                            alt="File preview"
-                            class="max-h-96 max-w-96 rounded-md object-contain"
-                        />
-                    </a>
+                    <img
+                        v-if="isImage"
+                        :src="url"
+                        alt="File preview"
+                        class="max-h-[900px] max-w-[900px] rounded-md object-contain"
+                    />
                 </div>
             </Teleport>
         </div>
     </article>
-</template>
 
-<style>
-.glightbox-supercool {
-    @apply absolute;
-}
-</style>
+    <!-- Overlay -->
+    <Teleport to="body">
+        <div
+            v-if="isOverlayOpen"
+            class="bg-black/80 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
+            @click="isOverlayOpen = false"
+        >
+            <button
+                class="bg-white/20 text-white hover:bg-white/40 absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full"
+                @click="isOverlayOpen = false"
+            >
+                ✕
+            </button>
+            <img
+                :src="url"
+                :alt="name"
+                class="max-h-[70vh] max-w-[70vw] rounded-md object-contain"
+                @click.stop
+            />
+        </div>
+    </Teleport>
+</template>
