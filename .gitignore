@@ -16,6 +16,7 @@
 .env.production
 .artifacts
 /artifacts
+/ops/backups
 /test-results
 .phpactor.json
 .phpunit.result.cache
