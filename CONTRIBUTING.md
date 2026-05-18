@@ -313,7 +313,7 @@ Commits are automatically validated using [commitlint](https://commitlint.js.org
 If you have questions not covered here:
 
 1. Check existing [GitHub Issues](https://github.com/ORIGINAL_OWNER/oneclicktask/issues)
-2. Review [README.md](README.md) for general information
+2. Review [product-overview.md](product-overview.md) for general information
 3. Create a new issue with the `question` label
 
 Thank you for contributing to OneClickTask! 🎉

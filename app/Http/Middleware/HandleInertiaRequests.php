@@ -46,10 +46,35 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'quote' => ['message' => $message, 'author' => $author],
             'auth' => [
-                'user' => $request->user(),
+                'user' => $this->resolveAuthenticatedUser($request),
                 'boards' => $request->user()?->allBoards()->get(['id', 'name', 'color']) ?? [],
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+        ];
+    }
+
+    /**
+     * Share only the user fields the frontend actually needs.
+     *
+     * @return array<string, mixed>|null
+     */
+    private function resolveAuthenticatedUser(Request $request): ?array
+    {
+        $user = $request->user();
+
+        if (! $user) {
+            return null;
+        }
+
+        return [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'avatar' => $user->avatar,
+            'email_verified_at' => $user->email_verified_at,
+            'analytics_consent' => $user->analytics_consent,
+            'created_at' => optional($user->created_at)?->toISOString(),
+            'updated_at' => optional($user->updated_at)?->toISOString(),
         ];
     }
 }

@@ -1,0 +1,46 @@
+oneclicktask.com {
+    encode zstd gzip
+
+    @reverb path /app* /apps*
+    handle @reverb {
+        reverse_proxy 127.0.0.1:8090
+    }
+
+    handle {
+        reverse_proxy 127.0.0.1:8004
+    }
+}
+
+www.oneclicktask.com {
+    redir https://oneclicktask.com{uri} permanent
+}
+
+preview.oneclicktask.com {
+    encode zstd gzip
+
+    basicauth {
+        ag $2a$14$oWMGw6qT5yvDmdFMmCObKev6F3bpgFyhG.SGdeCqsg.iCWsPRKQjC
+    }
+
+    @vite_ws {
+        header Connection *Upgrade*
+        header Upgrade websocket
+    }
+    handle @vite_ws {
+        reverse_proxy 127.0.0.1:5173
+    }
+
+    @vite_assets path /@vite/* /__vite* /resources/* /node_modules/* /@fs/* /@id/*
+    handle @vite_assets {
+        reverse_proxy 127.0.0.1:5173
+    }
+
+    @reverb path /app* /apps*
+    handle @reverb {
+        reverse_proxy 127.0.0.1:8090
+    }
+
+    handle {
+        reverse_proxy 127.0.0.1:8004
+    }
+}

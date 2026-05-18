@@ -89,7 +89,6 @@ onBeforeUnmount(() => {
 
 <template>
     <Head title="Welcome" />
-
     <div
         class="bg-white min-h-screen text-[#1b1b18]"
         style="

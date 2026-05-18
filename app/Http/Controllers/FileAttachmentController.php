@@ -10,12 +10,16 @@ use Illuminate\Support\Facades\Storage;
 
 class FileAttachmentController extends Controller
 {
+    private const DISK = 'attachments';
+
     /**
      * Display a listing of the resource.
      */
     public function index(Board $board, Task $task)
     {
-        $files = $task->files()->get();
+        $files = $task->files()
+            ->get()
+            ->map(fn (FileAttachment $file) => $this->serializeFile($file, $board, $task));
 
         return response()->json($files);
     }
@@ -31,16 +35,27 @@ class FileAttachmentController extends Controller
         ]);
 
         $file = $request->file('file');
-        $path = $file->store('task-attachments', 'public');
+        $path = $file->store('task-attachments', self::DISK);
 
         $fileAttachment = $task->files()->create([
             'name' => $validated['name'] ?? $file->getClientOriginalName(),
             'path' => $path,
-            'url' => Storage::url($path),
+            'url' => '',
             'type' => $file->getMimeType(),
         ]);
 
-        return response()->json($fileAttachment, 201);
+        $fileAttachment->update([
+            'url' => route('boards.tasks.files.show', [
+                'board' => $board,
+                'task' => $task,
+                'file' => $fileAttachment,
+            ]),
+        ]);
+
+        return response()->json(
+            $this->serializeFile($fileAttachment->fresh(), $board, $task),
+            201,
+        );
     }
 
     /**
@@ -48,7 +63,11 @@ class FileAttachmentController extends Controller
      */
     public function show(Board $board, Task $task, FileAttachment $file)
     {
-        return Storage::disk('public')->download($file->path, $file->name);
+        $disk = $this->resolveDisk($file);
+
+        abort_unless($disk !== null, 404);
+
+        return Storage::disk($disk)->download($file->path, $file->name);
     }
 
     /**
@@ -56,10 +75,40 @@ class FileAttachmentController extends Controller
      */
     public function destroy(Board $board, Task $task, FileAttachment $file)
     {
-        Storage::disk('public')->delete($file->path);
+        foreach ([self::DISK, 'public'] as $disk) {
+            Storage::disk($disk)->delete($file->path);
+        }
 
         $file->delete();
 
         return response()->json(null, 204);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function serializeFile(FileAttachment $file, Board $board, Task $task): array
+    {
+        return [
+            ...$file->toArray(),
+            'url' => route('boards.tasks.files.show', [
+                'board' => $board,
+                'task' => $task,
+                'file' => $file,
+            ]),
+        ];
+    }
+
+    private function resolveDisk(FileAttachment $file): ?string
+    {
+        if (Storage::disk(self::DISK)->exists($file->path)) {
+            return self::DISK;
+        }
+
+        if (Storage::disk('public')->exists($file->path)) {
+            return 'public';
+        }
+
+        return null;
     }
 }

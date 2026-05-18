@@ -1,0 +1,18 @@
+preview.oneclicktask.com {
+    encode zstd gzip
+
+    basicauth {
+        ag $2a$14$oWMGw6qT5yvDmdFMmCObKev6F3bpgFyhG.SGdeCqsg.iCWsPRKQjC
+    }
+
+    @vite_ws {
+        header Connection *Upgrade*
+        header Upgrade websocket
+    }
+    reverse_proxy @vite_ws 127.0.0.1:5173
+
+    @vite_assets path /@vite/* /__vite* /resources/* /node_modules/* /@fs/* /@id/*
+    reverse_proxy @vite_assets 127.0.0.1:5173
+
+    reverse_proxy 127.0.0.1:8000
+}

@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Services\PostHogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class TaskTagController extends Controller
 {
@@ -20,7 +21,9 @@ class TaskTagController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $tag = Tag::firstOrCreate(['name' => $validated['name']]);
+        $tag = $board->tags()->firstOrCreate([
+            'name' => $validated['name'],
+        ]);
 
         // Attach tag to task if not already attached
         if (! $task->tags()->where('tag_id', $tag->id)->exists()) {
@@ -37,12 +40,23 @@ class TaskTagController extends Controller
     }
 
     /**
-     * Update a tag's name (this updates the global tag).
+     * Update a tag within the current board.
      */
     public function update(Request $request, Board $board, Task $task, Tag $tag)
     {
+        if ($tag->board_id !== $board->id) {
+            abort(404);
+        }
+
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:tags,name,'.$tag->id,
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('tags', 'name')
+                    ->where('board_id', $board->id)
+                    ->ignore($tag->id),
+            ],
         ]);
 
         $tag->update($validated);
@@ -55,6 +69,10 @@ class TaskTagController extends Controller
      */
     public function detach(Board $board, Task $task, Tag $tag)
     {
+        if ($tag->board_id !== $board->id) {
+            abort(404);
+        }
+
         $task->tags()->detach($tag->id);
 
         return response()->json(null, 204);

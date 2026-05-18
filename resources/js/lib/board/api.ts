@@ -160,9 +160,9 @@ export const restClient = {
         },
 
         /**
-         * Update a tag's name (updates the global tag, affects all tasks)
+         * Update a tag's name within the current board
          * Board ID is automatically provided by Wayfinder URL defaults
-         * @param taskId - Any task that has this tag (required for route but not used)
+         * @param taskId - Any task that has this tag
          * @param tagId - The ID of the tag to update
          * @param name - The new name for the tag
          */
