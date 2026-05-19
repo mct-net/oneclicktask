@@ -16,6 +16,8 @@ const slots = useSlots();
 const inputRef = ref<HTMLInputElement | null>(null);
 
 defineEmits(['update:model-value', 'enter']);
+
+defineExpose({ inputRef });
 </script>
 
 <template>

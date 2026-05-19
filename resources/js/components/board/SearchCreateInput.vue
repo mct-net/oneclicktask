@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 import BaseInput from '@/components/board/common/BaseInput.vue';
 import IconClose from '@/components/board/icons/IconClose.vue';
 import IconSearch from '@/components/board/icons/IconSearch.vue';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
+
+const baseInputRef = ref<InstanceType<typeof BaseInput> | null>(null);
+
+onMounted(() => {
+    baseInputRef.value?.inputRef?.focus();
+});
 
 const taskStore = useTaskStore();
 const { filters } = taskStore;
@@ -73,6 +79,7 @@ watch(
 <template>
     <div class="flex items-center gap-x-1">
         <BaseInput
+            ref="baseInputRef"
             v-model="search"
             placeholder="Find or create..."
             @enter="onEnter"
