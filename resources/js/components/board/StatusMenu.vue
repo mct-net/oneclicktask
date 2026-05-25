@@ -15,6 +15,7 @@ import {
     useTaskStore,
 } from '@/composables/board/stores/useTaskStore';
 import { useAnalytics } from '@/composables/useAnalytics';
+import { statusMenuHinted } from '@/lib/board/hintState';
 import type { Task } from '@/lib/board/types/models';
 
 defineEmits(['destroy']);
@@ -42,6 +43,7 @@ const setStatus = (status: Task['status']) => {
         class="group relative flex items-center"
         role="group"
         aria-label="Status Menu"
+        @mouseenter="statusMenuHinted = true"
     >
         <!-- Button -->
         <button
@@ -86,6 +88,7 @@ const setStatus = (status: Task['status']) => {
         <section
             v-if="selectedTask.status !== 'trashed'"
             class="invisible absolute right-full opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100"
+            :class="{ '!visible !opacity-100': !statusMenuHinted }"
             aria-label="Task status options"
             role="menu"
         >

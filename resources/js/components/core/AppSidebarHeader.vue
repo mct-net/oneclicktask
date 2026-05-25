@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/core/Breadcrumbs.vue';
 import { Button } from '@/components/core/ui/button';
 import { SidebarTrigger } from '@/components/core/ui/sidebar';
 import { useAppearance } from '@/composables/useAppearance';
+import { headerHinted } from '@/lib/board/hintState';
 import type { BreadcrumbItemType } from '@/types';
 import { Monitor, Moon, Sun } from 'lucide-vue-next';
 
@@ -28,6 +29,7 @@ const appearanceOptions = [
     <header
         data-testid="app-header"
         class="group/header mb-4 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-sidebar-border/70 px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4"
+        @mouseenter="headerHinted = true"
     >
         <div
             data-testid="app-header-breadcrumbs"
@@ -41,6 +43,10 @@ const appearanceOptions = [
         <div
             data-testid="appearance-toggle"
             class="pointer-events-none flex translate-x-2 items-center rounded-full border border-sidebar-border/80 bg-background/90 p-1 opacity-0 shadow-xs transition-all duration-200 group-focus-within/header:pointer-events-auto group-focus-within/header:translate-x-0 group-focus-within/header:opacity-100 group-hover/header:pointer-events-auto group-hover/header:translate-x-0 group-hover/header:opacity-100"
+            :class="{
+                '!pointer-events-auto !translate-x-0 !opacity-100':
+                    !headerHinted,
+            }"
         >
             <Button
                 v-for="option in appearanceOptions"

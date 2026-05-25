@@ -20,6 +20,7 @@ import UserInfo from '@/components/core/UserInfo.vue';
 import { useDialogStore } from '@/composables/board/stores/useDialogStore';
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
 import { EMPTY_TASK_COLOR } from '@/lib/board/constants';
+import { postponeHinted } from '@/lib/board/hintState';
 import type { Tag } from '@/lib/board/types/models';
 import { formatDueDate } from '@/lib/board/utils/date';
 import type { User } from '@/types';
@@ -208,6 +209,7 @@ watch(
                 aria-label="Postpone task area"
                 role="group"
                 class="group relative flex w-full items-center justify-end py-4"
+                @mouseenter="postponeHinted = true"
             >
                 <div class="relative flex items-center">
                     <button label="Postpone task">
@@ -217,6 +219,7 @@ watch(
                         role="menu"
                         label="Postpone task options"
                         class="invisible absolute right-full opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100"
+                        :class="{ '!visible !opacity-100': !postponeHinted }"
                     >
                         <TimeAdderMenu
                             class="mt-1 bg-linear-to-r from-transparent to-[rgb(var(--theme-bg-surface))] to-10% py-2 pr-2 pl-10"

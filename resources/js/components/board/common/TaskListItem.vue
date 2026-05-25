@@ -10,12 +10,14 @@ import IconWarningSolid from '@/components/board/icons/IconWarningSolid.vue';
 
 import { useTaskStore } from '@/composables/board/stores/useTaskStore';
 import { EMPTY_TASK_COLOR } from '@/lib/board/constants';
+import { taskListHinted } from '@/lib/board/hintState';
 import type { Task } from '@/lib/board/types/models';
 import { formatDueDate } from '@/lib/board/utils/date';
 
 /*-------------------------------------
   State
 -------------------------------------*/
+
 const props = defineProps<{
     task: Task;
     isActive?: boolean;
@@ -42,6 +44,7 @@ const onAddTime = async (minutes: number) => {
         :title="formattedDueDate"
         role="listitem"
         :aria-label="task.name"
+        @mouseenter="taskListHinted = true"
     >
         <div class="flex items-center gap-x-2">
             <IconStarSolid v-if="task.is_starred" class="text-border" />
@@ -68,6 +71,7 @@ const onAddTime = async (minutes: number) => {
 
         <div
             class="invisible absolute right-10 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100"
+            :class="{ '!visible !opacity-100': !taskListHinted }"
         >
             <TimeAdderMenu
                 v-if="!disableTimeMenu"
