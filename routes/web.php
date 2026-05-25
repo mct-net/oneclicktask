@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -13,16 +12,6 @@ Route::get('/privacy', function () {
 })->name('privacy-policy');
 
 Route::get('/', function () {
-    if (Auth::check()) {
-        $boards = Auth::user()->allBoards()->get();
-
-        if ($boards->count() === 1) {
-            return redirect()->route('boards.show', $boards->first());
-        }
-
-        return redirect()->route('boards.index');
-    }
-
     return Inertia::render('Welcome', [
         'canRegister' => Features::enabled(Features::registration()),
     ]);

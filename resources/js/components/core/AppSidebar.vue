@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { index as boardsIndex } from '@/actions/App/Http/Controllers/BoardController';
 import NavBoards from '@/components/core/NavBoards.vue';
 import NavUser from '@/components/core/NavUser.vue';
 import {
@@ -21,7 +20,7 @@ import AppLogo from './AppLogo.vue';
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="boardsIndex()">
+                        <Link href="/">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
