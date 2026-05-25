@@ -29,9 +29,10 @@ const formattedDueDate = computed(() => {
 /*-------------------------------------
   Methods
 -------------------------------------*/
-const onAddTime = (minutes: number) => {
-    const { addTime } = useTaskStore();
-    addTime(props.task, minutes);
+const onAddTime = async (minutes: number) => {
+    const { addTime, selectNextUrgentTask } = useTaskStore();
+    await addTime(props.task, minutes);
+    selectNextUrgentTask({ currentTask: props.task });
 };
 </script>
 
