@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, router } from '@inertiajs/vue3';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 
 import { index as boardsIndex } from '@/actions/App/Http/Controllers/BoardController';
 import AppLayout from '@/layouts/AppLayout.vue';
@@ -124,6 +124,15 @@ onMounted(async () => {
         }
     }
 });
+
+watch(
+    () => filters.value.search,
+    (search) => {
+        if (search) {
+            taskStore.selectedTask.value = null;
+        }
+    },
+);
 </script>
 
 <template>
@@ -172,7 +181,7 @@ onMounted(async () => {
 
                     <!-- Selected Task's Area -->
                     <article
-                        v-if="!filters.search"
+                        v-if="selectedTask || !filters.search"
                         class="min-h-34"
                         aria-label="Selected task area"
                     >
@@ -180,7 +189,7 @@ onMounted(async () => {
                             :class="{ invisible: !selectedTask }"
                         />
                         <EmptyState
-                            v-if="!selectedTask && !noTasks"
+                            v-if="!selectedTask && !noTasks && !filters.search"
                             class="mt-0 mb-0 box-border h-full w-full"
                             :messages="['No task selected.']"
                             hide-icon
