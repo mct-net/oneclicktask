@@ -8,9 +8,9 @@ This is a task management application built with Laravel 12 + Vue 3 + Inertia.js
 
 **Tech Stack:**
 
-- Backend: Laravel 12, PHP 8.2+, Fortify (auth), Pest (testing)
-- Frontend: Vue 3.5, TypeScript 5.2, Inertia.js, Vite 7
-- UI: Tailwind CSS 4.1, reka-ui, Lucide icons
+- Backend: Laravel 12, PHP 8.2+, Fortify (auth), Pest 4 (testing), PostHog (analytics)
+- Frontend: Vue 3.5, TypeScript 5.2, Inertia.js, Vite 7, Tiptap 3 (rich text editor)
+- UI: Tailwind CSS 4.1, reka-ui, Lucide icons, VueUse, dayjs, glightbox
 - Package Manager: PNPM
 
 ## Development Commands
@@ -81,7 +81,7 @@ php artisan pail                # Tail logs in real-time
     - Core models: User, Board, Task, Comment, Tag, FileAttachment
     - Board-user pivot with roles (admin, member)
 - `app/Http/Controllers/` - Resource controllers organized by domain
-    - Main: BoardController, TaskController, CommentController, etc.
+    - Main: BoardController, TaskController, CommentController, FileAttachmentController, TagController, TaskTagController, UserController
     - `Settings/` subdirectory for settings-specific controllers
 - `app/Http/Middleware/` - Custom middleware
     - `HandleInertiaRequests` - Shares global data (app name, auth user, sidebar state, inspiring quotes)
@@ -125,11 +125,14 @@ php artisan pail                # Tail logs in real-time
 - Strict mode enabled
 - Wayfinder generates type-safe route helpers
 
-**Composables:**
+**Composables** (`resources/js/composables/`)**:**
 
 - `useAppearance` - Theme management (light/dark)
 - `useTwoFactorAuth` - 2FA logic
 - `useInitials` - User initials helper
+- `useToast` - Toast notifications
+- `useAnalytics` - PostHog analytics
+- `composables/board/` - Board-specific composables
 
 **Wayfinder:**
 
@@ -146,6 +149,7 @@ php artisan pail                # Tail logs in real-time
 - Feature tests use `RefreshDatabase`
 - Test database: SQLite in-memory (`:memory:`)
 - Custom expectation: `toBeOne()`
+- Browser testing via `pestphp/pest-plugin-browser`
 - Comprehensive auth and settings test coverage
 
 ## Important Conventions
