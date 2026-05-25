@@ -92,7 +92,7 @@ export function useRecentTasks(tasks: Ref<Task[]>) {
             case 'done_this_week':
                 return filterDoneThisWeek(tasks.value).sort(sortByCreationDate);
             default:
-                return [...tasks.value].sort(sortByCreationDate);
+                return [];
         }
     });
 
