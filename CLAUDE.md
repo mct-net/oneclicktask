@@ -94,6 +94,7 @@ php artisan pail                # Tail logs in real-time
 - `routes/web.php` - Main routes with nested resources under `board.member` middleware
 - `routes/settings.php` - Settings routes
 - Board routes use nested resource pattern: `boards.tasks.comments.*`
+- Full route inventory: tasks (`boards.tasks.*`), comments (`boards.tasks.comments.*`), files (`boards.tasks.files.*`), tags (`boards.tags.*`), task-tags (`boards.tasks.tags.attach/update/detach`), users (`boards.users.index`, `users.current`), member management (`boards.invite/remove/role`)
 
 **Key Patterns:**
 
@@ -101,6 +102,8 @@ php artisan pail                # Tail logs in real-time
 - Pivot table `board_user` stores role (admin/member)
 - `EnsureBoardMember` middleware protects board-specific routes
 - Fortify handles all authentication (login, register, 2FA, password reset)
+- Tags are board-scoped (not global) — see migration `2026_03_14_scope_tags_to_boards`
+- PostHog analytics with user consent flow (`analytics_consent` column on users, `AnalyticsConsentDialog`)
 
 ### Frontend Structure
 
@@ -113,7 +116,8 @@ php artisan pail                # Tail logs in real-time
 **Component Organization:**
 
 - `resources/js/components/core/ui/` - 20+ shadcn-vue style UI primitives (reka-ui based)
-- `resources/js/components/core/` - App-specific components
+- `resources/js/components/core/` - App-specific components (shell, sidebar, nav, user menu, etc.)
+- `resources/js/components/board/` - Board-specific components (dialogs, popovers, icons, filter, task cards, editor)
 - `resources/js/layouts/` - Layout components (App, Auth, Settings) with variants
 - `resources/js/pages/` - Inertia page components
 - `resources/js/routes/` - Additional organization mirroring backend routes
@@ -132,7 +136,7 @@ php artisan pail                # Tail logs in real-time
 - `useInitials` - User initials helper
 - `useToast` - Toast notifications
 - `useAnalytics` - PostHog analytics
-- `composables/board/` - Board-specific composables
+- `composables/board/` - Board-specific composables: `file.ts`, `filter.ts`, `pagination.ts`, `stores/`
 
 **Wayfinder:**
 
