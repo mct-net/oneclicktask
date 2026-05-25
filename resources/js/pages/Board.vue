@@ -205,7 +205,7 @@ onMounted(async () => {
 
                 <!-- Selected Task's Panel -->
                 <section
-                    class="hidden h-full w-76 shrink-0 flex-col rounded-md @3xl/main:flex @4xl/main:w-5/12"
+                    class="hidden h-full w-96 shrink-0 flex-col rounded-md @3xl/main:flex @4xl/main:w-1/2"
                     :class="{
                         'border-2 border-dashed': !selectedTask,
                         'bg-surface': selectedTask,
