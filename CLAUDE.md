@@ -13,6 +13,8 @@ This is a task management application built with Laravel 12 + Vue 3 + Inertia.js
 - UI: Tailwind CSS 4.1, reka-ui, Lucide icons, VueUse, dayjs, glightbox
 - Package Manager: PNPM
 
+**Marketing website:** `website/` is a separate Nuxt 4 + Nuxt UI project (from the Nuxt UI starter template) with its own `package.json`, lockfile and lint setup. The root ESLint, Prettier and Stylelint configs ignore it; see `website/README.md`.
+
 ## Development Commands
 
 ### Initial Setup
@@ -118,6 +120,7 @@ php artisan pail                # Tail logs in real-time
 - `resources/js/components/core/ui/` - 20+ shadcn-vue style UI primitives (reka-ui based)
 - `resources/js/components/core/` - App-specific components (shell, sidebar, nav, user menu, etc.)
 - `resources/js/components/board/` - Board-specific components (dialogs, popovers, icons, filter, task cards, editor)
+- `resources/js/components/landing/` - Sections of the public landing page (`pages/Welcome.vue`, German copy)
 - `resources/js/layouts/` - Layout components (App, Auth, Settings) with variants
 - `resources/js/pages/` - Inertia page components
 - `resources/js/routes/` - Additional organization mirroring backend routes
