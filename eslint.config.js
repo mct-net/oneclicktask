@@ -15,6 +15,7 @@ export default defineConfigWithVueTs(
             'node_modules',
             'public',
             'website',
+            'website-mct',
             'bootstrap/ssr',
             'tailwind.config.js',
             'resources/js/components/ui/*',

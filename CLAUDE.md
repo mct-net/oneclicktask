@@ -15,6 +15,8 @@ This is a task management application built with Laravel 12 + Vue 3 + Inertia.js
 
 **Marketing website:** `website/` is a separate Nuxt 4 + Nuxt UI project (from the Nuxt UI starter template) with its own `package.json`, lockfile and lint setup. The root ESLint, Prettier and Stylelint configs ignore it; see `website/README.md`.
 
+**Marketing website (MCT template):** `website-mct/` is a second version of the same site, built from Axel's [web-app-template](https://github.com/AxelGanter/web-app-template) frontend scaffold (Nuxt minimal, Pinia, Sanctum auth composables, plain CSS, npm). The root linters ignore it too; see `website-mct/README.md`.
+
 ## Development Commands
 
 ### Initial Setup

@@ -1,0 +1,185 @@
+/* Farben wie in website/ (Nuxt UI: primary sky, neutral slate) */
+:root {
+  color-scheme: light;
+  --color-bg: #fff;
+  --color-elevated: #f1f5f9;
+  --color-accented: #e2e8f0;
+  --color-border: #e2e8f0;
+  --color-text: #334155;
+  --color-highlighted: #0f172a;
+  --color-muted: #64748b;
+  --color-primary: #0ea5e9;
+  --color-warning: #eab308;
+  --color-inverted: #0f172a;
+  --color-on-inverted: #fff;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --header-height: 64px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-bg: #0f172a;
+    --color-elevated: #1e293b;
+    --color-accented: #334155;
+    --color-border: #1e293b;
+    --color-text: #cbd5e1;
+    --color-highlighted: #fff;
+    --color-muted: #94a3b8;
+    --color-primary: #38bdf8;
+    --color-warning: #facc15;
+    --color-inverted: #fff;
+    --color-on-inverted: #0f172a;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: var(--header-height);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+ul {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: 32px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Buttons und Button-Links */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.btn-lg {
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: 1rem;
+}
+
+.btn-solid {
+  background: var(--color-inverted);
+  color: var(--color-on-inverted);
+}
+
+.btn-solid:hover {
+  opacity: 0.9;
+}
+
+.btn-subtle {
+  background: var(--color-elevated);
+  color: var(--color-highlighted);
+  box-shadow: inset 0 0 0 1px var(--color-accented);
+}
+
+.btn-subtle:hover,
+.btn-ghost:hover {
+  background: var(--color-accented);
+}
+
+.btn-ghost {
+  color: var(--color-highlighted);
+}
+
+.btn-link {
+  padding-inline: 0;
+  color: var(--color-muted);
+}
+
+.btn-link:hover {
+  color: var(--color-highlighted);
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}

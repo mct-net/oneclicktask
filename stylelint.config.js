@@ -1,6 +1,6 @@
 /** @type {import('stylelint').Config} */
 export default {
     extends: 'stylelint-config-recommended-vue',
-    ignoreFiles: ['website/**'],
+    ignoreFiles: ['website/**', 'website-mct/**'],
     rules: {},
 };
