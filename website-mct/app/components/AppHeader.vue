@@ -11,7 +11,7 @@
 
       <div class="header-actions">
         <a :href="`${appUrl}/login`" class="btn btn-ghost header-login">Anmelden</a>
-        <a :href="`${appUrl}/register`" class="btn btn-solid">Kostenlos starten</a>
+        <a :href="`${appUrl}/register`" class="btn btn-primary">Kostenlos starten</a>
         <button
           type="button"
           class="btn btn-ghost header-toggle"
@@ -51,8 +51,9 @@ const menuOpen = ref(false)
 
 const navigation = [
   { label: 'Funktionen', href: '#funktionen' },
-  { label: 'Für Teams', href: '#teams' },
-  { label: 'Open Source', href: '#open-source' },
+  { label: 'Vergleich', href: '#vergleich' },
+  { label: 'Für wen', href: '#fuer-wen' },
+  { label: 'Datenschutz', href: '#daten' },
   { label: 'FAQ', href: '#faq' },
 ]
 </script>
@@ -62,9 +63,9 @@ const navigation = [
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-bg) 80%, transparent);
-  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
 }
 
 .header-bar {
@@ -84,20 +85,29 @@ const navigation = [
 
 .header-nav {
   display: none;
-  gap: 24px;
+  gap: 4px;
 }
 
 .header-nav a,
 .header-mobile a {
-  color: var(--color-muted);
-  font-size: 0.875rem;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.9375rem;
   font-weight: 500;
   text-decoration: none;
 }
 
-.header-nav a:hover,
+.header-nav a {
+  padding: 6px 10px;
+}
+
+.header-nav a:hover {
+  background: var(--sunken);
+  color: var(--accent-ink);
+}
+
 .header-mobile a:hover {
-  color: var(--color-highlighted);
+  color: var(--accent-ink);
 }
 
 .header-actions {
@@ -125,6 +135,7 @@ const navigation = [
   padding-block: 8px;
   font-size: 1rem;
 }
+
 
 @media (min-width: 640px) {
   .header-login {

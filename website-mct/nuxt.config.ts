@@ -2,7 +2,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@pinia/nuxt'],
-  css: ['~/assets/css/main.css'],
+  // Schriften liegen lokal, damit beim Seitenaufruf keine Daten an Google gehen
+  css: [
+    '@fontsource-variable/instrument-sans',
+    '@fontsource-variable/geist-mono',
+    '~/assets/css/main.css',
+  ],
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8101/api',

@@ -1,35 +1,206 @@
-/* Farben wie in website/ (Nuxt UI: primary sky, neutral slate) */
-:root {
+/*
+ * Farben wie in der OneClickTask-App (resources/css/app.css), umgerechnet aus OKLCH:
+ * fast monochrom, Hauptbuttons in Schrift-Farbe, kleine gedämpfte Akzente aus der App-Palette.
+ * Das Orange der App-Palette (orange-500) ist die Signalfarbe für Enter und Hashtags.
+ * C "Kobalt flach" (?look=c) bleibt zum Vergleich.
+ * .base-scope setzt die Grundfarben in einem Band wieder ein (z. B. für das Demo-Board).
+ */
+:root,
+.base-scope {
   color-scheme: light;
-  --color-bg: #fff;
-  --color-elevated: #f1f5f9;
-  --color-accented: #e2e8f0;
-  --color-border: #e2e8f0;
-  --color-text: #334155;
-  --color-highlighted: #0f172a;
-  --color-muted: #64748b;
-  --color-primary: #0ea5e9;
-  --color-warning: #eab308;
-  --color-inverted: #0f172a;
-  --color-on-inverted: #fff;
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --paper: #e6ebef;
+  --surface: #f3f6f9;
+  --sunken: #dde3e9;
+  --ink: #2b333a;
+  --text: #3f4850;
+  --muted: #5d6570;
+  --line: #ccd3da;
+  --line-strong: #b4bdc6;
+  --primary: #3f4850;
+  --on-primary: #f3f6f9;
+  --accent: #f9954c;
+  --accent-hover: #ffa766;
+  --on-accent: #060709;
+  --accent-soft: #fde3cf;
+  --accent-ink: #a8550f;
+  --star: #e2b44f;
+  --red: #e85c5c;
+  --lilac: #b77398;
+  --teal: #4f9e9b;
+  --green: #5f8f2f;
+  --key: #f3f6f9;
+  --key-edge: #b4bdc6;
+  --key-hot: #f9954c;
+  --key-hot-edge: #b8682c;
+  --on-key-hot: #060709;
+  --chip: #d6dee5;
+  --shadow: 23 28 33;
+}
+
+:root[data-look='c'],
+[data-look='c'] .base-scope {
+  --paper: #f6f7f9;
+  --surface: #fff;
+  --sunken: #eff1f5;
+  --ink: #0b1220;
+  --text: #2a3242;
+  --muted: #5a6272;
+  --line: #dde1e8;
+  --line-strong: #c3c9d4;
+  --primary: #1d3bc9;
+  --on-primary: #fff;
+  --accent: #1d3bc9;
+  --accent-hover: #1631ad;
+  --on-accent: #fff;
+  --accent-soft: #e3e8fb;
+  --accent-ink: #1d3bc9;
+  --key: #fff;
+  --key-edge: #c3c9d4;
+  --key-hot: #ffb800;
+  --key-hot-edge: #b98500;
+  --on-key-hot: #0b1220;
+  --shadow: 11 18 32;
+}
+
+:root {
+  --font-sans: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'Cascadia Mono', Consolas, monospace;
   --header-height: 64px;
+  --radius: 10px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --page-c: #f6f7f9;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --page-c: #0b1220;
+  }
+
+  :root,
+  .base-scope {
     color-scheme: dark;
-    --color-bg: #0f172a;
-    --color-elevated: #1e293b;
-    --color-accented: #334155;
-    --color-border: #1e293b;
-    --color-text: #cbd5e1;
-    --color-highlighted: #fff;
-    --color-muted: #94a3b8;
-    --color-primary: #38bdf8;
-    --color-warning: #facc15;
-    --color-inverted: #fff;
-    --color-on-inverted: #0f172a;
+    --paper: #060709;
+    --surface: #17191b;
+    --sunken: #111315;
+    --ink: #f0f3f7;
+    --text: #c9ced4;
+    --muted: #889199;
+    --line: #26292c;
+    --line-strong: #3a3e42;
+    --primary: #f0f3f7;
+    --on-primary: #060709;
+    --accent-hover: #ffa766;
+    --accent-soft: #3a2414;
+    --accent-ink: #f9954c;
+    --star: #efc970;
+    --red: #f66c6c;
+    --lilac: #b77398;
+    --teal: #74b9b7;
+    --green: #a4c877;
+    --key: #292c2e;
+    --key-edge: #000;
+    --chip: #292c2e;
+    --shadow: 0 0 0;
+  }
+
+  :root[data-look='c'],
+  [data-look='c'] .base-scope {
+    --paper: #0b1220;
+    --surface: #121a2c;
+    --sunken: #0f1626;
+    --ink: #f6f7f9;
+    --text: #c8ceda;
+    --muted: #8d96a8;
+    --line: #1e273a;
+    --line-strong: #2c3650;
+    --primary: #4c6cf0;
+    --on-primary: #fff;
+    --accent: #4c6cf0;
+    --accent-hover: #6380ff;
+    --on-accent: #fff;
+    --accent-soft: #17224a;
+    --accent-ink: #9aaeff;
+    --key: #182033;
+    --key-edge: #05080f;
+    --shadow: 0 0 0;
+  }
+}
+
+/* Band: die eine kräftige Fläche pro Richtung. A Graphit, C Kobalt. */
+.band {
+  color-scheme: dark;
+  --paper: #060709;
+  --surface: #17191b;
+  --sunken: #111315;
+  --ink: #f0f3f7;
+  --text: #c9ced4;
+  --muted: #889199;
+  --line: #26292c;
+  --line-strong: #3a3e42;
+  --primary: #f0f3f7;
+  --on-primary: #060709;
+  --accent: #f9954c;
+  --accent-hover: #ffa766;
+  --on-accent: #060709;
+  --accent-soft: #3a2414;
+  --accent-ink: #f9954c;
+  --key: #292c2e;
+  --key-edge: #000;
+  --chip: #292c2e;
+
+  background: var(--paper);
+  color: var(--text);
+}
+
+[data-look='c'] .band {
+  --paper: #1d3bc9;
+  --surface: #2342d4;
+  --sunken: #1a35b5;
+  --ink: #fff;
+  --text: #e3e8fb;
+  --muted: #c9d3ff;
+  --line: rgb(255 255 255 / 0.2);
+  --line-strong: rgb(255 255 255 / 0.36);
+  --primary: #ffb800;
+  --on-primary: #0b1220;
+  --accent: #ffb800;
+  --accent-hover: #ffc633;
+  --on-accent: #0b1220;
+  --accent-soft: rgb(255 255 255 / 0.12);
+  --accent-ink: #ffd15c;
+  --key: #fff;
+  --key-edge: #0f2490;
+}
+
+@media (prefers-color-scheme: dark) {
+  .band {
+    --paper: #0f1113;
+
+    border-block: 1px solid #26292c;
+  }
+}
+
+/* Feines Papierkorn statt Lichtnebel */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .grain::after {
+    opacity: 0.05;
+    mix-blend-mode: screen;
   }
 }
 
@@ -40,7 +211,8 @@
 }
 
 html {
-  scroll-padding-top: var(--header-height);
+  scroll-padding-top: calc(var(--header-height) + 16px);
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -51,11 +223,13 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--paper);
+  color: var(--text);
   font-family: var(--font-sans);
-  line-height: 1.5;
+  font-size: 1.0625rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -63,8 +237,22 @@ h2,
 h3,
 p,
 figure,
-ul {
+ul,
+ol,
+blockquote {
   margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ink);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 img {
@@ -79,25 +267,29 @@ input {
   color: inherit;
 }
 
+a {
+  color: inherit;
+}
+
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   margin-inline: auto;
-  padding-inline: 16px;
+  padding-inline: 20px;
 }
 
-@media (min-width: 640px) {
-  .container {
-    padding-inline: 24px;
-  }
-}
-
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .container {
     padding-inline: 32px;
   }
@@ -121,65 +313,107 @@ input {
   flex-shrink: 0;
 }
 
-/* Buttons und Button-Links */
+/* Schaltflächen */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 6px 10px;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px;
   border: 0;
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
-  color: var(--color-text);
-  font-size: 0.875rem;
+  color: var(--ink);
+  font-size: 0.9375rem;
   font-weight: 500;
+  line-height: 1.2;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+  transition: background-color 0.15s, color 0.15s, box-shadow 0.2s, transform 0.2s;
 }
 
 .btn-lg {
-  gap: 8px;
-  padding: 10px 14px;
-  font-size: 1rem;
+  min-height: 52px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1.0625rem;
+  font-weight: 600;
 }
 
-.btn-solid {
-  background: var(--color-inverted);
-  color: var(--color-on-inverted);
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
-.btn-solid:hover {
+.btn-primary:hover {
   opacity: 0.9;
 }
 
-.btn-subtle {
-  background: var(--color-elevated);
-  color: var(--color-highlighted);
-  box-shadow: inset 0 0 0 1px var(--color-accented);
+.btn-quiet {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 
-.btn-subtle:hover,
+.btn-quiet:hover {
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
 .btn-ghost:hover {
-  background: var(--color-accented);
-}
-
-.btn-ghost {
-  color: var(--color-highlighted);
+  background: var(--sunken);
 }
 
 .btn-link {
-  padding-inline: 0;
-  color: var(--color-muted);
+  min-height: auto;
+  padding: 0;
+  color: var(--muted);
 }
 
 .btn-link:hover {
-  color: var(--color-highlighted);
+  color: var(--ink);
 }
 
-.btn-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 24px;
+/* Hashtags und getippter Text: das Einzige in Mono */
+.hashtag {
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  font-weight: 500;
+}
+
+.typed {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+.btn-primary {
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.16);
+}
+
+.band .btn-quiet {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.band .btn-quiet:hover {
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+/* Inhalte gleiten beim Scrollen herein, nur wo der Browser scrollgesteuerte Animationen kann */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(48px) scale(0.98);
+  }
 }

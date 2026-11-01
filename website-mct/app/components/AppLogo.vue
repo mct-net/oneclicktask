@@ -22,7 +22,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--color-highlighted);
+  color: var(--ink);
   font-weight: 600;
 }
 

@@ -1,11 +1,12 @@
 <template>
-  <section :id="id" class="section" :class="{ 'section-tinted': tinted }">
+  <section :id="id" class="section" :class="{ 'section-surface': surface }">
     <div class="container">
-      <header v-if="title" class="section-header">
-        <h2 class="section-title">{{ title }}</h2>
-        <p v-if="description" class="section-description">{{ description }}</p>
+      <header v-if="title" class="section-header reveal">
+        <h2 class="section-title">
+          {{ title }} <span v-if="description" class="section-description">{{ description }}</span>
+        </h2>
       </header>
-      <div class="section-body" :class="{ 'section-body-spaced': title }">
+      <div :class="{ 'section-body': title }">
         <slot />
       </div>
     </div>
@@ -17,66 +18,46 @@ defineProps<{
   id?: string
   title?: string
   description?: string
-  tinted?: boolean
+  surface?: boolean
 }>()
 </script>
 
 <style scoped>
 .section {
-  padding-block: 64px;
+  padding-block: 80px;
 }
 
-.section-tinted {
-  background: color-mix(in srgb, var(--color-elevated) 50%, transparent);
+.section-surface {
+  border-block: 1px solid var(--line);
+  background: var(--surface);
 }
 
 .section-header {
-  max-width: 48rem;
-  margin-inline: auto;
-  text-align: center;
+  max-width: 54rem;
 }
 
+/* Zweifarbig: Titel kräftig, die Erklärung läuft gedämpft im selben Satz weiter */
 .section-title {
-  color: var(--color-highlighted);
-  font-size: 1.875rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
+  font-size: clamp(1.875rem, 4.2vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
 }
 
 .section-description {
-  margin-top: 24px;
-  color: var(--color-muted);
-  font-size: 1rem;
-  text-wrap: pretty;
+  color: var(--muted);
 }
 
-.section-body-spaced {
-  margin-top: 48px;
+.section-body {
+  margin-top: 56px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .section {
-    padding-block: 96px;
+    padding-block: 128px;
   }
 
-  .section-title {
-    font-size: 2.25rem;
-  }
-
-  .section-description {
-    font-size: 1.125rem;
-  }
-
-  .section-body-spaced {
-    margin-top: 64px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-title {
-    font-size: 3rem;
+  .section-body {
+    margin-top: 72px;
   }
 }
 </style>
