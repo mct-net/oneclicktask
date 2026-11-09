@@ -41,7 +41,10 @@ const { repositoryUrl } = useRuntimeConfig().public
 .data {
   position: relative;
   isolation: isolate;
+  /* clip statt hidden: hidden macht den Abschnitt zum Scroll-Container für view(),
+     dann drehen sich die Sterne beim Scrollen nicht */
   overflow: hidden;
+  overflow: clip;
   padding-block: 96px;
 }
 

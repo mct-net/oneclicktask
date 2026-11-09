@@ -49,7 +49,10 @@ function pressKey() {
 
 <style scoped>
 .hero {
+  /* clip statt hidden: hidden macht den Hero zum Scroll-Container für view(),
+     dann bleibt die Neigung des Boards beim Scrollen stehen */
   overflow: hidden;
+  overflow: clip;
   padding-block: 72px 40px;
   background: var(--paper);
 }
